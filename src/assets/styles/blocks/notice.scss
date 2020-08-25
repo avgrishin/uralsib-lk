@@ -1,0 +1,41 @@
+.notice{
+  position:fixed;
+  right:1em;
+  bottom:0;
+  width:100%;
+  max-width:360px;
+  z-index:9999;
+
+  &__item{
+    border-radius:$br_1;
+    background:$clr_blue;
+    transition:$trans;
+    box-shadow:$bxsh_3;
+    position:relative;
+    padding:nth($m_em, 2);
+    padding-right:nth($m_em, 5);
+    margin-bottom:nth($m_em, 2);
+    &_err{
+      background:$clr_error_notice;
+      color:$clr_wh;
+      .notice__close path{ fill:$clr_wh; }
+    }
+  }
+  & &__close{
+    position:absolute;
+    right:0;
+    top:0;
+    svg{ width:14px; height:14px }
+  }
+  @include media($width_xs){
+    left:0;
+    right:0;
+    width:100%;
+    max-width:100%;
+    &__item{
+      border-radius:0;
+      margin-bottom:0;
+      border-bottom:1px solid;
+    }
+  }
+}

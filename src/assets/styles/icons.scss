@@ -1,0 +1,168 @@
+@charset "UTF-8";
+.icon {
+    display: inline-block;
+    width: $icon_width;
+    height: $icon_width;
+    vertical-align: top;
+    background-image: $icon_bg;
+    background-repeat: no-repeat;
+    &_close {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    &_question {
+        background-position: -20px -15px;
+    }
+    &_comment {
+        background-position: 0 -15px;
+    }
+    &_print {
+        background-position: 0 -50px;
+        &-label {
+            padding-left: 28px;
+            cursor: pointer;
+        }
+    }
+    &_cart {
+        width: 11px;
+        height: 13px;
+        background-position: -1070px 0;
+    }
+    &_num {
+        background-image: none;
+        text-align: center;
+    }
+    &_calendar {
+        background-position: -98px 1px;
+    }
+    &_puzzle {
+        background-position: -300px 0;
+    }
+    &_exit {
+        background-position: -500px 0;
+        width: 13px;
+    }
+    &_person {
+        background-position: -550px 1px;
+        width: 18px;
+    }
+    &_email {
+        width: 23px;
+        background-position: -600px 1px;
+    }
+    &_case {
+        background-position: -650px 2px;
+    }
+    &_search {
+        background-position: -700px 0px;
+    }
+    &_file {
+        &_pdf {
+            background-position: -750px 0;
+        }
+        &_xls {
+            background-position: -900px 0;
+        }
+    }
+    &_chart {
+        background-position: -800px 0;
+    }
+    &_table {
+        background-position: -850px 0;
+    }
+    &_trash {
+        background-position: -1346px 3px;
+    }
+    &_preview {
+        background-position: -1650px 0;
+    }
+    &_preview_2 {
+        background-position: 0 -90px;
+    }
+    &_dir_up {
+        background-position: -950px 0px;
+        width: 8px;
+        height: 11px;
+    }
+    &_dir_dn {
+        background-position: -1000px 0px;
+        width: 8px;
+        height: 11px;
+    }
+    &_arrow_left {
+        width: 6px;
+        height: 10px;
+        background-position: -400px 0px;
+    }
+    &.sz_s {
+        width: 14px;
+        height: 14px;
+        &.icon_arrow_dn {
+            background-position: -147px -144px;
+            .open & {
+                background-position: -197px -144px;
+            }
+        }
+    }
+    &.sz_l {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        &.icon_person {
+            background-position: -1446px 2px;
+        }
+        &.icon_passport {
+            background-position: -1495px 2px;
+        }
+        &.icon_address {
+            background-position: -1547px 2px;
+        }
+        &.icon_bank {
+            background-position: -1598px 2px;
+        }
+    }
+    &.sz_2 {
+        cursor: pointer;
+    }
+    &.sz_xl {
+        width: 60px;
+        height: 60px;
+        &.icon_info {
+            background-position: -1050px 0;
+        }
+    }
+}
+
+.g-icon {
+    display: inline-block;
+    vertical-align: middle;
+    &_cart {
+        width: 9px;
+        height: 12px;
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAMCAMAAACHgmeRAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAZlBMVEWAgIBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqBzgqD///+n6AvwAAAAIHRSTlMAcOjg6XNNYLqSwXHQdGJYQkA9QSNR8gjsztKx24qB+8i1i04AAAABYktHRCHEbA0WAAAACXBIWXMAAAsSAAALEgHS3X78AAAAXUlEQVQI1yWM7RJAIAAEj6SEEirf3fs/pYbduZn9dQCqWjQSQKt0pzqtWhjxY9APPz1G2s8RjhN9mcPMpdTCGStD9DFwRaIVXlgmYJO73+VWro/zuq/zKPVkkvnBC0g0Btp0u4/DAAAAAElFTkSuQmCC');
+    }
+    &_plus {
+        position: relative;
+        &:after,
+        &:before {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            content: '';
+            background: $clr_primary;
+        }
+        &:after {
+            height: 2px;
+            width: 100%;
+        }
+        &:before {
+            width: 2px;
+            height: 100%
+        }
+        width:12px;
+        height:12px;
+    }
+    &_download {}
+}

@@ -1,0 +1,50 @@
+
+.fund-pay-thumb{
+  @each $i, $c in $fund_color{
+    &_#{$i} &__avatar svg, &_#{$i}{ fill:$c; }
+    &_#{$i} &__text{ color:$c }
+  }
+
+  .fund-pay-thumb__input:disabled ~ &__inner &__layout-disabled{ opacity:.5; cursor:default }
+  .fund-pay-thumb__input:checked ~ &__inner{
+    box-shadow:$bxsh_2;
+    background:white;
+    border-color:white;
+  }
+  .fund-pay-thumb__input:not(:checked) ~ &__inner &__avatar svg{ fill:$clr_primary }
+  .fund-pay-thumb__input:not(:checked) ~ &__inner &__text{ color:$clr_primary }
+  &__text{ transition:$trans; margin-bottom:.5em;
+    height:3em;
+    overflow:hidden; }
+  &__inner{
+    height:200px;
+    padding:2em;
+    margin:15px;
+    border:1px solid $clr_border;
+    border-radius:$br_1;
+    transition:$trans;
+    box-sizing:border-box;
+    cursor:pointer;
+  }
+
+  &__avatar, &__icon{
+    /* Style for "vase" */
+    width:30px;
+    height:22px;
+    line-height:22px;
+    display:inline-block;
+    vertical-align:top;
+    flex:0 0 auto;
+  }
+  &__row{ display:flex }
+  &__icon .svginline{ text-align:center;
+    svg{ width:14px; display:inline-block }
+  }
+  &__info{
+    display:inline-block;
+    vertical-align:text-top;
+  }
+  &_request{height:100%}
+  &_request &__inner{height:100%;margin-top:0;margin-bottom:0;}
+  &_request &__text{margin-bottom:0;height:auto}
+}

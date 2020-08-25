@@ -1,0 +1,15 @@
+.manager{
+  line-height: 1.2;
+  margin-bottom:nth($m_em,2);
+  max-width: 356px;
+  &__img{ height:165px;border-radius:$br_1; background: url(/dist/img/manager.jpg) no-repeat center; display:block;
+  &_2 {
+    background: url(/dist/img/us_logo_small.svg) no-repeat center right/contain;
+    height: 70px;
+  }
+  }
+  &_aside_us {
+    width:300px;
+  }
+  &__row{ margin-bottom:nth($m_em, 1);font-size:$fs_15 }
+}

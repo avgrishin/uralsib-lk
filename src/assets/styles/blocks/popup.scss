@@ -1,0 +1,156 @@
+.popup {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    transition: $trans;
+    color: $clr_primary;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: auto;
+
+    &__buttons {
+        > div {
+            &:first-child {
+                margin-right: 25px;
+            }
+        }
+    }
+
+    &__overlay {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        position: fixed;
+        background-color: rgba(0, 10, 23, 0.9);
+    }
+
+    &__title strong {
+        display: block;
+    }
+
+    &_show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__close {
+        position: absolute;
+        right: 1em;
+        top: 1em;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: -1em;
+            right: -1em;
+            bottom: -1em;
+            top: -1em;
+        }
+    }
+
+    &__wrap {
+        padding: 0 1em;
+        margin: auto 0;
+        padding: 12vh 0;
+
+        @include media($width_xs) {
+            max-width: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    &_print {
+        .popup__wrap {
+            margin: auto;
+        }
+    }
+
+    &__inner {
+        border-radius: 20px;
+        position: relative;
+        background: $clr_wh;
+        padding: nth($m_em, 4) nth($m_em, 2);
+
+        @include media($width_xs) {
+            width: 100%;
+        }
+    }
+
+    &__info {
+        padding: nth($m_em, 2);
+        margin: 0 -(nth($m_em,2)) nth($m_em, 2);
+        align-items: center;
+        display: flex;
+        background-color: $clr_blue;
+    }
+
+    .error {
+        &-links {
+            padding-left: 0;
+            list-style-type: none;
+            margin: 0 0 30px;
+            display: block;
+
+            li {
+                display: inline;
+            }
+
+            &__header {
+                color: $clr_error;
+            }
+        }
+
+        &-link {
+            font-size: 14px;
+            margin-right: 6px;
+            text-transform: lowercase;
+
+            &:after {
+                content: ', ';
+                display: inline-block;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+                margin-right: 0;
+
+                &:after {
+                    content: '.'
+                }
+            }
+        }
+    }
+
+    @include media($width_xs, 1) {
+        &__close {
+            right: -1em;
+            top: -1em;
+        }
+        &__content {
+            min-width: 360px;
+        }
+        &__content_sz_1 {
+            width: 360px;
+        }
+        &__content_sz_2 {
+            width: 550px;
+        }
+        &__inner {
+            padding: nth($m_em, 6) nth($m_em, 4);
+        }
+        &__info {
+            padding: nth($m_em, 3) nth($m_em, 4);
+            margin: 0 -(nth($m_em,4)) nth($m_em, 4);
+        }
+    }
+
+}

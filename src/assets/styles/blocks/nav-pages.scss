@@ -1,0 +1,8 @@
+.nav-pages{
+  display:flex;
+  & &__list{ display:flex; margin-top:.2em; }
+  &__item, &__text{ margin-right:nth($m_em, 2); }
+  &__link:not(:hover){ color:rgba($clr_primary, .6) }
+  &__item_active &__link{ color:$clr_primary }
+  &__link{ border-bottom-color:transparent; display:inline-block; vertical-align:top; }
+}

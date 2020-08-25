@@ -1,0 +1,20 @@
+.progress{
+  height:10px;
+  position:relative;
+  background-color:$clr_blue;
+  border-radius:$br_1;
+  &__line{
+    background-color:$clr_primary;
+    height:100%;
+    border-radius:$br_1;
+  }
+  &__text{
+    color:$clr_wh;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    text-align:center;
+  }
+}

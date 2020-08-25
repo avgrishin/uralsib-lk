@@ -1,0 +1,125 @@
+.fund-short{
+  @include media($width_xs){
+    @for $i from 1 through 4{
+      &-result[data-order="#{$i+1*(-1)}"]{ order:$i+1*(-1) }
+    }
+    &-col{
+      @for $i from 1 through 4{
+        &:nth-child(#{$i}){ order:$i+1*(-1) }
+      }
+    }
+  }
+  margin-top:nth($m_em, 2);
+  cursor:pointer;
+  height:118px;
+  box-sizing:border-box;
+  padding:35px 20px 0;
+  background-color:#fff;
+  border:1px solid #eaf1f8;
+  border-radius:$br_1;
+  transition:$trans;
+  @include clearfix;
+  &__icon{
+    width:46px;
+    height:46px;
+    float:left;
+    .svginline{
+      display:inline-block;
+      vertical-align:middle;
+      height:100%;
+      width:100%;
+      svg{
+        display:block;
+        max-width:100%;
+        height:auto;
+        margin:auto;
+        transition: none;
+      }
+
+    }
+    & + .fund-short__name{
+      margin-left:60px;
+    }
+  }
+  &__name{
+    font-size:$fs_1;
+    line-height:24px;
+    font-weight:300;
+    color:$clr_primary;
+
+    &-primary{
+      font-weight:400;
+      transition:$trans;
+      line-height:1.2;
+    }
+  }
+  /*  &_uep{
+      .fund-short__name{
+        font-size:0;
+        line-height:0;
+        &-primary{
+          font-size:$fs_1;
+          line-height:24px;
+        }
+      }
+    }*/
+  &:not(:hover) &__icon svg{ 
+    fill:$clr_primary; 
+    * {
+      fill:$clr_primary; 
+    }
+  }
+  &.active{
+
+    border-color:#fff;
+    box-shadow:$bxsh_3;
+    @each $i, $c in $fund_color{
+      &.fund-short_#{$i}{
+        .fund-short{
+          &__name-primary{
+            color:$c;
+          }
+          &__icon svg{
+            * {
+              fill:$c;
+            }
+            fill:$c;
+          }
+        }
+      }
+    }
+  }
+  &{
+    &__icon svg{ 
+      fill:$clr_primary;
+      * {
+        transition: $trans;
+        fill:$clr_primary;
+      }
+    }
+    &:hover{
+      @include media($width_md, 1){
+        border-color:#fff;
+        box-shadow:$bxsh_3;
+        @each $i, $c in $fund_color{
+          &.fund-short_#{$i}{
+            .fund-short{
+              &__name-primary{
+                color:$c;
+              }
+              &__icon svg{
+                fill:$c;
+                * {
+                  fill:$c;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+}
+

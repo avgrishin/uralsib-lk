@@ -1,0 +1,126 @@
+.dropdown{
+  display:inline-block;
+  position:relative;
+  text-align:left;
+
+  &__arrow{
+    right:-4px;
+    top:50%;
+    transform:translateY(-50%);
+    position:absolute;
+  }
+  &__name{
+    display:block;
+    width:100%;
+    padding:15px 30px 15px 18px;
+    position:relative;
+    line-height:18px;
+    font-weight:300;
+    color:$clr_gray_1;
+    white-space:nowrap;
+    cursor:pointer;
+    border-radius:6px;
+    border:1px solid #eaf1f8;
+    background-color:#fff;
+    &:hover{
+      border:1px solid #eaf1f8;
+    }
+  }
+  &__content{
+    list-style-type:none;
+    opacity:0;
+    visibility:hidden;
+    padding:23px 19px;
+    position:absolute;
+    left:0;
+    top:100%;
+    transform:translateY(-20px);
+    margin-top:4px;
+    width:100%;
+    background-color:#fff;
+    transition:$trans;
+    box-shadow:$bxsh_1;
+    border-radius:6px;
+    z-index:1111;
+
+    &:after{
+      display:block;
+      content:'';
+      height:4px;
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:100%;
+    }
+  }
+  &__item{
+    color:$clr_gray_1;
+    position:relative;
+    z-index:1;
+    & + &{
+      margin-top:16px;
+    }
+    a{
+      display:block;
+      position:relative;
+      font-size:inherit;
+      color:inherit;
+      border-bottom:0;
+    }
+    &:hover{
+      color:$clr_primary;
+    }
+  }
+
+  &_disabled &__name, &_disabled .g-icon-down{ cursor:default;
+    &:after{ display:none }
+  }
+  &:not(&_disabled) &__name.g-icon-down-focus:focus + &__content, &_open:not(&_disabled) &__content{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0px);
+
+  }
+  &__name.g-icon-down-focus:focus{
+    &:after{
+      display:block;
+      content:'';
+      height:4em;
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:100%;
+    }
+  }
+
+  &_cards &__name{
+    height:62px;
+    display:flex;
+    align-items:center;
+  }
+  &_case{
+    width:220px;
+  }
+  &_status{
+    .dropdown__content{
+      width:auto
+    }
+  }
+  &_trans{
+    .dropdown__name{
+      border:0;
+      background:transparent;
+      color:inherit;
+      font-weight:inherit;
+    }
+    .dropdown__content{
+      white-space:normal;
+    }
+
+  }
+  &_field{ display:inherit }
+  &_field &__content{ opacity:1;
+    visibility:visible; transform:translateY(0);
+  }
+
+}

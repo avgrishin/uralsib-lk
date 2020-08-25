@@ -1,0 +1,10 @@
+.nav-main-toggle{display:none;float:right;overflow:hidden;position:relative;width:25px;height:22px;margin: -1px 0;padding:0;border:none;border-radius:0;box-shadow:none;font-size:0;text-decoration:none;text-indent:-9999px;cursor:pointer;-webkit-transition:background .3s;transition:background .3s;-webkit-appearance:none;-moz-appearance:none;appearance:none;}
+.nav-main-toggle:hover{border:0;text-decoration:none;}
+.nav-main-toggle__icon{display:block;position:absolute;top:10px;right:0;left:0;height:2px;background:$clr_primary;transition:$trans}
+.nav-main-toggle__icon:after,.nav-main-toggle__icon:before{display:block;position:absolute;left:0;width:100%;height:2px;background-color:$clr_primary;content:"";-webkit-transition-delay:.3s, 0s;transition-delay:.3s, 0s;-webkit-transition-duration:.3s, .3s;transition-duration:.3s, .3s;}
+.nav-main-toggle__icon:before{top:-6px;-webkit-transition-property:top, -webkit-transform;transition-property:top, transform;}
+.nav-main-toggle__icon:after{bottom:-6px;-webkit-transition-property:bottom, -webkit-transform;transition-property:bottom, transform;}
+.open .nav-main-toggle__icon{background:0 0;}
+.open .nav-main-toggle__icon::after,.open .nav-main-toggle__icon::before{-webkit-transition-delay:0s, .3s;transition-delay:0s, .3s;}
+.open .nav-main-toggle__icon::before{top:0;-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg);}
+.open .nav-main-toggle__icon::after{bottom:0;-webkit-transform:rotate(-45deg);-ms-transform:rotate(-45deg);transform:rotate(-45deg);}

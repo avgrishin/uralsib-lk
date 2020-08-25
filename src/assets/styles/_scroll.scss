@@ -1,0 +1,26 @@
+.scrollbot-outer-parent {
+  margin-right: -20px;
+}
+.scrollbot-scrollbar {
+  border: 2px solid #eaf1f8;
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: move;
+  &-holder {
+    height: auto !important;
+    bottom: 8px;
+    &:after {
+      display: block;
+      left: 5px;
+      content: '';
+      position: absolute;
+      width: 2px;
+      background-color: #eaf1f8;
+      top: 0;
+      bottom: 0;
+    }
+  }
+
+}

@@ -1,0 +1,30 @@
+.strategy-cart {
+/*&-tooltip {
+  position:relative;
+  &__text{
+    display:flex;
+    align-items:center;
+  }
+  &__icon {
+    background-position: -37px -17px;
+  }
+  &__icon:hover+&__tooltip{
+    visibility:visible;opacity:1;
+  }
+}*/
+}
+
+.fund-cart_strategy {
+  .fund-cart{
+    &__name {
+      display: flex;
+      align-items: center;
+    }
+    &__options{line-height:1.2;}
+    &__option{    padding: .65em 0;    display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__options-val{white-space:nowrap}
+  }
+}

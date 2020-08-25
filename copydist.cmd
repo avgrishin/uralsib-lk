@@ -1,0 +1,1 @@
+copy dist\build.js \\vs-pif-cc-app\c$\CC-TEST\dist

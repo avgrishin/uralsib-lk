@@ -1,0 +1,363 @@
+
+.header{
+  line-height:1.2;
+  position:relative;
+  z-index:333;
+  .hide_noauth {
+    display: none !important;
+    @include media($width_xs){
+      display: inline-block !important;
+    }
+  }
+  &:not(&_notauth) &__top{
+    background:$clr_wh;
+  }
+  &__inner {
+    @include media($width_xs){
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &:before,
+      &:after {
+        display: none;
+      }
+      .g-col {
+        width: max-content !important;
+      }
+    }
+  }
+
+  &__phones{
+    padding-top:.4em;
+    float:right;
+    text-align:right;
+    color:$clr_wh;
+    margin-bottom:0;
+  }
+  &__top{
+    position:relative;
+    padding:32px 0 31px;
+
+
+  }
+  &__logo{
+    margin-top:-21px;
+    min-width:337px;
+    svg{
+      max-height:57px;
+      transform:translate3d(0, 0, 0);
+      pointer-events:none;
+    }
+    a{
+      display:inline-block;
+      white-space:nowrap;
+      text-decoration:none;
+      color:$clr_primary;
+      text-transform:uppercase;
+      .svginline.svg_xs {
+        display: none;
+        @include media($width_xs){
+          display: inline-block;
+        }
+      }
+      .svginline:not(.svg_xs) {
+        @include media($width_xs){
+          display: none;
+        }
+      }
+    }
+    &-text{
+      margin:23px 0 0 17px;
+      display:inline-block;
+      vertical-align:top;
+      font-weight:500;
+    }
+  }
+
+  &_notauth{
+    background-color:$clr_primary;
+    @include media($width_xs){
+      .g-row .hide_noauth {
+        display: none !important;
+      }
+      .g-row > * {
+        width: 50% !important;
+      }
+    }
+
+    .header{
+      &__phone{
+        color:#fff;
+      }
+      &__top{
+        background-color:$clr_primary;
+      }
+      &__logo{
+        a{
+          color:#fff;
+        }
+        path{
+          fill:#fff;
+        }
+      }
+    }
+    &:after{
+      display:none;
+    }
+  }
+
+  @include media($width_md){
+    &_notauth{
+      &:before{
+        content:'';
+        display:block;
+        height:81px;
+      }
+    }
+    &__top{
+      padding:28px 0 25px;
+      position:fixed;
+      z-index:333;
+      left:0;
+      right:0;
+      top:0;
+    }
+    &__nav{ margin-top:90px }
+
+  }
+  @include media($width_xs){
+    &__logo{ 
+      max-width:32px; 
+      min-width:auto;
+    }
+    &__top{
+      padding:17px 0 16px;
+
+      .g-col {
+        &:first-child {
+          padding-right: 0;
+          
+        }
+        &:last-child {
+          padding-left: 0;
+        }
+      }
+    }
+    &__phone{
+      font-size:1em; font-weight:300;
+      position:relative;
+      top:.2em;
+    }
+
+    &_notauth:before{ height:auto;
+      height: 82px;
+    }
+    &__nav{ 
+      margin-top:82px;
+     }
+  }
+
+
+
+}
+
+.header-menu{
+  background:$clr_wh;
+  position:absolute;
+  left:0;
+  right:0;
+  top:60%;
+
+  z-index:3;
+  border-top:1px solid $clr_primary;
+  box-shadow:$bxsh;
+  transition:$trans;
+  margin-top:-1000px;
+  padding-top:nth($m_em, 4);
+  padding-bottom:nth($m_em, 3);
+
+  &__item{ margin-bottom:nth($m_em, 3); }
+
+  &__avatar &__avatar-image{
+    padding-bottom:0;
+    height:200px;
+    &:not([style*="background-image"]){background-size:auto}
+  }
+  &__progress{ max-width:280px }
+  .h3{
+    margin-bottom:18px;
+  }
+
+  &_show{
+    margin-top:0;
+    & + .header-menu-overlay{
+      /*  visibility:visible;
+        opacity:1;*/
+
+    }
+  }
+  &__info{
+    margin-left:-3%
+  }
+  &__space{
+    min-height:9.2em;
+    @include media($width_md){
+      min-height:auto;
+
+    }
+  }
+  &__percent{
+    width:160px;
+    height:160px;
+    margin:0;
+    display:inline-block;
+    line-height:160px;
+    text-indent:-17px;
+    font-size:$fs_3;
+    text-align:center;
+    position:relative;
+    .svginline{ position:absolute;
+      left:-20px;
+      top:-10px;
+      transform:scale(.89); }
+    svg{
+      transform:rotate(-90deg);
+    }
+    svg circle{
+      stroke-dashoffset:0;
+      transition:stroke-dashoffset 1s linear;
+      stroke:#f9f9f9;
+      stroke-width:10px;
+    }
+    svg #bar{
+      stroke:$clr_primary;
+    }
+  }
+  &__close{
+    position:absolute;
+    right:0;
+    top:0;
+    z-index:1;
+    &:before{
+      content:'';
+      position:absolute;
+      left:-1em;
+      right:-1em;
+      bottom:-1em;
+      top:-1em;
+    }
+  }
+  &__nav{
+    @include media($width_md, 1){
+      margin-right:3%;
+      a, .link{ color:$clr_gray_1;
+        &:hover{ color:$clr_primary }
+      }
+    }
+
+
+    li:last-child{ margin-bottom:0 }
+  }
+
+  @include media($width_md){
+    opacity:0;
+    visibility:hidden;
+    position:fixed;
+    top:90px;
+    bottom:0;
+    margin-top:0;
+    overflow-y:auto;
+    background:white;
+    transform:translateY(-100%);
+    &_show{
+      opacity:1;
+      visibility:visible;
+      transform:translateY(0);
+    }
+  }
+  @include media($width_xs){
+    padding:nth($m_em, 2) 0;
+    top:64px;
+    &__item{ margin-bottom:1.5em; }
+    &__avatar &__avatar-image{
+      height:75px;
+      max-width:75px;
+      width:100%;
+      margin-right:1.25em;
+    /*  background-position:-1194px 10px;*/
+      margin-bottom:0;
+      margin-right:nth($m_em, 2);
+    }
+  }
+}
+.nav-main{
+  &__inner{
+    position:relative;
+    z-index:1;
+    padding:nth($m_em, 2) 0;
+    background-color:$clr_primary;
+    transition:$trans;
+    font-size:$fs_15;
+  }
+  &__toggle{
+    position:absolute;
+    right:-15px;
+    top:-10px;
+    margin-top:nth($m_em, 1);
+  }
+
+  &__list{
+    display:flex;
+    justify-content:space-between;
+  }
+  &__item.active &__link{ 
+    color:#fff;
+   }
+  &__link{
+    font-weight:500;
+    color:#c0cbda;
+    border-bottom:0;
+    display:block;
+  }
+
+  @include media($width_xs){
+    &{ height:3.7em; }
+    &__grid{ position:relative; padding-right:20px; }
+    &_title:not(&_open) &__text:after{ 
+      content:'Меню';
+      font-weight:500;
+      color:#c0cbda;
+      border-bottom:0;
+      display:block;
+      margin:0.625em 0;
+    }
+
+
+    &__inner{
+      padding:.46em 0;
+    }
+    &__list{ flex-direction:column; }
+    &__item{
+      margin:nth($m_em, 1) 0; font-size:0;
+      opacity:0;
+      transition:$trans;
+      .nav-main_open &{
+        display:block;
+        font-size:inherit;
+        opacity:1;
+        @include media(340px) {
+          font-size: 17px;
+        }
+       }
+    }
+    &__item.active{ 
+      order:-1; 
+      display:block; 
+      font-size:inherit; 
+      opacity:1;
+      @include media(340px) {
+        font-size: 17px;
+      }
+    }
+  }
+}
