@@ -36,7 +36,7 @@ export default {
                 const confirmOperationModalData = await this.getApplicationForOpenModal(result.applicationId);
                 // await this.closeAllModals();
 
-                window.events.$emit('show_popup', ['confirm-operation', confirmOperationModalData]);
+                window.events.$emit('show_popup', ['confirm-operation', {...confirmOperationModalData, deferred: true}]);
             }
         },
 
@@ -47,7 +47,7 @@ export default {
                     app_number: application.number,
                     app_id: applicationId,
                     operation: 'SellApps',
-                    fund: application.account.portfolio.description,
+                    fund: `${application.account.portfolio.description} №${application.number}`,
                     disableRequestCode: true,
                 }
 
@@ -83,14 +83,14 @@ export default {
         },
 
         initOnClosePopupHandler() {
-            window.events.$on('popup_closed', ({ component, payload }) => {
-                if (component !== 'confirm-operation') {
-                    return;
-                }
+            window.events.$on('code_canceled', payload => {
+                // if (component !== 'confirm-operation') {
+                //     return;
+                // }
 
-                if (!this[CHECK_DEFERRED_APPS_RESULT] || !this[CHECK_DEFERRED_APPS_RESULT].canBeSign) {
-                    return;
-                }
+                // if (!this[CHECK_DEFERRED_APPS_RESULT] || !this[CHECK_DEFERRED_APPS_RESULT].canBeSign) {
+                //     return;
+                // }
 
                 this.cancelApplication(payload.app_id)
                     .then(() => {})

@@ -5,7 +5,6 @@ export const API_FULL_PROD_URL = 'https://i.am-uralsib.ru/api';
 
 export function detectEnv() {
     const isSandbox = window.location.hostname.indexOf('localhost') >= 0;
-    console.log(`window.location.hostname=${window.location.hostname}`);
     const forceFullProd = Boolean(window.DEBUG_fullprod);
     if (isSandbox)
         return API_DEBUG_URL;

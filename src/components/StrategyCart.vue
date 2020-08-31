@@ -40,7 +40,7 @@
                     @click.prevent="strategyOperation(fund.webSiteID)",
                     :class="{btn_disabled: buttonDisabledIIS.val && rStrategyType == 'iis'}"
                     type="button",
-                    v-html="buttonDisabledIIS.text"
+                    v-html="buttonText"
                 )
                 //- .g-show_md(hidden)
                 //-     router-link(:to="{ name: 'iisDuStrategyPage', params: { strategyPrefix: fund.webSiteID }}") Подробнее
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { DU_DISABLED_BUY } from '../constatnts';
 import { iisDU } from '../mixins';
 
 export default {
@@ -119,6 +120,10 @@ export default {
 
         risk() {
             return this.fund.ish ? this.fund.ish.risk : '';
+        },
+
+        buttonText() {
+            return Boolean(DU_DISABLED_BUY.find(duId => duId === this.fund.id)) ? "Получить консультацию" : this.buttonDisabledIIS.text;
         },
 
         strategyShortDesc() {

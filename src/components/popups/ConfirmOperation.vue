@@ -41,6 +41,8 @@
                         button.g-btn-txt.g-fs_05.g-clr_gray.g-clr_pr_h.g-fw_6(type="button" @click.prevent="requestCode") Запросить код повторно
                 .g-col.g-col_md_6.g-mt_3_xs
                     button(type="submit" :disabled="!sms_code" value="Отправить" :class="{'spinner_bg': disabled}" @click.prevent="submitCode").btn.btn_block.btn_primary.g-mb_2 Отправить
+                    button(v-if="payload.deferred" type="button" value="Отменить" :class="{'spinner_bg': disabled}" @click.prevent="cancelCode").btn.btn_block.btn_primary.g-mb_2 Отменить
+                    
 
 </template>
 
@@ -108,6 +110,11 @@
                             flash(['Неизвестная ошибка'], 'error');
                         }
                     });
+            },
+            
+            cancelCode() {
+                window.events.$emit('code_canceled', { app_id: this.payload.app_id});
+                window.events.$emit('close_popup');
             },
 
             requestCode() {

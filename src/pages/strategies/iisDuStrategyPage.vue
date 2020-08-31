@@ -21,7 +21,7 @@
                                 @click="strategyOperation(rsStrategyID)",
                                 class="btn btn_primary g-mr_2 g-mr_0_xs g-col_md_a g-col_xs_12",
                                 :class="{btn_disabled: buttonDisabledIIS.val && rStrategyType == 'iis'}"
-                            ) Оформить договор
+                            ) {{ buttonText }}
                     template(v-else)
                         h2 Текущие показатели*
                         div.g-mb_4
@@ -353,6 +353,10 @@ export default {
 
         fund() {
             return this.iisDUList.find(product => product.webSiteID === this.rsStrategyID);
+        },
+
+        buttonText() {
+            return this.duDisabledBuy ? "Получить консультацию" : "Оформить договор";
         },
 
         duDisabledBuy() {
