@@ -11,7 +11,7 @@
 				th
 			tr.case-table__thead-line(v-if="table_data.total_pif")
 				td ПИФы
-				td
+				td(v-html="formatNumber(table_data.share_pif, {maximumFractionDigits: 2}) + '%'")
 				td(v-html="formatCurrency(table_data.total_pif)")
 				//- td(v-html="formatCurrency(table_data.profit_pif)")
 				//- td(v-html="table_data.profit_2.toLocaleString('ru-RU') + '%'")
@@ -36,7 +36,7 @@
 			tr.case-table__thead-line
 				td.g-ws_nw.g-hidden-b.g-hide_md
 					span.h4 Доверительное управление
-				td.g-hide_xs
+				td.g-hide_xs(v-html="formatNumber(table_data.share_du, {maximumFractionDigits: 2}) + '%'")
 				td.case-table__total-line-price(title="Доверительное управление")
 					span(v-html="formatCurrency(table_data.total_du)")
 				td.g-hide_xs
@@ -102,7 +102,6 @@
 			table_data() {
 
 				if (this.table) {
-					window.log('table_data',this.table);
 					return this.table;
 
 				}

@@ -107,7 +107,7 @@ export default {
         this.getDocs();
         this.chechdownloadFormLast();
         this.$store.commit('updateCrumbs', [
-            { link: '/funds', text: 'Портфель' },
+            { link: '/', text: 'Портфель' },
         ]);
         if (this.$route.query.tab) {
             this.selected_tab = this.$route.query.tab;

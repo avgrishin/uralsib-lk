@@ -112,7 +112,7 @@ casenav
         },
         created() {
             this.$store.commit('updateCrumbs', [
-                {link: '/funds', text: 'Портфель'}
+                {link: '/', text: 'Портфель'}
             ]);
             
             this.getData();

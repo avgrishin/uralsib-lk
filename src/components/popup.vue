@@ -13,6 +13,8 @@
         components: {
             'message': require('./popups/Message.vue'),
             'outdated-password': require('./popups/OutdatedPassword.vue'),
+            'user_is_lockedout': require('./popups/UserLockedOut.vue'),
+            'password_expired': require('./popups/PasswordExpired.vue'),
             'confirm-personal-data': require('./popups/ConfirmPersonalData.vue'),
             'preview-operation': require('./popups/PreviewOperation.vue'),
             'preview-docs': require('./popups/PreviewDocs.vue'),

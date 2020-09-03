@@ -1,5 +1,5 @@
 <template lang="pug">
-    invest-nav
+    casenav
         article.content
             div(:class="{'bug-ie': loaded}")
             h1.g-hide_xs Операции с паями
@@ -67,11 +67,12 @@
 <script>
     import moment from 'moment';
     import {Money, VMoney} from 'v-money'
-    import InvestNav from './InvestNav';
+    //import InvestNav from './InvestNav';
+    import CaseNav from '../case/CaseNav';
     import { confirmPersonalData } from '../../guards';
 
     export default {
-        components: { InvestNav, Money},
+        components: { CaseNav, /*InvestNav,*/ Money },
         directives: { money: VMoney },
         beforeRouteEnter: confirmPersonalData,
         data() {
@@ -154,7 +155,7 @@
         created() {
             this.getTextDisclaimer();
             this.$store.commit('updateCrumbs', [
-                { link: '/funds', text: 'Паевые инвестиционные фонды' }
+               {link: '/', text: 'Портфель'}
             ]);
 
             if (this.allFunds.length) this.formatFunds(this.allFunds);

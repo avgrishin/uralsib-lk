@@ -70,6 +70,8 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                             total_du: 0,
                             profit_pif: 0,
                             profit_2: 0,
+                            share_pif: 0,
+                            share_du: 0,
                             data: []
                         };
 
@@ -110,11 +112,16 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                                 //window.log(table_data.profit_pif);
 
                             }
+                            console.log('item',item);
                             table_data.data.push(item);
                         }
 
                         table_data.total = table_data.total_pif + table_data.total_du;
-
+                        if (table_data.total != 0) {
+                            table_data.share_pif = table_data.total_pif * 100 / table_data.total;
+                            table_data.share_du = table_data.total_du * 100 / table_data.total;
+                        }
+                        
                         table_data.data = table_data.data.map(item => {
                             item.share = item.amount * 100 / table_data.total;
                             item.children = item.children.map(child => {
@@ -136,7 +143,7 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                             this.case_table.profit_2 = data[0].profiT_2;
                         });
 
-                        this.case_table.data = this.case_table.data.filter(item => item.id && item.share);
+                        this.case_table.data = this.case_table.data.filter(item => /*item.id &&*/ item.share);
                     })
                 )
                 .catch((error) => {
@@ -174,9 +181,9 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                     data.id = matches ? matches[1] : '';
                     data.name = item.prtf;
                     data.amount += item.outamnt;
-					data.amountVal += item.outamntusd != null ? item.outamntusd : item.outamnt;
-                    data.Val = item.outamntusd != null ? 'Доллары США' : 'Рубли РФ';
-                    data.profit += item.outamntusd != null ? item.prlosT_NR_USD: item.prlosT_NR;
+					data.amountVal += item.outamntusd > 0 ? item.outamntusd : item.outamnt;
+                    data.Val = item.outamntusd > 0 ? 'Доллары США' : 'Рубли РФ';
+                    data.profit += item.outamntusd > 0 ? item.prlosT_NR_USD: item.prlosT_NR;
                     data.profit_per += item.profiT_2;
                     data.children.push({
                         name: item.opeR_ACC,

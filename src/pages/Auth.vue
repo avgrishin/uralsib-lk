@@ -245,8 +245,19 @@ export default {
                 // localStorage.removeItem('loginAttempt');
             })
             .catch((data) => {
+                console.log(data)
                 if (data.response.data.error == "outdated_password") {
                     window.events.$emit('show_popup', 'outdated-password');
+                    this.buffering = false;
+                    return
+                }
+                else if (data.response.data.error == "user_is_lockedout") {
+                    window.events.$emit('show_popup', 'user_is_lockedout');
+                    this.buffering = false;
+                    return
+                }
+                else if (data.response.data.error == "password_expired") {
+                    window.events.$emit('show_popup', 'password_expired');
                     this.buffering = false;
                     return
                 }

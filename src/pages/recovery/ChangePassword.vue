@@ -4,13 +4,13 @@
         form(@submit.prevent="changePassword" autocomplete="off").form_vertical
             .control
                 label.control__field.g-d_b
-                    input(name="oldPassword" data-vv-as="Старый пароль" v-validate="'required'" v-model="oldPassword" type="password" id="PASS_OLD").field_text.field_text_mtrl
+                    input(name="oldPassword" data-vv-as="Старый пароль" v-validate="'required'" v-model="oldPassword" type="password" id="PASS_OLD" rel="oldPassword").field_text.field_text_mtrl
                     span.field__eye(@click="togglePassword('PASS_OLD')")
                     span.control__label Введите старый пароль
                     span.field_error(v-if="errors.has('oldPassword')" v-html="errors.first('oldPassword')")
             .control
                 label.control__field.g-d_b
-                    input(name="newPassword" data-vv-as="новый пароль" v-validate="'required|spass'" rel="newPassword"   v-model="newPassword" type="password", id="PASS_NEW").field_text.field_text_mtrl
+                    input(name="newPassword" data-vv-as="новый пароль" v-validate="{required: true, spass: true, is_not: oldPassword}" rel="newPassword" v-model="newPassword" type="password", id="PASS_NEW").field_text.field_text_mtrl
                     span.field__eye(@click="togglePassword('PASS_NEW')")
                     span.control__label Введите новый пароль
                     span.field_error(v-if="errors.has('newPassword')" v-html="errors.first('newPassword')")

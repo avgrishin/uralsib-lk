@@ -1,5 +1,5 @@
 <template lang="pug">
-    invest-nav
+    casenav
         article.content
             h1.g-hide_xs Аналитика
             section.page-section
@@ -66,7 +66,7 @@
 
     import AnalyticsHighChart from '../../components/charts/AnalyticsHighChart';
     import AppTable from '../../components/table/AppTable';
-    import InvestNav from './InvestNav';
+    import CaseNav from '../case/CaseNav';
     import Paginator from '../../components/Paginator';
 
     import { dateFilter, xml } from '../../mixins';
@@ -128,7 +128,7 @@
         created() {
             this.getTextDisclaimer();
             this.$store.commit('updateCrumbs', [
-                {link: '/funds', text: 'Паевые инвестиционные фонды'}
+                {link: '/', text: 'Портфель'}
             ]);
 
             if (this.userFunds.length) this.getGraphs();

@@ -22,7 +22,7 @@ import { mapActions } from 'vuex';
 import Head from './components/Head.vue';
 import Foot from './components/Foot.vue';
 import Auth from './pages/Auth.vue';
-import PopUp from './components/Popup.vue';
+import PopUp from './components/popup.vue';
 import Notice from './components/Notice.vue';
 import { setUtmSource, setRegDataFromUS, setTransactionId, addPixelImg } from './assets/js/functions/global';
 import { confirmPersonalData } from './guards';

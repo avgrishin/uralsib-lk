@@ -94,7 +94,7 @@
 <script>
     import moment from 'moment';
 
-    import InvestNav from './invest/InvestNav.vue';
+    // import InvestNav from './invest/InvestNav.vue';
     import DateFilter from '../components/DateFilter';
     import FundChart from '../components/charts/FundChart';
     import NotFound from './404.vue';
@@ -103,7 +103,7 @@
     import UiDisclaimer from '../components/ui/UiDisclaimer';
 
     export default {
-        components: { UiDisclaimer, InvestNav, DateFilter, FundChart, NotFound },
+        components: { UiDisclaimer, /*InvestNav,*/ DateFilter, FundChart, NotFound },
         mixins: [caseStructure],
         data() {
             return {

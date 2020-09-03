@@ -47,7 +47,8 @@ Vue.mixin(global);
 messagesRu.messages = {
     ...messagesRu.messages,
     required: 'Поле обязательно для заполнения',
-    is: 'Пароли не совпадают'
+    is: 'Пароли не совпадают',
+    is_not: 'Старый и новый пароль не должен совпадать'
 };
 
 messagesRu.custom = {
