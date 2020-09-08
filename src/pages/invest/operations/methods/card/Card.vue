@@ -1,5 +1,5 @@
 <template lang="pug">
-    invest-nav
+    casenav
         article.content
             .g-mb_6
                 h1 Оплатить паи #[span.g-clr_gray (мои карты)]
@@ -36,15 +36,15 @@
                                 input(type="submit", @click.prevent="pay()" value="Оплатить" :disabled="buttonDisabled").btn.btn_primary.btn_block
 </template>
 <script>
-    import InvestNav from '../../../InvestNav'
+    import CaseNav from '../../../../case/CaseNav.vue'
 
     export default {
-        components: {InvestNav},
+        components: { 'casenav': CaseNav },
         created() {
             this.$store.commit('updateCrumbs', [
-                {link: '/funds', text: 'Паевые инвестиционные фонды'},
-                {link: '/operations', text: 'Операции с паями'},
-                {link: '/operations', text: 'Купить Паи'}
+                { link: '/', text: 'Портфель'},
+                { link: '/operations', text: 'Операции с паями' },
+                { link: '/operations', text: 'Купить Паи' }
             ]);
         },
         data() {

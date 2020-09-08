@@ -177,7 +177,7 @@ export const auth = (to, from, next) => {
 
 export const cleanUp = (to) => {
     let title = to.matched[to.matched.length - 1].meta.title;
-    let profileRoutes = ['/case/balance', '/case/chart', '/history', '/case/balance', '/documents', '/']
+    let profileRoutes = [ '/case/balance', '/case/chart', '/history', '/case/balance', '/documents', '/', '/analytics', '/operations', '/operations/buy', '/operations/change', '/operations/repay' ]
     if (title) window.document.title = title;
     else window.document.title = 'Кабинет УК УРАЛСИБ';
 

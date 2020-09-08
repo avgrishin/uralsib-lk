@@ -1,7 +1,6 @@
 <template lang="pug">
-    invest-nav
         article.content
-            h1 Фонды с наилучшей доходностью
+            h1 Рекомендуемые фонды
             .spinner(v-if="loading")
             fund-list(:funds="recommendedFunds" :showBG="true")
             div(v-if="!showAllFunds")
@@ -21,15 +20,13 @@
 <script>
     import fundThumb from '../../../components/Fund-thumb.vue';
     import FundList from './FundList.vue';
-    import InvestNav from '../InvestNav';
     import moment from 'moment';
     import UiDisclaimer from '../../../components/ui/UiDisclaimer';
     export default {
         components: {
             UiDisclaimer,
             'fund-thumb': fundThumb,
-            FundList,
-            InvestNav
+            FundList
         },
         watch: {
             recommendedFunds(val) {

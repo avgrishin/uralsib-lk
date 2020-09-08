@@ -1,5 +1,5 @@
 <template lang="pug">
-    invest-nav
+    casenav
         article.content
             h1.g-fw_4_xs.g-hide_xs(v-html="title")
             .control-label-top-title_xs.g-show_xs(hidden)
@@ -13,7 +13,7 @@
                     router-link(to="/user/personal").btn.btn_rare.g-ws_nw.g-ws_n_xs.g-p_1_xs Заполнить анкету
 </template>
 <script>
-    import InvestNav from '../InvestNav';
+    import CaseNav from '../../case/CaseNav.vue';
     import BuySingle from './buy/Single.vue';
     import BuyMultiple from './buy/Multiple';
     import { authAfterRouter } from '../../../mixins';
@@ -22,7 +22,7 @@
     export default {
         mixins: [authAfterRouter],
 
-        components: { InvestNav, BuySingle, BuyMultiple },
+        components: { 'casenav': CaseNav, BuySingle, BuyMultiple },
         beforeRouteEnter:confirmPersonalData,
         data() {
             return {
@@ -33,27 +33,23 @@
         },
         created() {
             this.$store.commit('updateCrumbs', [
-                { link: '/funds', text: 'Паевые инвестиционные фонды' },
+                { link: '/', text: 'Портфель'},
                 { link: '/operations', text: 'Операции с паями' },
                 { link: '/operations', text: 'Формирование документов' }
             ]);
 
             this.determineComponent();
-
         },
         beforeRouteLeave(to, from, next) {
             if (to.path == '/operations/buy/approve' || this.showNotice) return next();
 
-
             if(this.$store.getters['funds/quantityFunds']==0 && (to.path=='/operations/change' || to.path=='/operations/repay')) return ;
             if(this.$store.state.user.state.pifState != 2 && to.path=='/analytics') return ;
-
 
             if(!this.$store.state.popupConfirmOff) {
                 this.$store.dispatch('confirm')
                     .then(answer => {
                         if (answer) return next();
-
                         else window.events.$emit('close_popup');
                     });
             } else next()
@@ -72,7 +68,7 @@
                 this.$store.commit('updateCrumbs', []);
                 this.$nextTick(() => {
                     this.$store.commit('updateCrumbs', [
-                        { link: '/funds', text: 'Паевые инвестиционные фонды' },
+                        { link: '/', text: 'Портфель'},
                         { link: '/operations', text: 'Операции с паями' },
                         { link: '/operations', text: title }
                     ]);

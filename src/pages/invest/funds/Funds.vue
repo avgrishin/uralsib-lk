@@ -1,5 +1,5 @@
 <template lang="pug">
-    invest-nav
+    casenav
         .page.page_
             .page__head
                 .page__head-controls
@@ -22,13 +22,13 @@
 <script>
     import fundThumb from '../../../components/Fund-thumb.vue';
     import FundList from './FundList.vue';
-    import InvestNav from '../InvestNav';
+    import CaseNav from '../../case/CaseNav.vue';
 
     export default {
         components: {
             'fund-thumb': fundThumb,
             FundList,
-            InvestNav
+            'casenav': CaseNav
         },
         computed: {
             funds() {

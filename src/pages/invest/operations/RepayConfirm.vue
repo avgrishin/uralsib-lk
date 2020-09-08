@@ -1,5 +1,5 @@
 <template lang="pug">
-    invest-nav
+    casenav
         article.content
             h1.g-hide_xs Погасить паи
             form.form_approve
@@ -99,13 +99,13 @@
     import Inputmask from "inputmask";
     import moment from 'moment';
     import { confirmPersonalData } from '../../../guards';
-    import InvestNav from '../InvestNav';
+    import CaseNav from '../../case/CaseNav.vue';
     import { DEFERRED_SELL_SUM } from '../../../constatnts';
     import { buildAppsDictionary } from '../../../helpers';
     import { sellAppsApiService } from '../../../api';
 
     export default {
-        components: { InvestNav },
+        components: { 'casenav': CaseNav },
         beforeRouteEnter:confirmPersonalData,
         data() {
             return {
@@ -200,7 +200,7 @@
             window.events.$on('going_back', this.refreshComponent);
 
             this.$store.commit('updateCrumbs', [
-                { link: '/funds', text: 'Паевые инвестиционные фонды' },
+                { link: '/', text: 'Портфель'},
                 { link: '/operations', text: 'Операции с паями' }
             ]);
         },

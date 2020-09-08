@@ -67,12 +67,11 @@
 <script>
     import moment from 'moment';
     import {Money, VMoney} from 'v-money'
-    //import InvestNav from './InvestNav';
     import CaseNav from '../case/CaseNav';
     import { confirmPersonalData } from '../../guards';
 
     export default {
-        components: { CaseNav, /*InvestNav,*/ Money },
+        components: { 'casenav': CaseNav, Money },
         directives: { money: VMoney },
         beforeRouteEnter: confirmPersonalData,
         data() {
@@ -129,12 +128,10 @@
                                 this.selected_funds.push(this.funds[i]);
                                 disableArr.push(val[i])
                             }
-
                         }
                         else {
                             delete val[i];
                         }
-
                         indx = i
                         valIndx = val
                     });
@@ -146,7 +143,6 @@
                     this.disableBuyBtn = disableBtn
                 },
                 deep: true
-
             },
             showPanel(val) {
                 if (val) this.onScroll();

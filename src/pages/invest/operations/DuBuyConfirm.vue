@@ -1,5 +1,5 @@
 <template lang="pug">
-	invest-nav
+	casenav
 		article.content
 			h1 Оплата банковской картой
 			form
@@ -59,7 +59,7 @@
 	import CardInfo from 'card-info';
 	import moment from 'moment';
 	import { confirmPersonalData } from '../../../guards';
-	import InvestNav from '../InvestNav';
+	import CaseNav from '../../case/CaseNav.vue';
 
 	export default {
 		beforeRouteEnter:confirmPersonalData,
@@ -87,7 +87,7 @@
 			}
 		},
 		components: {
-			InvestNav
+			'casenav': CaseNav
 		},
 		created() {
 			let sType = this.$route.query.stype;
@@ -140,7 +140,7 @@
 				]);
 			} else {
 				this.$store.commit('updateCrumbs', [
-					{ link: '/funds', text: 'Паевые инвестиционные фонды' },
+					{ link: '/', text: 'Портфель'},
 					{ link: '/operations', text: 'Купить паи' }
 				]);
 			}

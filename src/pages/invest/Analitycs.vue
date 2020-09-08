@@ -75,7 +75,7 @@
         components: {
             'analytics-hchart': AnalyticsHighChart,
             AppTable,
-            InvestNav,
+            'casenav': CaseNav,
             Paginator
         },
         mixins: [dateFilter, xml],

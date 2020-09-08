@@ -1,100 +1,96 @@
 <template lang="pug">
-    invest-nav(v-if="isFound")
-        article.content.fond-detail
-            .g-hidden.g-show_md
-                .fond-detail__title.g-mb_4
-                    h1.g-mb_0(v-html="fund_full.description")
-                    .fond-detail__title-img.g-hidden.g-show_xs
+    article.content.fond-detail
+        .g-hidden.g-show_md
+            .fond-detail__title.g-mb_4
+                h1.g-mb_0(v-html="fund_full.description")
+                .fond-detail__title-img.g-hidden.g-show_xs
+                    svg-inline(:src="`/funds/${fund_full.webSiteId}.svg`")
+        section.page-section.g-row.g-row_flex.g-mb_9.g-mb_7_xs
+            .g-col.g-col_lg_2.g-col_md_3.g-or_1_xs
+                .g-col_xs_12
+                    .fond-detail__avatar.g-mb_4.g-hide_xs
                         svg-inline(:src="`/funds/${fund_full.webSiteId}.svg`")
-            section.page-section.g-row.g-row_flex.g-mb_9.g-mb_7_xs
-                .g-col.g-col_lg_2.g-col_md_3.g-or_1_xs
-                    .g-col_xs_12
-                        .fond-detail__avatar.g-mb_4.g-hide_xs
-                            svg-inline(:src="`/funds/${fund_full.webSiteId}.svg`")
-                        a(class="btn btn_primary btn_block" href="#" @click.prevent="buy") Купить
-                .g-col.g-col_lg_5.g-col_md_12.g-pt_4_md.g-or_1_md.g-or_0_xs.g-pt_0_xs
-                    .g-col_xs_12
-                        .g-mb_2.g-d_b.g-hide_md(hidden)
-                            .h1.g-mb_0(v-html="fund_full.description")
-                        .g-mb_1.h4  Минимальная сумма инвестирования: #[span.g-ws_nw(v-html="`1000 ${rubleSign}`")]
-                        .g-mb_2.h4 Рекомендуемый срок инвестирования: #[span.g-ws_nw от 1 года]
-                        p.g-mb_1(v-text="fund_full.text")
-                        a(:href="`https://www.uralsib-am.ru/funds/${this.fund}/`" target="_blank").g-fw_5 Полное описание фонда
-                        br
-                        a.fond-detail__results(href="https://www.uralsib-am.ru/services/advisor/" target="_blank").g-fw_5 Результаты управления фондом
-                .g-col.g-col_lg_5.g-col_md_a
-                    .fond-detail__info.g-lh_1
-                        .g-mb_2
-                            .h2.g-mb_0(v-html="`Доходность фонда за год*: ${fund_full.profitability}`")
-                        .g-mb_1.g-fw_5.g-mb_2(v-html="`Риск - ${fund_full.risk || ''}`")
-                        .fond-detail__info-decor
-                        .fond-detail__date.g-clr_gray(v-html="`на ${tableData.date_two || ''}:`")
-                        div.g-d_f.g-d_b_xs
-                            div.g-mr_6.g-mb_2_xs.g-mr_0_xs
-                                .h4.g-mb_1 Стоимость пая:
-                                span.h3( v-html="tableData.price ? tableData.price[1] : ''")
-                                .spinner(v-show="!loaded.fund_chart")
-                            div
-                                .h4.g-mb_1  СЧА:
-                                span.h3(v-html="tableData.scha ? tableData.scha[1] : ''")
-                                .spinner(v-show="!loaded.fund_chart")
-            table.case-table.g-mb_9.g-mb_7_xs
-                caption.case-table__title ПИФы
-                thead
-                    tr
-                        th Наименование фонда
-                        th(v-html="`на ${tableData.date_one || ''}`")
-                        th(v-html="`на ${tableData.date_two || ''}`")
-                        th Изменение
+                    a(class="btn btn_primary btn_block" href="#" @click.prevent="buy") Купить
+            .g-col.g-col_lg_5.g-col_md_12.g-pt_4_md.g-or_1_md.g-or_0_xs.g-pt_0_xs
+                .g-col_xs_12
+                    .g-mb_2.g-d_b.g-hide_md(hidden)
+                        .h1.g-mb_0(v-html="fund_full.description")
+                    .g-mb_1.h4  Минимальная сумма инвестирования: #[span.g-ws_nw(v-html="`1000 ${rubleSign}`")]
+                    .g-mb_2.h4 Рекомендуемый срок инвестирования: #[span.g-ws_nw от 1 года]
+                    p.g-mb_1(v-text="fund_full.text")
+                    a(:href="`https://www.uralsib-am.ru/funds/${this.fund}/`" target="_blank").g-fw_5 Полное описание фонда
+                    br
+                    a.fond-detail__results(href="https://www.uralsib-am.ru/services/advisor/" target="_blank").g-fw_5 Результаты управления фондом
+            .g-col.g-col_lg_5.g-col_md_a
+                .fond-detail__info.g-lh_1
+                    .g-mb_2
+                        .h2.g-mb_0(v-html="`Доходность фонда за год*: ${fund_full.profitability}`")
+                    .g-mb_1.g-fw_5.g-mb_2(v-html="`Риск - ${fund_full.risk || ''}`")
+                    .fond-detail__info-decor
+                    .fond-detail__date.g-clr_gray(v-html="`на ${tableData.date_two || ''}:`")
+                    div.g-d_f.g-d_b_xs
+                        div.g-mr_6.g-mb_2_xs.g-mr_0_xs
+                            .h4.g-mb_1 Стоимость пая:
+                            span.h3( v-html="tableData.price ? tableData.price[1] : ''")
+                            .spinner(v-show="!loaded.fund_chart")
+                        div
+                            .h4.g-mb_1  СЧА:
+                            span.h3(v-html="tableData.scha ? tableData.scha[1] : ''")
+                            .spinner(v-show="!loaded.fund_chart")
+        table.case-table.g-mb_9.g-mb_7_xs
+            caption.case-table__title ПИФы
+            thead
                 tr
-                    td.g-hide-b_xs(title="Наименование" v-html="`Расчётная стоимость пая, ${rubleSign}`")
-                    td(:title="`на ${tableData.date_one}`" v-html="tableData.price ? tableData.price[0] : ''")
-                    td(:title="`на ${tableData.date_two}`" v-html="tableData.price ? tableData.price[1] : ''")
-                    td(title="Изменение")
-                        span.g-mr_1.g-va_m(v-html="(tableData.price ? tableData.price[2] : '') + '%'")
-                        .icon.icon_dir_up.g-va_m.g-va_m(v-if="tableData.price && tableData.price[3]")
-                        .icon.icon_dir_dn.g-va_m.g-va_m(v-else)
+                    th Наименование фонда
+                    th(v-html="`на ${tableData.date_one || ''}`")
+                    th(v-html="`на ${tableData.date_two || ''}`")
+                    th Изменение
+            tr
+                td.g-hide-b_xs(title="Наименование" v-html="`Расчётная стоимость пая, ${rubleSign}`")
+                td(:title="`на ${tableData.date_one}`" v-html="tableData.price ? tableData.price[0] : ''")
+                td(:title="`на ${tableData.date_two}`" v-html="tableData.price ? tableData.price[1] : ''")
+                td(title="Изменение")
+                    span.g-mr_1.g-va_m(v-html="(tableData.price ? tableData.price[2] : '') + '%'")
+                    .icon.icon_dir_up.g-va_m.g-va_m(v-if="tableData.price && tableData.price[3]")
+                    .icon.icon_dir_dn.g-va_m.g-va_m(v-else)
+            .spinner(v-show="!loaded.fund_chart")
+            tr
+                td.g-hide-b_xs(title="Наименование" v-html="`Стоимость чистых активов, ${rubleSign}`")
+                td(:title="`на ${tableData.date_one}`" v-html="tableData.scha ? tableData.scha[0] : ''")
+                td(:title="`на ${tableData.date_two}`" v-html="tableData.scha ? tableData.scha[1] : ''")
+                td(title="Изменение")
+                    span.g-mr_1.g-va_m(v-html="(tableData.scha ? tableData.scha[2] : '') + '%'")
+                    .icon.icon_dir_up.g-va_m.g-va_m(v-if="tableData.scha && tableData.scha[3]")
+                    .icon.icon_dir_dn.g-va_m.g-va_m(v-else)
+        section.page-section
+            div(style="margin-top:-2em")
+                date-filter(text="Динамика стоимости пая" @filter_time="customDate" @start_of="defaultDate")
+        section.page-section
+            ul.g-mb_5.page-section__nav.g-mb_3_xs.g-mt_0
+                li.g-mr_4.g-ib
+                    a(href="#" @click.prevent="tab = 0" :class="{active: tab == 0}").nav__link.h2.g-ib.g-bbc_t.g-mb_0 Динамика стоимости пая
+                li.g-mr_4.g-ib
+                    a(href="#" @click.prevent="tab = 1" :class="{active: tab == 1}").nav__link.h2.g-ib.g-bbc_t.g-mb_0 Динамика СЧА
+            div(v-show="tab == 0")
+                fund-chart.chartdiv.chartdiv_pd(:dataProvider="profitability" :min="chart_min" :max="chart_max" :range="chart_range" v-show="loaded.fund_chart")
                 .spinner(v-show="!loaded.fund_chart")
-                tr
-                    td.g-hide-b_xs(title="Наименование" v-html="`Стоимость чистых активов, ${rubleSign}`")
-                    td(:title="`на ${tableData.date_one}`" v-html="tableData.scha ? tableData.scha[0] : ''")
-                    td(:title="`на ${tableData.date_two}`" v-html="tableData.scha ? tableData.scha[1] : ''")
-                    td(title="Изменение")
-                        span.g-mr_1.g-va_m(v-html="(tableData.scha ? tableData.scha[2] : '') + '%'")
-                        .icon.icon_dir_up.g-va_m.g-va_m(v-if="tableData.scha && tableData.scha[3]")
-                        .icon.icon_dir_dn.g-va_m.g-va_m(v-else)
-            section.page-section
-                div(style="margin-top:-2em")
-                    date-filter(text="Динамика стоимости пая" @filter_time="customDate" @start_of="defaultDate")
-            section.page-section
-                ul.g-mb_5.page-section__nav.g-mb_3_xs.g-mt_0
-                    li.g-mr_4.g-ib
-                        a(href="#" @click.prevent="tab = 0" :class="{active: tab == 0}").nav__link.h2.g-ib.g-bbc_t.g-mb_0 Динамика стоимости пая
-                    li.g-mr_4.g-ib
-                        a(href="#" @click.prevent="tab = 1" :class="{active: tab == 1}").nav__link.h2.g-ib.g-bbc_t.g-mb_0 Динамика СЧА
-                div(v-show="tab == 0")
-                    fund-chart.chartdiv.chartdiv_pd(:dataProvider="profitability" :min="chart_min" :max="chart_max" :range="chart_range" v-show="loaded.fund_chart")
-                    .spinner(v-show="!loaded.fund_chart")
-                div(v-show="tab == 1")
-                    fund-chart.chartdiv(:dataProvider="scha" :scha="true" :min="chart_min" :max="chart_max" :range="chart_range" v-show="loaded.fund_chart")
-                    .spinner(v-show="!loaded.fund_chart")
-            section.page-section
-                h2.page-section__caption Структура портфеля фонда
-                .g-row
-                    .g-col.g-col_lg_6(v-show="loaded.fund_structure" style="height: 300px")
-                        div(ref="pie_chart")
-                    .spinner(v-show="!loaded.fund_structure")
-            p.g-mt_6.g-col_8
-                ui-disclaimer.text-note(tag="small")
+            div(v-show="tab == 1")
+                fund-chart.chartdiv(:dataProvider="scha" :scha="true" :min="chart_min" :max="chart_max" :range="chart_range" v-show="loaded.fund_chart")
+                .spinner(v-show="!loaded.fund_chart")
+        section.page-section
+            h2.page-section__caption Структура портфеля фонда
+            .g-row
+                .g-col.g-col_lg_6(v-show="loaded.fund_structure" style="height: 300px")
+                    div(ref="pie_chart")
+                .spinner(v-show="!loaded.fund_structure")
+        p.g-mt_6.g-col_8
+            ui-disclaimer.text-note(tag="small")
 
-
-    not-found(v-else)
 
 </template>
 <script>
     import moment from 'moment';
 
-    // import InvestNav from './invest/InvestNav.vue';
     import DateFilter from '../components/DateFilter';
     import FundChart from '../components/charts/FundChart';
     import NotFound from './404.vue';
@@ -103,7 +99,7 @@
     import UiDisclaimer from '../components/ui/UiDisclaimer';
 
     export default {
-        components: { UiDisclaimer, /*InvestNav,*/ DateFilter, FundChart, NotFound },
+        components: { UiDisclaimer, DateFilter, FundChart, NotFound },
         mixins: [caseStructure],
         data() {
             return {

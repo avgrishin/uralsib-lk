@@ -1,5 +1,5 @@
 <template lang="pug">
-    invest-nav
+    casenav
         article.content
             h1 Оплата банковскими картами
             form(v-if="!applicationsListLoading && !isLoading")
@@ -33,7 +33,7 @@ import Inputmask from 'inputmask';
 import { authAfterRouter } from '../../../mixins';
 import CardInfo from 'card-info';
 import { confirmPersonalData } from '../../../guards';
-import InvestNav from '../InvestNav';
+import CaseNav from '../../case/CaseNav.vue';
 import { APPLICATIONS_LIST_KEY, APPLICATIONS_BUY_LIST_KEY, APPLICATIONS_LIST_LOADING_KEY, APPLICATIONS_STORE_KEY, APPLICATIONS_GET_BUY_LIST_ACTION } from '../../../store/modules/applications';
 
 export default {
@@ -41,7 +41,7 @@ export default {
     mixins: [authAfterRouter],
 
     components: {
-        InvestNav,
+        'casenav': CaseNav,
     },
 
     data() {
@@ -86,7 +86,7 @@ export default {
                 // this.getCards();
 
                 this.$store.commit('updateCrumbs', [
-                    { link: '/funds', text: 'Паевые инвестиционные фонды' },
+                    { link: '/', text: 'Портфель'},
                     { link: '/operations', text: 'Купить паи' },
                 ]);
 
