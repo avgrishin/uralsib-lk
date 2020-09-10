@@ -84,6 +84,14 @@
                 this.pageNavOpen = !this.pageNavOpen;
             },
 
+            yandexTarget(link){
+                if(link=='/operations/buy') {if(typeof yaCounter50062190 !== "undefined") {yaCounter50062190.reachGoal('BTN_BUY_MENU');}}
+            },
+            
+            openSellAlertModal() {
+                window.events.$emit('show_popup', 'sell-alert-confirm');
+            },
+
         },
         computed: {
 
@@ -169,7 +177,6 @@
                                     if (authState || !sellFunds) {
                                         return;
                                     }
-
                                     this.yandexTarget('/operations/repay');
                                     this.openSellAlertModal();
                                 }

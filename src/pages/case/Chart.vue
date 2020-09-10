@@ -124,11 +124,7 @@ casenav
                 });
 
                 this.profits.push(charts[0]);
-                console.log('this.profits')
-                console.log(this.profits)
                 this.profitsUsd.push(charts[1]);
-                console.log('this.profitsUsd')
-                console.log(this.profitsUsd)
                 this.loaded.case_chart = true;
             },
             defaultDate(event, type) {

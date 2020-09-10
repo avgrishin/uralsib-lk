@@ -191,7 +191,7 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                         profit: this.formatCurrency(item.prlosT_NR),
                         profit_per: item.profiT_2 ? item.profiT_2.toLocaleString('ru-RU', { maximumFractionDigits: 2 }) : 0
                     });
-                    data.quantity = item.outqnt;
+                    data.quantity += item.outqnt;
                     data.sCode = item.sCode;
                     data.sCodeType = data.type === 'ДУ' ? productInStateSType : '';
                 }

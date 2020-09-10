@@ -156,7 +156,7 @@
 				}
 			},
 			getCaseTableData() {
-				axios.get('/reports/AssetsEstimateDU').then(({data}) => {
+				axios.get('/reports/AssetsStruct').then(({data}) => { //AssetsEstimateDU
 					let table_data = {
 						total: 0,
 						data: []
@@ -233,7 +233,7 @@
 
 						data.id = matches ? matches[1] : 'unknown';
 						data.name = item.prtf;
-						data.pif=item.pif,
+						data.pif = item.pif;
 						data.amount += item.outamnt;
 						data.amountVal += item.outamntusd > 0 ? item.outamntusd : item.outamnt;
 						data.Val = item.outamntusd > 0 ? 'Доллары США' : 'Рубли РФ';

@@ -18,6 +18,7 @@
                         .case-table__toggle.g-hidden.g-show_md
                             .g-icon-down(:class="{'g-icon-down_open': toggleCaseTable }")
                     td.case-table__td-md(title="Доля в портфеле" v-html="formatNumber(row.share, {maximumFractionDigits: 2}) + '%'")
+                    td.case-table__td-md(title="Количество паев" v-html="row.quantity")
                     td.case-table__td-md(title="Стоимость активов на конец периода*" v-html="formatCurrency(row.amount)")
                     td.case-table__td-md(title="Доход*" v-html="row.profit")
                     td.case-table__td-promo(title="Доходность*" v-html="(row.profit_per=='-0')?'0':row.profit_per + '%'")
@@ -59,10 +60,11 @@
                         .case-table__toggle.g-hidden.g-show_md
                             .g-icon-down(:class="{'g-icon-down_open': toggleCaseTable }")
                     td.case-table__td-md(title="Доля в портфеле" v-html="formatNumber(row.share, {maximumFractionDigits: 2}) + '%'")
+                    td(v-html="")
                     td.case-table__td-md(title="Стоимость активов на конец периода*" v-html="formatCurrency(row.amountVal, false, row.Val)")
                     td.case-table__td-md(title="Доход*" v-html="row.profit")
                     td.case-table__td-md(title="Доходность*" v-html="(row.profit_per=='-0')?'0':row.profit_per + '%'")
-                    td.case-table__td-md.g-hidden-b: button.btn.btn_primary.g-d_b.g-col_xs_12.g-col_md_3.g-col_lg_12(@click="strategyOperation(row.sCode.toLowerCase())") Пополнить
+                    td.case-table__t-btns.g-hidden-b: button.btn.btn_primary.g-d_b.g-col_xs_12.g-col_md_3.g-col_lg_12(@click="strategyOperation(row.sCode.toLowerCase())") Пополнить
 </template>
 <script>
 import {iisDU} from '../../mixins';
