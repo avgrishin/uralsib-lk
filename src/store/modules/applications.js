@@ -43,7 +43,7 @@ export default {
             try {
                 commit(APPLICATIONS_SET_LOADING, true);
                 const list = await appsApiService.allApps();
-                console.log({ list });
+                //console.log({ list });
 
                 commit(APPLICATIONS_SET_LIST, list);
             } catch (e) {

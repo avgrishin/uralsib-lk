@@ -42,7 +42,7 @@ export default {
         },
 
         duDisabledBuy() {
-            return this.fund && Boolean(DU_DISABLED_BUY.find(duId => duId === this.fund.id)) && this.buttonDisabledIIS.val;
+            return this.fund && Boolean(DU_DISABLED_BUY.find(duId => duId === this.fund.id)) && (this.buttonDisabledIIS.val || this.rStrategyType.toUpperCase() !== 'IIS');
         },
     },
 

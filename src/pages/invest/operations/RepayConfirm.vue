@@ -314,7 +314,6 @@
                             fundFromArr.push(dataItem)
                         }
                     });
-
                     this.available_funds = fundFromArr;
                     if (this.$route.query.fund) this.setFund(fundFromArr);
                 });

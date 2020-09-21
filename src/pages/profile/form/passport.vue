@@ -5,7 +5,7 @@
 			step
 			.g-col.g-col_lg_8
 				form.form.form-step(autocomplete="off")
-					fieldset.form__fieldset.form__fieldset_narrow.g-mb_0(:disabled="formDisabled")
+					fieldset.form__fieldset.g-mb_0(:disabled="formDisabled")
 						.g-row_narrow
 							.control.g-col.g-col_md_6
 								label.control__field.g-d_b
@@ -44,7 +44,7 @@
 									id="FR_ISSUE",
 									:disabled="regEsia"
 								).field_text.field_text_mtrl
-								span.control__label Кем выдан
+								span.control__label Кем выдан #[strong.red_text (строго в соответствии с паспортом)]
 								span.field_error(v-if="errors.has('issue')", v-html="errors.first('issue')")
 
 						.g-row_narrow
@@ -458,12 +458,15 @@
 
 <style lang="scss">
 
-
 	.drag-over {
 		border-color: #bbc0c6;
 	}
 
 	.drag-error {
 		border-color: #ff3333;
+	}
+
+	.red_text {
+		color: red;
 	}
 </style>
