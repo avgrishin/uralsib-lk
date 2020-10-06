@@ -1,5 +1,5 @@
 import store from "../store";
-import { DU_DISABLED_BUY } from '../constatnts';
+import { DU_DISABLED_BUY, DU_CODE_DISABLED_BUY } from '../constatnts';
 
 export default {
     watch: {
@@ -61,7 +61,7 @@ export default {
         /**
          * Открывает попап связи с менеджером для покупки "специальных" ДУ, на 28.12.19 это валютные рантье
          */
-        showDuSpecialPopup() {
+        showDuSpecialPopup(webSiteID) {
             window.events.$emit('show_popup', ['contact', {
                 type: 'duSpecial',
                 duName: this.fund.strategyName,
@@ -85,7 +85,7 @@ export default {
             }
 
             if (this.duDisabledBuy) {
-                this.showDuSpecialPopup();
+                this.showDuSpecialPopup(id);
                 return;
             }
 

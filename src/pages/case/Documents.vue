@@ -179,7 +179,6 @@ export default {
                     ],
                 );
 
-                console.log(iisReports, otherDocs);
 
                 if (!iisReports || !Array.isArray(iisReports)) {
                     throw new TypeError('Ошибка при получении документов клиента');

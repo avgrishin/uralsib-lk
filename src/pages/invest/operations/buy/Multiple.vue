@@ -199,7 +199,7 @@
                 } else {
                     this.buffering=true;
                 }
-                console.log(val);*/
+                */
             },
             order(val) {
                 let text = 'Формирование документов';

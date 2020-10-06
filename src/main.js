@@ -125,7 +125,6 @@ window.log = ((val)=>{if(localStorage.getItem('debug')) return console.log(val)}
 window._ = require('lodash');
 
 window.axios = require('axios');
-console.log(API_BASE_URL);
 window.axios.defaults.baseURL = API_BASE_URL;
 
 router.beforeEach(auth);

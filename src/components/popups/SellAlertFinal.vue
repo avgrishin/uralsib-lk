@@ -63,7 +63,6 @@ export default {
             this.toggleConfirm(true);
 
             setTimeout(() => {
-                console.log('push funds');
                 this.$router.push('/funds');
             }, 10000);
 

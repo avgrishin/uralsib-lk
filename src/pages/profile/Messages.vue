@@ -4,7 +4,7 @@
             h1(style="line-height:1") Сообщения
             b-search.g-ml_6.g-flex_1.g-mt_1_m(@search="setFilter" v-if="0")
         .message-list
-            a().message-thumb.g-row.g-row_table.g-btn-hover.g-row_b_xs(v-if=0)
+            a(v-if="0").message-thumb.g-row.g-row_table.g-btn-hover.g-row_b_xs
                 .g-col.g-col_lg_2.g-col_md_2.message-thumb__date 14.08.2018
                 .g-col.g-col_lg_8.g-col_md_7.message-thumb__name
                     |Уважаемые клиенты!
@@ -13,7 +13,7 @@
                     |Старая версия Кабинета клиента будет доступна в течение месяца.
                 .g-col.g-col_lg_2.g-col_md_3.g-hide_xs
                     span.btn.btn_secondary.btn_primary_h.btn_block.g-btn-hover__btn Подробнее
-            div(v-if=1)
+            div(v-if="1")
                 a(v-for="message in filteredMessages" @click.prevent="openMessage(message)", :class="{'new': message.msgStatus == 0}").message-thumb.g-row.g-row_table.g-btn-hover.g-row_b_xs
                     .g-col.g-col_lg_2.g-col_md_2.message-thumb__date(v-html="message.date")
                     .g-col.g-col_lg_8.g-col_md_7.message-thumb__name

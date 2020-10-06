@@ -315,7 +315,6 @@ export default {
                     return typeof this.order == 'object' ? contract.pifNumber == this.order.pifNumber : contract.pifNumber == this.order;
                 });
 
-                // console.log(jsonParse(this.application));
 
 	            // this.storeSrategyById(this.operationDetails.fund.params.webSiteID)
 

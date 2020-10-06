@@ -74,7 +74,7 @@
                     .auth-bottom__link
                         span.icon.icon_comment
                         a.js-click-datalayer(href="#" @click.prevent="showPopup" data-action="openForm" data-label="Форма обратной связи") Форма обратной связи
-            .g-col.g-col_md_6
+            .g-col.g-col_md_6(v-if="1==2")
                 .auth-bottom__stores
                     span.auth-bottom__label Скачать приложения
                     div
@@ -196,7 +196,7 @@ export default {
                         }
                     })
             } else {
-                flash(['Пароль был введен некорректно несколько раз. <br> Попытайтесь снова через 5 минут'], 'error');
+                flash(['Пароль был введен некорректно несколько раз. <br> Попытайтесь снова через 15 минут'], 'error');
             }
         },
         sendLoginRequest() {
@@ -245,7 +245,6 @@ export default {
                 // localStorage.removeItem('loginAttempt');
             })
             .catch((data) => {
-                console.log(data)
                 if (data.response.data.error == "outdated_password") {
                     window.events.$emit('show_popup', 'outdated-password');
                     this.buffering = false;

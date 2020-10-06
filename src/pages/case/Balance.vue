@@ -89,11 +89,11 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                                 /*   item.outqnt=1;*/
                                 table_data.total_du += item.outamnt;
 
-                                if (item.outqnt > 0) {
+                                // if (item.outqnt > 0) {
                                     table_data.profit_du += item.prlosT_NR;
-                                }
+                                // }
 
-                            } else if (item.outqnt > 0) {
+                            } else /*if (item.outqnt > 0)*/ {
                                 table_data.profit_pif += item.prlosT_NR;
 
                                 window.temp += item.profiT_2;
@@ -112,7 +112,6 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                                 //window.log(table_data.profit_pif);
 
                             }
-                            console.log('item',item);
                             table_data.data.push(item);
                         }
 
@@ -174,7 +173,7 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                 const productInState = this.$store.state.iisDU.list.find(str => str.sCode.toLowerCase() === sCode.toLowerCase());
                 const productInStateSType = productInState ? productInState.sType : '';
 
-                if (item.outqnt > 0) {
+                //if (item.outqnt > 0) {
                     let matches = [];
                     if (item.smallIcon) matches = item.smallIcon.match(/\/([a-z0-9]*)-s.jpg$/);
                     data.type = item.pif;
@@ -194,7 +193,7 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                     data.quantity += item.outqnt;
                     data.sCode = item.sCode;
                     data.sCodeType = data.type === 'ДУ' ? productInStateSType : '';
-                }
+                //}
             });
 
             data.amount = data.amount;

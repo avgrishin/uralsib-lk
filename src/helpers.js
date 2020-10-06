@@ -28,7 +28,6 @@ export function initDataLayerHelpers() {
 
 
         if (window.location.host.indexOf('am-uralsib.ru') === -1) {
-            console.log(event);
             return;
         }
 
@@ -139,9 +138,6 @@ export function togglePrivateGTMMode(flag = true) {
     isPrivate = flag;
 
     if (window.location.host.indexOf('am-uralsib.ru') === -1) {
-        console.log({
-            isPrivate: flag ? 'YES' : 'NO',
-        });
         return;
     }
 

@@ -64,7 +64,7 @@
                     td.case-table__td-md(title="Стоимость активов на конец периода*" v-html="formatCurrency(row.amountVal, false, row.Val)")
                     td.case-table__td-md(title="Доход*" v-html="row.profit")
                     td.case-table__td-md(title="Доходность*" v-html="(row.profit_per=='-0')?'0':row.profit_per + '%'")
-                    td.case-table__t-btns.g-hidden-b: button.btn.btn_primary.g-d_b.g-col_xs_12.g-col_md_3.g-col_lg_12(@click="strategyOperation(row.sCode.toLowerCase())") Пополнить
+                    td.case-table__t-btns.g-hidden-b: button.btn.btn_primary.g-d_b.g-col_xs_12.g-col_md_3.g-col_lg_12(@click="stratOper(row.sCode.toLowerCase())") Пополнить
 </template>
 <script>
 import {iisDU} from '../../mixins';
@@ -76,11 +76,16 @@ export default {
                 isShowChild: false,
                 toggleCaseTable: false,
 	            rStrategyType: this.row.sCodeType ? this.row.sCodeType.toLowerCase() : '',
-                toggleDrop: false
+                toggleDrop: false,
+                fund: {}
             }
         },
         methods:{
-            toggleDropdown(){
+            stratOper(code) {
+                this.fund = { ...this.$store.state.iisDU.list.find(i => i.webSiteID == code) };
+                this.strategyOperation(code)
+            },
+            toggleDropdown() {
                 this.toggleDrop = !this.toggleDrop;
             },
             jsToggleCaseTable() {

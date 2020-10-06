@@ -58,7 +58,6 @@ export default {
             try {
                 commit(APPLICATIONS_SET_LOADING, true);
                 const list = await appsApiService.buyApps();
-                console.log({ list });
 
                 commit(APPLICATIONS_SET_BUY_LIST, list);
             } catch (e) {

@@ -167,7 +167,7 @@
 						this.loaded.case_structure = true;
 						return this.case_table = table_data;
 					}
-					data = data.filter((item)=>item.outqnt > 0);
+					//data = data.filter((item)=>item.outqnt > 0);
 					data.forEach(elem=>{
 
 						if(elem.pif=="ДУ") {
@@ -226,7 +226,7 @@
 
 
 				items.forEach(item => {
-					if (item.outqnt > 0) {
+					//if (item.outqnt != 0) {
 						let matches = [];
 						if (item.smallIcon) matches = item.smallIcon.match(/\/([a-z0-9]*)-s.jpg$/);
 						if (matches[1]) data.color = colors[matches[1]];
@@ -254,7 +254,7 @@
 							data.color = getColor && getColor[0];
 							data.id = scodeL || 'unknown';
 						}
-					}
+					//}
 				});
 
 				data.amount = data.amount;

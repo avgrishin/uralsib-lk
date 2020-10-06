@@ -63,7 +63,8 @@
 					li.header-menu__item
 						router-link(to="/help").g-bbc_t Помощь
 					li.header-menu__item
-						a(href="#", @click.prevent="showPopup_feedback").g-bbc_t Форма обратной связи
+						router-link(to="/cmp").g-bbc_t Форма обратной связи
+						a(href="#", @click.prevent="showPopup_feedback" v-if="1==2").g-bbc_t Форма обратной связи
 					li.header-menu__item.g-hidden.g-show_xs(hidden)
 						button(@click="logout").link.g-bbc_t.g-btn-txt.g-fw_5 Выход
 			.g-col.g-col_lg_5.g-col_md_4.header-menu__info.g-ml_0_md.g-mb_8_xs.g-hide_xs

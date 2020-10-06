@@ -85,7 +85,7 @@ export default {
             disclaimer: '',
             session: null,
             session_reminder: null,
-            sessionTime: 30,
+            sessionTime: 60,
             registerCheckPopupState: false,
         };
     },
