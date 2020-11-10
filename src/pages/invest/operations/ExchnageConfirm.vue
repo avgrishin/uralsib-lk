@@ -58,11 +58,21 @@
                                     span(slot="no-options")
                                 input(type="text" :value="account_to ? account_to.title : ''" style="opacity: 1;" :placeholder="accounts_to.length == 0 ? 'Новый счет' : ''" disabled v-else).field_text
                         .control
-                    .g-row
+                    .g-row.g-mb_2
                         .control.g-col.g-col_lg_8
-                            label.checkbox.g-mb_5(:class="{'checkbox_error': errors.has('correct_data')}")
+                            label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")
+                                input(type="checkbox", v-model="term1" v-validate="'required'" name="term1")
+                                .checkbox__text Срок проведения операции составляет до 5(пяти) рабочих дней
+                    .g-row.g-mb_2
+                        .control.g-col.g-col_lg_8
+                            label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")
                                 input(type="checkbox", v-validate="'required'" v-model="terms" name="correct_data", id="FPP_CORRECT_DATA")
                                 span.checkbox__text(v-html="disclaimerTextOperChange")
+                    .g-row
+                        .control.g-col.g-col_lg_8
+                            label.checkbox.g-mb_2(:class="{'checkbox_error': errors.has('correct_data')}")
+                                input(type="checkbox", v-model="term2" v-validate="'required'" name="term2")
+                                .checkbox__text Заявка носит безотзывной характер
 
                             button(type="submit" :class="{btn_secondary: buttonDisabled, btn_primary: !buttonDisabled}" @click.prevent="exchange").btn.g-col_md_3.g-col_xs_12 Подписать
 
@@ -95,6 +105,8 @@
                 fundAvailable: [],
 
                 terms: false,
+                term1: false,
+                term2: false,
                 fund_data: []
             }
         },
@@ -245,7 +257,8 @@
                 this.setAmount();
             },
             getFundInfo() {
-                return axios.get('/reports/AssetsEstimate');
+                // return axios.get('/reports/AssetsEstimate');
+                return axios.get('/reports/AssetsStructPIF');
             },
             getAccounts(direction) {
 
@@ -363,6 +376,8 @@
                 this.accounts_from = [];
                 this.accounts_to = [];
                 this.terms = false;
+                this.term1 = false;
+                this.term2 = false;
                 this.amount = '';
 
                 this.getAvailableFunds();
@@ -406,7 +421,9 @@
                     this.fund_to &&
                     this.amount &&
                     this.account_from &&
-                    this.terms
+                    this.terms &&
+                    this.term1 &&
+                    this.term2
                 )
             },
             links() {

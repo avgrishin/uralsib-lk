@@ -140,13 +140,13 @@ export default {
         },
 
         sendMessage() {
+            this.buffering = true;
             this.$validator.validateAll().then(response => {
                 if (response) {this.sendRequest();}
             });
         },
 
         sendRequest() {
-            this.buffering = true;
             axios.post('/message/add', {
                 theme: this.theme.id,
                 name: this.name,
@@ -155,7 +155,6 @@ export default {
                 text: this.message
             })
             .then(({data}) => {
-                this.buffering = false;
                 if (data.isSuccess)
                 {
                     this.id = data.id;
@@ -166,6 +165,7 @@ export default {
                 else {
                     data.errorDescription ? flash([data.errorDescription], 'error') : flash(['Неизвестная ошибка'], 'error');
                 }
+                this.buffering = false;
             })
             .catch(({response: error}) => {
                 this.buffering = false;
@@ -179,9 +179,9 @@ export default {
             // params.append('Id', this.id);
             axios.post(`/message/check/${this.smscode}`, { Id: this.id })
             .then(() => {
-                this.buffering = false;
                 this.$removeOnBlurEvents();
                 this.page = 3;
+                this.buffering = false;
                 //this.nextTick();
             }).catch(({response: error}) => {
                 this.buffering = false;
@@ -204,7 +204,7 @@ export default {
     computed: {
         ...mapState('user', { userInfo: 'info' }),
         buttonDisabled() {
-            return !Boolean(this.phone && this.message && this.theme && this.theme.id)
+            return !Boolean(this.phone && this.message && this.theme && this.theme.id && !this.buffering)
         },
         isAuth2() {
             return this.$store.state.user.state.authState == 2;

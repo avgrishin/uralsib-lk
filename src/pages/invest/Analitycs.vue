@@ -130,7 +130,6 @@
             this.$store.commit('updateCrumbs', [
                 {link: '/', text: 'Портфель'}
             ]);
-console.log('this.userFunds', this.userFunds)
             if (this.userFunds.length) this.getGraphs();
 
             this.pifTableData();
@@ -260,7 +259,6 @@ console.log('this.userFunds', this.userFunds)
                     let table = [];
 
                     if (data && data.length == 0) this.loaded.table = true;
-console.log('data', data)
                     data= data.filter(item => item.pif != 'ДУ');
 
                     let funds = _.groupBy(data, 'prtf');
@@ -276,7 +274,6 @@ console.log('data', data)
                         if(!this.$store.state.funds.items.some((itemSub)=>item.id==itemSub.webSiteId)) item.history=true;
                         return item;
                     });
-console.log('table', table, 'loaded', loaded);
                     this.table_data = table;
                     if (loaded) this.loaded.table = true;
                 }).catch(() => {

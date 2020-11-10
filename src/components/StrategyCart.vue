@@ -15,7 +15,7 @@
             ul.fund-cart__list.fund-cart__options(v-if="rStrategyType == 'iis'")
                 li.fund-cart__item
                     small.fund-cart__item-name  Доходность#[sup 1], % годовых:
-                    strong.fund-cart__item-text до {{expectProfit}}%{{ fund.strategyName.indexOf('Доллар') !== -1 ? '*' : '' }} {{rStrategyType == 'du' ? expectProfitText : ''}}
+                    strong.fund-cart__item-text ~ {{expectProfit}}%{{ fund.strategyName.indexOf('Доллар') !== -1 ? '*' : '' }} {{ expectProfitText }}
                 li.fund-cart__item
                     small.fund-cart__item-name Допустимый риск#[sup 2]:
                     strong.fund-cart__item-text {{risk}}

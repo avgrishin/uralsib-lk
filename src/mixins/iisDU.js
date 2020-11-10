@@ -19,7 +19,8 @@ export default {
         buttonDisabledIIS() {
             let list = this.$store.state.iisDU.list;
             let selectedIISinCase;
-            let iisInCase;if (list.length == 0 || typeof list != 'object') return false;
+            let iisInCase;
+            if (list.length == 0 || typeof list != 'object') return false;
             list = list.filter(l => l.sType == this.rStrategyType.toUpperCase());
             iisInCase = list.find(l => l.contract.length > 0);
             if (!iisInCase) return {

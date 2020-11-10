@@ -330,25 +330,29 @@ export default {
             };
 
             try {
-                const allPays = await axios.get('payments/allpayed').then(({ data }) => data);
-                if (!allPays || !allPays.length) {
-                    return setMinSum();
-                }
-
-                if (!this.order && typeof this.order !== 'object') {
-                    return setMinSum();
-                }
-
-                const findLastStrategyPayByOrderNumber = allPays.find(item => {
-                    // Задавал вопрос насколько корректно по подстроке искать. Бекендеры сказали что корректно
-                    return item.orderReason && item.orderReason.includes(this.order.number) && item.status === 3;
-                });
-
-                if (findLastStrategyPayByOrderNumber) {
+                if(this.order && this.order.firstSum > 0) {
                     return setAddSum();
                 }
-
                 setMinSum();
+                // const allPays = await axios.get('payments/allpayed').then(({ data }) => data);
+                // if (!allPays || !allPays.length) {
+                //     return setMinSum();
+                // }
+
+                // if (!this.order && typeof this.order !== 'object') {
+                //     return setMinSum();
+                // }
+
+                // const findLastStrategyPayByOrderNumber = allPays.find(item => {
+                //     // Задавал вопрос насколько корректно по подстроке искать. Бекендеры сказали что корректно
+                //     return item.orderReason && item.orderReason.includes(this.order.number) && item.status === 3;
+                // });
+
+                // if (findLastStrategyPayByOrderNumber) {
+                //     return setAddSum();
+                // }
+
+                // setMinSum();
             } catch (e) {
                 flash([e.message], 'error');
                 setMinSum();

@@ -13,6 +13,15 @@ export default {
         openTempPasswordModal() {
             window.events.$emit('show_popup', ['temp-password', { disableOverlayClick: true }]);
         },
+        openSurveyModal() {
+            window.events.$emit('show_popup', ['survey', { clientId: this.userState.clientId }]);
+        },
+        getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
     },
 
     watch: {
@@ -24,11 +33,20 @@ export default {
                 }
             }
         },
+        userStateLoaded: {
+            immediate: true,
+            handler(value) {
+                if (this.userState.clientId && this.getCookie('opros') != '1') {
+                    setTimeout(this.openSurveyModal, 1000);
+                }
+            }
+        },
     },
 
     computed: {
         ...mapState('user', {
             userState: 'state',
+            userStateLoaded: 'state_loaded'
         }),
 
         ...mapState('funds', {

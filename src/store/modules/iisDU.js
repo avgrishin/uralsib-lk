@@ -192,6 +192,7 @@ export default {
 
     mutations: {
         setIisDuList(state, getlist, getDUAllContracts) {
+            //console.log('getlist', getlist, 'getDUAllContracts', getDUAllContracts)
             state.list = getlist;
             state.getDUAllContracts = getDUAllContracts;
         }

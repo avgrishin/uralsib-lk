@@ -137,9 +137,10 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                         this.case_table = table_data;
 
                         axios.get('/reports/AssetsEstimateTotal').then(({ data }) => {
-                            this.case_table.profit_pif = data[0].prlosT_NR;
-
-                            this.case_table.profit_2 = data[0].profiT_2;
+                            if (data.length > 0){
+                                this.case_table.profit_pif = data[0].prlosT_NR;
+                                this.case_table.profit_2 = data[0].profiT_2;
+                            }
                         });
 
                         this.case_table.data = this.case_table.data.filter(item => /*item.id &&*/ item.share);

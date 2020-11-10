@@ -52,7 +52,7 @@ export class SellAppsApiService {
     }
 
     async cancelAppPepVerification(applicationId) {
-        await axios.put(`/sellapps/cancelAppPepVerification/${applicationId}`);
+        await axios.post(`/sellapps/cancelAppPepVerification/${applicationId}`);
     }
 
     async requestSmsCode(appIds) {

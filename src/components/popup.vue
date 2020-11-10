@@ -42,7 +42,8 @@
 	        'popup-technical-works': require('./popups/PopupTechnicalWorks'),
 	        'temp-password': require('./popups/TempPassword'),
 	        'sell-alert-confirm': require('./popups/SellAlertConfirm'),
-	        'sell-alert-final': require('./popups/SellAlertFinal'),
+            'sell-alert-final': require('./popups/SellAlertFinal'),
+            'survey': require('./popups/Survey')
         },
         watch: {
             '$route' (to, from) {

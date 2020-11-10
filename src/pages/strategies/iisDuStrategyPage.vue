@@ -9,14 +9,14 @@
                         span(v-html="strategyName.length > 1 ? strategyName.replace('', '') : strategyName ")
                     template(v-if="!strategyOld.iis && !strategyOld.du")
                         h2 Условия*
-                        p #[strong Доходность#[sup 1], % годовых до {{strategyParam.expectProfitAdd}} {{strategy.expectProfit}}%{{ strategyParam.currency !== 'Рубли РФ' ? '*' : '' }}]
+                        p #[strong Доходность#[sup 1], % годовых ~ {{strategyParam.expectProfitAdd}} {{strategy.expectProfit}}%{{ strategyParam.currency !== 'Рубли РФ' ? '*' : '' }}]
                         p #[strong Допустимый риск]#[sup 2] - {{strategy.risk}}
                         p #[strong Инвестиционная стратегия] - {{strategyParam.investStrategy.replace(/\.|;/g,' ')}}
                         p #[strong Инвестиционная цель] - {{strategyParam.investAim.replace(/\.|;/g,' ')}}
                         p #[strong Объекты инвестирования] - {{strategyParam.investObjects.replace(/\.|;/g,' ')}}
                         p #[strong Для кого] - {{strategyParam.targets.replace(/\.|;/g,'')}}
                         p #[strong Рекомендуемый срок инвестирования - {{strategyParam.investPeriod.replace(/\.|;/g,' ')}}]
-                        p
+                        p(v-if="buttonVisible")
                             span(
                                 @click="strategyOperation(rsStrategyID)",
                                 class="btn btn_primary g-mr_2 g-mr_0_xs g-col_md_a g-col_xs_12",
@@ -88,7 +88,7 @@
                     h2 Условия
                     .strategy-page__conditions
                         .strategy-page__conditions-row.g-row
-                            .g-col.g-col_md_7 Минимальная сумма инвестиций:
+                            .g-col.g-col_md_7 Минимальная сумма инвестиций#[sup(v-if="rsStrategyID=='s45'") 3]:
                             .g-col.g-col_md_5.strategy-page__conditions-val
                                 strong {{formatCurrency(strategyParam.minSumm, true, strategyParam.currency)}}
                         .strategy-page__conditions-row.g-row
@@ -119,8 +119,8 @@
                             .g-col.g-col_md_7 Вознаграждение за успех, % от прироста портфеля:
                             .g-col.g-col_md_5.strategy-page__conditions-val #[strong {{strategyParam.successPercent}}]
                         .strategy-page__conditions-row.g-row
-                            .g-col.g-col_md_7 Комиссия при досрочном расторжении:
-                            .g-col.g-col_md_5.strategy-page__conditions-val #[strong {{ strategyParam.terminationCommission ? `${strategyParam.terminationCommission}%` : 'Не предусмотрено' }}]
+                            .g-col.g-col_md_7 Комиссия при досрочном расторжении#[sup(v-if="rsStrategyID=='s45'") 4]:
+                            .g-col.g-col_md_5.strategy-page__conditions-val #[strong {{ strategyParam.terminationCommission ? `${strategyParam.terminationCommission}%` : strategyParam.termCmsText ? strategyParam.termCmsText : 'Не предусмотрено' }}]
                         .strategy-page__conditions-row.g-row(v-if="rStrategyType == 'du'")
                         .strategy-page__conditions-row
                             span С подробной информацией об условиях инвестирования Вы можете ознакомиться #[a(target="_blank", :href="strategyLinkMore") на сайте]
@@ -140,6 +140,9 @@
         .g-col_md_10.g-mt_4(v-if="!strategyOld.iis && !strategyOld.du")
             p: small.text-note #[sup 1] Доходность – прогнозируемая доходность, которая не накладывает на АО «УК УРАЛСИБ» обязанности по ее достижению и не является гарантией для Клиента. Рассчитывается исходя из текущего совокупного состава портфеля и может быть скорректирована управляющим.
             p: small.text-note #[sup 2] Допустимый риск – риск возможных убытков, связанных с доверительным управлением, который способен нести Клиент.
+            p(v-if="rsStrategyID=='s45'"): small.text-note #[sup 3] Минимальная сумма инвестиций доступна только при оформлении в Личном кабинете.
+            p(v-if="rsStrategyID=='s45'"): small.text-note #[sup 4] При выводе активов до истечения первого года действия Договора комиссия рассчитывается от совокупной рыночной стоимости портфеля на дату расторжения, уменьшенной на сумму начисленного Вознаграждения за управление.
+            
             p: small.text-note(v-if="rStrategyType === 'iis' && strategyParam.currency !== 'Рубли РФ'") *Прогнозируемая доходность указана в долларах.
             p: small.text-note(v-if="rStrategyType === 'du' && strategyParam.currency !== 'Рубли РФ'") *Прогнозируемая доходность указана в валюте стратегии.
         .g-col_md_10
@@ -217,14 +220,14 @@ export default {
                 yield: ''
             },
             indicators: [false, false],
-            date: null,
+            // date: null,
         };
     },
     created() {
         this.getIisDuPieData();
         this.checkStrategyContractInCase();
         this.buffering = true;
-        this.date = moment().format('DD.MM.YYYY')
+        //this.date = moment().format('DD.MM.YYYY')
     },
     methods: {
         getIisDuPieData() {
@@ -269,7 +272,7 @@ export default {
             if (this.strategyOld.iis || this.strategyOld.du) {
                 axios.all([
                     axios.get('/amcontracts/getDUAllContracts'),
-                    axios.get('/reports/AssetsEstimateDU')
+                    axios.get('/reports/AssetsStruct')
                 ]).then(axios.spread(({ data: contracts }, { data: estimateDU }) => {
                     const contractsByStrategy = [...contracts].filter(item => item.stratID === this.storeSrategyById().id);
                     this.indicators[0] = contractsByStrategy.length ? contractsByStrategy[0].beginDate : '';
@@ -347,12 +350,27 @@ export default {
             if (this.strategy.strategyManager.includes('Борис Краснов')) {
                 return 'Старший портфельный менеджер по работе с долговыми инструментами';
             }
+            if (this.strategy.strategyManager.includes('Руслан Николенко')) {
+                return 'Портфельный менеджер по работе с долговыми инструментами';
+            }
 
             return 'Начальник Управления по работе с акциями и производными инструментами';
+        },
+        
+        date() {
+            try {
+                return this.$store.state.user.state.portfolioDate;
+            } catch (e) {
+                return moment().format('DD.MM.YYYY');
+            }
         },
 
         fund() {
             return this.iisDUList.find(product => product.webSiteID === this.rsStrategyID);
+        },
+
+        buttonVisible() {
+            return this.fund && this.fund.status == 1;
         },
 
         buttonText() {

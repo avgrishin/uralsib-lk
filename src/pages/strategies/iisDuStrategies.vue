@@ -52,7 +52,7 @@
         .g-col_md_10
             p: small.text-note #[sup 1]Доходность – прогнозируемая доходность, которая не накладывает на АО «УК УРАЛСИБ» обязанности по ее достижению и не является гарантией для Клиента. Рассчитывается исходя из текущего совокупного состава портфеля и может быть скорректирована управляющим.
             p(v-if="selectedStrategy === 'du' || selectedStrategy === 'iis'"): small.text-note #[sup 2]Допустимый риск – риск возможных убытков, связанных с доверительным управлением, который способен нести Клиент.
-            p(v-if="selectedStrategy === 'iis'"): small.text-note *Прогнозируемая доходность указана в долларах.
+            p(v-if="selectedStrategy === 'iis'"): small.text-note *Прогнозируемая доходность указана в рублях РФ.
             p(v-if="selectedStrategy === 'du'"): small.text-note *Прогнозируемая доходность указана в валюте стратегии.
             p: small.text-note С  перечнем обязательной информации о профессиональном участнике рынка ценных бумаг  можно ознакомиться на #[a(href="https://www.uralsib-am.ru/about/disclosure/cb-info/" target="_blank") сайте]
 </template>
@@ -183,7 +183,7 @@ export default {
         iisList() {
             let iisDuCloned = Object.assign([], this.$store.state.iisDU.list);
             if (!iisDuCloned) return [];
-            iisDuCloned = iisDuCloned.filter(item => item.sType == this.selectedStrategy.toUpperCase());
+            iisDuCloned = iisDuCloned.filter(item => item.sType == this.selectedStrategy.toUpperCase() && item.status == 1);
             return iisDuCloned;
         },
 

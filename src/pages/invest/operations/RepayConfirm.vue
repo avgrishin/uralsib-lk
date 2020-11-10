@@ -28,11 +28,31 @@
                             .control__label-top.g-mb_1(v-html="`Стоимость паев, ${rubleSign}`")
                             .control__field.h1.g-clr_gray.g-fw_3.g-ws_nw.g-mb_0(v-html="totalPrice")
                         .control
-                    .g-row.g-mb_6
+                    .g-row.g-mb_2
+                        .control.g-col.g-col_lg_8
+                            label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")
+                                input(type="checkbox", v-model="term1" v-validate="'required'" name="term1")
+                                .checkbox__text Скидка при погашении инвестиционных паев составит:#[br] - 3% - при владении паями <= 731 календарным дням#[br] - 0% - при владении паями от 731 календарного дня
+                    .g-row.g-mb_2
+                        .control.g-col.g-col_lg_8
+                            label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")
+                                input(type="checkbox", v-model="term2" v-validate="'required'" name="term2")
+                                .checkbox__text Срок погашения паёв составляет 3(три) рабочих дня с момента подачи заявки
+                    .g-row.g-mb_2
+                        .control.g-col.g-col_lg_8
+                            label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")
+                                input(type="checkbox", v-model="term3" v-validate="'required'" name="term3")
+                                .checkbox__text Срок вывода средств от погашения паёв на банковский счет составляет до 10(десяти) рабочих дней с момента погашения паёв
+                    .g-row.g-mb_2
                         .control.g-col.g-col_lg_8
                             label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")
                                 input(type="checkbox", v-model="terms" v-validate="'required'" name="correct_data", id="FPP_CORRECT_DATA")
                                 .checkbox__text(v-html="disclaimerTextRepay")
+                    .g-row.g-mb_4
+                        .control.g-col.g-col_lg_8
+                            label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")
+                                input(type="checkbox", v-model="term4" v-validate="'required'" name="term4")
+                                .checkbox__text Заявка носит безотзывной характер
                 fieldset.g-mt_2_m_xs
                     legend.h2.g-mb_3 Проверьте или измените Ваши банковские реквизиты:
                     .g-row
@@ -129,7 +149,10 @@
                 branch_name: '',
 
                 terms: false,
-
+                term1: false,
+                term2: false,
+                term3: false,
+                term4: false,
                 loaded: false
             }
         },
@@ -432,6 +455,10 @@
                 this.accounts = [];
                 this.account = false;
                 this.terms = false;
+                this.term1 = false;
+                this.term2 = false;
+                this.term3 = false;
+                this.term4 = false;
                 this.amount = '';
 
                 this.getAvailableFunds();
@@ -469,7 +496,11 @@
                     this.bank &&
                     this.account_corr &&
                     this.account_check &&
-                    this.terms
+                    this.terms &&
+                    this.term1 &&
+                    this.term2 &&
+                    this.term3 &&
+                    this.term4
                 )
             },
             link() {

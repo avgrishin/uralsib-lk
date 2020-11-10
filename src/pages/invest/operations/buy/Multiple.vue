@@ -121,8 +121,18 @@
                                 p.g-col.g-col_md_7 40701810300480000169
                             .control.control_empty
                     fieldset.control
-                        .control__field
-                            .control
+                        .g-row.g-mb_2
+                            .control.g-col.g-col_lg_8
+                                label.checkbox(:class="{'checkbox_error': errors.has('term1')}")
+                                    input(type="checkbox", v-model="term1" v-validate="'required'" name="term1")
+                                    .checkbox__text Срок проведения операции составляет до 5(пяти) рабочих дней
+                        .g-row.g-mb_2
+                            .control.g-col.g-col_lg_8
+                                label.checkbox(:class="{'checkbox_error': errors.has('term2')}")
+                                    input(type="checkbox", v-model="term2" v-validate="'required'" name="term2")
+                                    .checkbox__text Надбавка к расчетной стоимости пая составит 0.5%
+                        .g-row.g-mb_2
+                            .control.g-col.g-col_lg_8
                                 label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")
                                     input(type="checkbox",v-validate="'required'", v-model="checkbox" name="correct_data", id="FPP_CORRECT_DATA" )
                                     span.checkbox__text(v-html="disclaimerTextOperBuy")
