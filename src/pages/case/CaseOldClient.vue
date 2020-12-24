@@ -205,7 +205,9 @@
 					this.loaded.case_structure = true;
 
 					this.case_table = table_data;
+					
 					this.case_table.data = this.case_table.data.filter(item => item.id && item.share);
+					console.log('this.case_table', this.case_table)
 				})
 			},
 			formatTableData(items) {
@@ -219,11 +221,11 @@
 					profit_per: 0,
 					pif:'',
 					children: [],
-					sCode: ''
+					sCode: '',
+					portfolioID: null
 				}
 
 				let colors = colorsFunds.colors;
-
 
 				items.forEach(item => {
 					//if (item.outqnt != 0) {
@@ -253,6 +255,7 @@
 							if (!getColor) getColor = colorsFunds.colorsStrategies['s-def']
 							data.color = getColor && getColor[0];
 							data.id = scodeL || 'unknown';
+							data.portfolioId = item.opeR_ACC;
 						}
 					//}
 				});

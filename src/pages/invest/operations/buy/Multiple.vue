@@ -130,7 +130,8 @@
                             .control.g-col.g-col_lg_8
                                 label.checkbox(:class="{'checkbox_error': errors.has('term2')}")
                                     input(type="checkbox", v-model="term2" v-validate="'required'" name="term2")
-                                    .checkbox__text Надбавка к расчетной стоимости пая составит 0.5%
+                                    .checkbox__text Надбавка к расчетной стоимости пая составит 0.5%#[br]При приобретении на сумму 3 млн руб. и более #[strong 0%]
+
                         .g-row.g-mb_2
                             .control.g-col.g-col_lg_8
                                 label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")

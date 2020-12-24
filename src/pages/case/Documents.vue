@@ -6,8 +6,9 @@
                 .g-tabs__header.g-mb_6.g-mb_2_xs
                     a.g-tabs__btn.g-mb_1_xs.g-mr_3_md(:class="{active: selected_tab == 0}" @click.prevent="selected_tab = 0") Заявки
                     a.g-tabs__btn.g-mb_1_xs.g-mr_3_md(:class="{active: selected_tab == 3}" @click.prevent="selected_tab = 3") Анкета
-                    .g-tabs__btn.g-mb_1_xs.g-mr_3_md(:class="{active: selected_tab == 1}" @click.prevent="selected_tab = 1") Документы клиента
+                    a.g-tabs__btn.g-mb_1_xs.g-mr_3_md(:class="{active: selected_tab == 1}" @click.prevent="selected_tab = 1") Документы клиента
                     a.g-tabs__btn.g-mb_1_xs.g-mr_3_md(:class="{active: selected_tab == 4}" @click.prevent="selected_tab = 4") Отчёты ДУ
+                    a.g-tabs__btn.g-mb_1_xs.g-mr_3_md(:class="{active: selected_tab == 5}" @click.prevent="selected_tab = 5") Оплаты через ЛК
                     //- a.g-tabs__btn.g-mb_1_xs.g-mr_3_md(:class="{active: selected_tab == 2}" @click.prevent="selected_tab = 2") Отчёты ДУ
                 .g-tabs__contents
                     applications(:show="selected_tab == 0")
@@ -67,6 +68,7 @@
                                         td.case-table__td-md(title="Дата отчета" v-html="formatDate(report.docDate)")
                                 .spinner(v-show="isLoading")
                     forms(:show="selected_tab == 3")
+                    payments(:show="selected_tab == 5")
 </template>
 <script>
 import moment from 'moment-timezone';
@@ -74,10 +76,11 @@ import FileSaver from 'file-saver';
 
 import CaseNav from './CaseNav';
 import Applications from '../../components/Applications';
+import Payments from '../../components/Payments';
 import Forms from '../../components/Forms';
 
 export default {
-    components: { 'casenav': CaseNav, Applications, Forms },
+    components: { 'casenav': CaseNav, Applications, Payments, Forms },
     data() {
         return {
             reportTable: [],
@@ -106,9 +109,7 @@ export default {
         this.getDuIIsList();
         this.getDocs();
         this.chechdownloadFormLast();
-        this.$store.commit('updateCrumbs', [
-            { link: '/', text: 'Портфель' },
-        ]);
+        this.$store.commit('updateCrumbs', [{ link: '/', text: 'Портфель' }]);
         if (this.$route.query.tab) {
             this.selected_tab = this.$route.query.tab;
         }

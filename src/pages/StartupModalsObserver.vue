@@ -33,14 +33,14 @@ export default {
                 }
             }
         },
-        userStateLoaded: {
-            immediate: true,
-            handler(value) {
-                if (this.userState.clientId && this.getCookie('opros') != '1') {
-                    setTimeout(this.openSurveyModal, 1000);
-                }
-            }
-        },
+        // userStateLoaded: {
+        //     immediate: true,
+        //     handler(value) {
+        //         if (this.userState.clientId && this.getCookie('opros') != '1') {
+        //             setTimeout(this.openSurveyModal, 1000);
+        //         }
+        //     }
+        // },
     },
 
     computed: {

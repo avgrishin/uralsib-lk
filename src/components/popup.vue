@@ -16,7 +16,7 @@
             'user_is_lockedout': require('./popups/UserLockedOut.vue'),
             'password_expired': require('./popups/PasswordExpired.vue'),
             'confirm-personal-data': require('./popups/ConfirmPersonalData.vue'),
-            'preview-operation': require('./popups/PreviewOperation.vue'),
+            'preview-operation': require('./popups/PreviewOperationNew.vue'),
             'preview-docs': require('./popups/PreviewDocs.vue'),
             'confirm-operation': require('./popups/ConfirmOperation'),
             'confirm-operation-multi': require('./popups/ConfirmOperationMulti'),
@@ -43,7 +43,8 @@
 	        'temp-password': require('./popups/TempPassword'),
 	        'sell-alert-confirm': require('./popups/SellAlertConfirm'),
             'sell-alert-final': require('./popups/SellAlertFinal'),
-            'survey': require('./popups/Survey')
+            'survey': require('./popups/Survey'),
+            'preview-payms': require('./popups/Payments')
         },
         watch: {
             '$route' (to, from) {
@@ -87,7 +88,6 @@
                 this.activeComponent = activeComponent;
                 this.payload = payload;
                 this.popup_active = true;
-
                 if (payload && 'closable' in payload) this.closable = payload.closable;
 
             });

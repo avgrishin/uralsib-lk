@@ -32,7 +32,8 @@
                         .control.g-col.g-col_lg_8
                             label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")
                                 input(type="checkbox", v-model="term1" v-validate="'required'" name="term1")
-                                .checkbox__text Скидка при погашении инвестиционных паев составит:#[br] - 3% - при владении паями <= 731 календарным дням#[br] - 0% - при владении паями от 731 календарного дня
+                                .checkbox__text Скидка при погашении инвестиционных паев составит:#[br] 
+                                    .span(v-html="discountText")
                     .g-row.g-mb_2
                         .control.g-col.g-col_lg_8
                             label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")
@@ -134,6 +135,7 @@
                 available_funds: [],
                 disclaimerTextRepay: '',
                 disclaimerTextRepayDate: '',
+                discountText: '',
                 fund: null,
                 account: false,
                 amount: '',
@@ -169,6 +171,7 @@
 
                 this.getAccounts();
                 this.setAmount();
+                this.getDiscountText();
                 this.getTextDisclaimer();
             },
             userInfo(val) {
@@ -184,6 +187,7 @@
             }
         },
         created() {
+            this.getDiscountText();
             this.getTextDisclaimer();
             axios.get('/reference/getsitetext', {
                 params: {
@@ -275,19 +279,23 @@
             getTextDisclaimer() {
                 let id;
                 if (this.fund) id = this.fund.id;
-
-
                 axios.get('/reference/getsitetext', {
                     params: {
                         place: 'Repay',
                         portfolioId: id,
-
                     }
                 }).then(({data}) => {
-
                     this.disclaimerTextRepay = data.outText;
-
                 });
+            },
+            getDiscountText() {
+                if (this.fund) {
+                    axios.get('/reference/getsitetext', {
+                        params: {   place: 's_'+this.fund.id }
+                    }).then(({data}) => {
+                        this.discountText = data.outText;
+                    });
+                }
             },
             getBankByBik() {
                 axios.get('/reference/banksbybic', {

@@ -1,4 +1,4 @@
-import OperationsHistory from '../pages/case/History';
+import OperationsHistory from '../pages/case/HistoryNew';
 import Documents from '../pages/case/Documents';
 import CaseBalance from '../pages/case/Balance';
 import CaseChart from '../pages/case/Chart';

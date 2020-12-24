@@ -44,7 +44,7 @@
                                 class="btn btn_primary g-mr_2 g-mr_0_xs g-mb_0_xs g-col_md_a g-col_xs_12"
                             ) Пополнить
                             router-link(
-                                :to="{name:'iisDuTermination'}",
+                                :to="{name:'iisDuCancel'}",
                                 class="btn btn_secondary g-col_md_a g-col_xs_12 g-mb_0_xs",
                                 @click.prevent="showPopup"
                             ) Расторгнуть договор
@@ -79,7 +79,7 @@
                             class="btn btn_primary g-mr_2 g-mr_0_xs g-mb_2_xs g-col_md_a g-col_xs_12"
                         ) Частичный вывод
                         router-link(
-                            :to="{name:'iisDuTermination'}",
+                            :to="{name:'iisDuCancel'}",
                             class="btn btn_secondary g-col_md_a g-col_xs_12"
                         ) Расторгнуть договор
         section.page-section.strategy-page__section

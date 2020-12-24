@@ -194,6 +194,9 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                     data.quantity += item.outqnt;
                     data.sCode = item.sCode;
                     data.sCodeType = data.type === 'ДУ' ? productInStateSType : '';
+                    if (item.pif == 'ДУ') {
+                        data.portfolioId = item.opeR_ACC;
+                    }
                 //}
             });
 

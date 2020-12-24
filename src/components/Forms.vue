@@ -69,7 +69,7 @@
                             let date = moment(item.created);
 
                             item.time = moment.parseZone(date).format('HH:mm');
-                            item.sentDate = date.format('DD.MM.YYYY');
+                            item.sentDate = moment.parseZone(date).format('DD.MM.YYYY');
                         } else {
                             item.time = '';
                             item.sentDate = '';

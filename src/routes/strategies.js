@@ -1,5 +1,6 @@
 import Du from '../pages/strategies/Du';
 import iisDuTermination from '../pages/strategies/iisDuTermination';
+import iisDuCancel from '../pages/strategies/iisDuCancel'
 import duWithdrawalTemp from '../pages/strategies/DuWithdrawalTemp';
 import duWithdrawal from '../pages/strategies/DuWithdrawal';
 import DuIis from '../pages/strategies/DuIis';
@@ -31,7 +32,7 @@ let helpers = [
             }
         },
         {
-            path: '/strategies/:selectedStrategy/:strategyPrefix',
+            path: '/strategies/:selectedStrategy/:strategyPrefix/:portfolioId',
             name: 'iisDuStrategyPage',
             component: iisDuStrategyPage,
             meta: {
@@ -83,9 +84,17 @@ let helpers = [
             }
         },
         {
-            path: '/strategies/:selectedStrategy/:strategyPrefix/termination',
+            path: '/strategies/:selectedStrategy/:portfolioId/termination',
             name:'iisDuTermination',
             component: iisDuTermination,
+            meta: {
+                auth: true
+            }
+        },
+        {
+            path: '/strategies/:selectedStrategy/:strategyPrefix/:portfolioId/cancel',
+            name:'iisDuCancel',
+            component: iisDuCancel,
             meta: {
                 auth: true
             }

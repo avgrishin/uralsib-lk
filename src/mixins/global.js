@@ -54,8 +54,9 @@ export default {
     },
     methods: {
         iisDuOpen(row) {
+            console.log('row', row);
             if (row.sCode) {
-                return `/strategies/${_.includes(row.name,'ДУ') ? 'du' : 'iis'}/${row.sCode.toLowerCase()}`;
+                return `/strategies/${_.includes(row.name,'ДУ') ? 'du' : 'iis'}/${row.sCode.toLowerCase()}/${row.portfolioId}`;
             } else {
                 return '/'
             }

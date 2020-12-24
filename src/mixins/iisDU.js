@@ -50,8 +50,10 @@ export default {
     methods: {
         checkContractSubmited(id) {
             let contracts = this.storeSrategyById(id).contract;
+            //console.log('contracts1', contracts)
             if (!contracts && contracts.length == 0) return false;
             contracts = contracts.filter(contract => contract.canBuyFromLKK == 1);
+            //console.log('contracts2', contracts)
             return contracts.length > 0;
         },
 
@@ -80,6 +82,7 @@ export default {
         },
 
         strategyOperation(id, contractPage) {
+            console.log("id, contractPage", id, contractPage)
             if (this.$store.state.user.state.authState == 1) {
                 window.events.$emit('show_popup', 'confirm-personal-data');
                 return;

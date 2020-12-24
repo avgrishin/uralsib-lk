@@ -56,7 +56,7 @@ export default {
             loaded_activepaymentsNoCard: false,
             isLoading: true,
 
-            showComputedError: true,
+            showComputedError: false,
         };
     },
 
@@ -392,9 +392,12 @@ export default {
             let number = this.operationDetails.fund.application.number;
 
             if (this.operationDetails.fund.application.created) {
-                date = moment(this.operationDetails.fund.application.created, [moment.ISO_8601, 'DD.MM.YYYY']).format('DD.MM.YYYY');
+                //date = moment(this.operationDetails.fund.application.created, [moment.ISO_8601, 'DD.MM.YYYY']).format('DD.MM.YYYY');
+                date = moment.parseZone(this.operationDetails.fund.application.created).format('DD.MM.YYYY');
+
             } else if (this.operationDetails.fund.application.sentDate) {
-                date = moment(this.operationDetails.fund.application.sentDate, [moment.ISO_8601, 'DD.MM.YYYY']).format('DD.MM.YYYY');
+                // date = moment(this.operationDetails.fund.application.sentDate, [moment.ISO_8601, 'DD.MM.YYYY']).format('DD.MM.YYYY');
+                date = moment.parseZone(this.operationDetails.fund.application.sentDate).format('DD.MM.YYYY');
             } else {
                 date = moment().format('DD.MM.YYYY');
             }

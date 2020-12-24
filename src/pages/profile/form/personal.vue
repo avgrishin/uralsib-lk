@@ -173,6 +173,7 @@ export default {
         });
 
         this.fillData();
+        //this.anketaEnter();
     },
     beforeDestroy() {
 
@@ -273,6 +274,10 @@ export default {
                 });
             }
         },
+
+        // anketaEnter() {
+        //     axios.post('/ClientProfile/AnketaEnter');
+        // },
 
         fillData() {
             axios.get('/ClientProfile/PersonalData').then(({
