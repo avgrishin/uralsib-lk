@@ -68,12 +68,14 @@ export default {
                         case "деньги":
                         case "денежные средства":
                         case "cash":
+                        case "рубль":
                             colors.push('#cf2200');
                             break;
                         case "финансы":
                             colors.push('#28BD5F');
                             break;
                         case "акции":
+                        case "акция":
                             colors.push('#93B5E2');
                             break;
                         case "машиностроение":
@@ -131,6 +133,7 @@ export default {
                             colors.push('#ff5f1f');
                             break;
                         case "облигации":
+                        case "облигация":
                             colors.push('#2C6BC1');
                             break;
                         case "высокие технологии":

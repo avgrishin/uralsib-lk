@@ -79,7 +79,7 @@
 						legend.h3(v-if="passportValidationState !== 3") Скан паспорта
 					fieldset.form__fieldset.form__fieldset_scans(:disabled="formDisabled", v-if="passportValidationState !== 3")
 						.g-row_narrow
-							.g-col.g-col_xs_4
+							.g-col.g-col_xs_6
 								.control.field-image.js-field-image
 									.field-image__name Первая страница
 									label.field-image__image.field-image__image_pass.js-field-image__preview#first_page(for="first_page_input" :style="getBackgroundImage('first_page')" :class="{spinner:!first_page_loaded}")
@@ -106,7 +106,7 @@
 										@input="uploadIMG($event, 'first_page'), scansStatusChange[0] = true"
 									).field-image__input
 									span.field_error(v-if="errors.has('scan_first')") Поле обязательно для заполнения
-							.g-col.g-col_xs_4
+							.g-col.g-col_xs_6
 								.control.field-image.js-field-image
 									.field-image__name(data-text-xs="Регистрация") Страница с регистрацией
 									label.field-image__image.field-image__image_pass.js-field-image__preview#second_page(for="second_page_input" :style="getBackgroundImage('second_page')" :class="{spinner:!second_page_loaded}")

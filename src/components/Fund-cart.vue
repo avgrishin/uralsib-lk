@@ -7,7 +7,7 @@
                 .fund-cart__icon(hidden)
                     svg-inline(:src="getSrcFundIcon(alias)")
                 h4.fund-cart__title
-                    span.fund-cart__label Фонд УРАЛСИБ
+                    span.fund-cart__label(v-html="nameprefix")
                     span(class="fund-cart__name-primary" v-html="name")
                 //- span.fund-cart__count {{fund.quantity}} шт.
             router-link(:to="`/funds/${fund.webSiteId}`" class="fund-cart__link g-bbc_t") подробнее
@@ -16,8 +16,8 @@
                 strong.g-f_r.g-d_f_xs.fund-cart__options-val {{income}} 
                     //- span.g-hide_ld.j-show_xs {{fund.quantity}} шт. 
             .fund-cart__nav.g-hide_xs
-                button.btn.btn_primary.fund-cart__btn.g-hide_md(@click="fundOperation(alias)" type="button") Купить
-                .g-show_md(hidden)
+                button.btn.btn_primary.fund-cart__btn.g-hide_md(v-if="!isPort" @click="fundOperation(alias)" type="button") Купить
+                .g-show_md(v-if="isPort")
                     router-link(:to="`/funds/${fund.webSiteId}`" class="btn btn_primary fund-cart__btn") Подробнее
 
 </template>
@@ -45,23 +45,18 @@
 
                 this.$store.commit('funds/setOperation', data);
 
-
-                if(typeof yaCounter50062190 !== "undefined") {yaCounter50062190.reachGoal('BTN_BUY_FUND_CART');}//яндекс цель купить
+                //-- if(typeof yaCounter50062190 !== "undefined") {yaCounter50062190.reachGoal('BTN_BUY_FUND_CART');}//яндекс цель купить
 
                  this.$router.push('/operations/buy');
-
             },
+            isPortPIF() { return this.fund.webSiteId.substr(0,1) === 'p' }
         },
         computed: {
-            name() {
-                return this.fund.description.replace('УРАЛСИБ ', '');
-            },
-            alias() {
-                return this.fund.webSiteId;
-            },
-            income() {
-                return this.currencyFormat.format(this.fund.profitability) + '%';
-            }
+            isPort() { return this.isPortPIF() },
+            name() { return this.fund.description.replace('УРАЛСИБ ', ''); },
+            nameprefix() { return this.isPortPIF() ? 'Портфель фондов УРАЛСИБ' : 'Фонд УРАЛСИБ' },
+            alias() { return this.fund.webSiteId },
+            income() { return this.currencyFormat.format(this.fund.profitability) + '%'; }
         }
     }
 </script>

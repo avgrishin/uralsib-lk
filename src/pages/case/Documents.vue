@@ -3,7 +3,7 @@
         section
             // h1.g-hide_xs Документы
             .g-tabs
-                .g-tabs__header.g-mb_6.g-mb_2_xs
+                .g-tabs__header.g-mb_6.g-mb_2_xs.g-mt_2_xs
                     a.g-tabs__btn.g-mb_1_xs.g-mr_3_md(:class="{active: selected_tab == 0}" @click.prevent="selected_tab = 0") Заявки
                     a.g-tabs__btn.g-mb_1_xs.g-mr_3_md(:class="{active: selected_tab == 3}" @click.prevent="selected_tab = 3") Анкета
                     a.g-tabs__btn.g-mb_1_xs.g-mr_3_md(:class="{active: selected_tab == 1}" @click.prevent="selected_tab = 1") Документы клиента
@@ -22,7 +22,7 @@
                                 li.g-mb_2(v-for="(item, index) in strategiesDocsFiltered", :key="`docs_strategy_${index}`")
                                     button(
                                         type="button",
-                                        @click.prevent="disableDownload=true; downloadFile({duUrl:`/amContracts/${item.portfolioID}/GenerateDuJoiningApplicationPdf`}, `Заявление на присоединение к договору «${item.findStrategy.strategyName}» №${item.number}.pdf`,$event)" :disabled="disableDownload"
+                                        @click.prevent="disableDownload=true; downloadFile({duUrl:`/amContracts/${item.pifId}/GenerateDuJoiningApplicationPdf`}, `Заявление на присоединение к договору «${item.findStrategy.strategyName}» №${item.number}.pdf`,$event)" :disabled="disableDownload"
                                     ).btn.btn_file.btn_o Заявление на присоединение к договору «{{item.findStrategy.strategyName}}» №{{item.number}}
                                         span(title="pdf").icon.icon_file_pdf.g-fr
                             template(v-if="userDocs && userDocs.length")
@@ -41,6 +41,14 @@
                                 button(type="button" @click.prevent="downloadDoc('/docs/RiskNotationPdf')" :disabled="disableDownload").btn.btn_file.btn_o
                                     | Уведомление о рисках #[span.g-fw_3 (70КБ)]
                                     span(title="pdf").icon.icon_file_pdf.g-fr
+                            template(v-if="cancelDocs && cancelDocs.length")
+                                li.g-mb_2(v-for="(item, index) in cancelDocs", :key="`cancel_doc_${index}`")
+                                    button.btn.btn_file.btn_o(
+                                        type="button",
+                                        @click.prevent="downloadCancelDoc(item)" :disabled="loadingCancelDoc"
+                                    )
+                                        | Уведомление о расторжении договора №{{ item.dogNumber }} от {{ formatDate(item.dateStart) }} г.
+                                        span(title="pdf" ,:class="{spinner:loadingCancelDoc}").icon.icon_file_pdf.g-fr
                         .spinner(v-show="isLoading")
 
                     .g-tabs__content(v-show="selected_tab == 2  || selected_tab == 4")
@@ -89,6 +97,8 @@ export default {
 
             duReports: [],
             userDocs: [],
+            cancelDocs: [],
+            loadingCancelDoc: false,
 
             lastPdf: false,
             disableDownload: false,
@@ -102,6 +112,7 @@ export default {
                 duReports: false,
                 userDocs: false,
                 iisDuList: false,
+                cancelDocs: false
             },
         };
     },
@@ -109,6 +120,7 @@ export default {
         this.getDuIIsList();
         this.getDocs();
         this.chechdownloadFormLast();
+        this.getCancelDocs();
         this.$store.commit('updateCrumbs', [{ link: '/', text: 'Портфель' }]);
         if (this.$route.query.tab) {
             this.selected_tab = this.$route.query.tab;
@@ -134,6 +146,7 @@ export default {
                     item.findStrategy = findStrategy;
                     return item;
                 });
+                //console.log('this.strategiesDocs', this.strategiesDocs, this.strategiesDocs.filter(document => document.isBoughtFromLKK))
             }).finally(() => {
                 this.loadingFlags.iisDuList = false;
             });
@@ -197,6 +210,24 @@ export default {
             }
         },
 
+        async getCancelDocs() {
+            this.loadingFlags.cancelDocs = true;
+            try {
+                const cancelDocs = await axios.get('/amcontracts/canceldoclist').then(({ data }) => data);
+
+                if (!cancelDocs && !Array.isArray(cancelDocs)) {
+                    throw new TypeError('Ошибка при получении отчетов расторжений договоров');
+                    return;
+                }
+
+                this.cancelDocs = cancelDocs;
+            } catch (e) {
+                flash([e.message], 'error');
+            } finally {
+                this.loadingFlags.cancelDocs = false;
+            }
+        },
+
         async getDocs() {
             this.getDUReports();
             this.getUserDocs();
@@ -213,8 +244,21 @@ export default {
 
             this.downloadFile(`/Docs/${docID}`, `${name}.pdf`, event);
         },
-        chechdownloadFormLast() {
 
+        downloadCancelDoc(item) {
+            this.loadingCancelDoc = true;
+            axios.get(`/amcontracts/${item.id}/canceldoc`, { responseType: 'blob' }).then(({ data, headers }) => {
+                const blob = new Blob([data], { type: data.type });
+                const fileName = headers["content-disposition"].split("filename=")[1];
+                FileSaver.saveAs(blob, fileName);
+                this.loadingCancelDoc = false;
+            }).catch(({response: error}) => {
+                if (error) flash([error.data.message], 'error');
+                this.loadingCancelDoc = false;
+            });
+        },
+
+        chechdownloadFormLast() {
             axios.get('/ClientProfileApp/last').then(({ data }) => {
                 this.lastPdf = data.id;
 
@@ -236,5 +280,3 @@ export default {
     },
 };
 </script>
-
-

@@ -145,11 +145,7 @@
             });
             this.getTextDisclaimer();
 
-            this.getFundInfo().then(({
-                data
-            }) => {
-                
-
+            this.getFundInfo().then(({ data }) => {
                 let dataSelect = data
                 let dataSelectArr = []
                 dataSelect.forEach((dataSelectItem) => {
@@ -255,6 +251,7 @@
 
                 if (fund) this.fund_from = fund;
                 this.setAmount();
+                this.fundAvailableToChange();
             },
             getFundInfo() {
                 // return axios.get('/reports/AssetsEstimate');
@@ -384,6 +381,7 @@
             },
             fundAvailableToChange() {
                 let funds = []
+console.log('this.fund_from', this.fund_from);
                 if (!this.fund_from) this.fundAvailable = [];
                     else {
                     axios.get('/exchapps/selectTo', {

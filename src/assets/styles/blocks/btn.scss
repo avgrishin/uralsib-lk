@@ -6,7 +6,7 @@
     transform:translateX(-50%)
   }
   .btn_plus{ position:absolute;
-    top:15px;
+    top:10px;
     right:40px;
     z-index:1;
     display: flex;
@@ -157,7 +157,7 @@
   }
 
   &_o, &_primary, &_secondary, &_rare{
-    padding:1.375em 2em;
+    padding:17px 2em;
   }
   &_p_1{
     padding:14px 25px;

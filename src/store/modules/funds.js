@@ -5,11 +5,12 @@ export default {
         itemsOper: [],
         items_strategies:[],
         operations: {},
+        amounts: [],
         loaded: false,
+        portPif: []
     },
     mutations: {
         save(state, { funds, userFunds , operFunds}) {
-
             let getUnique = (arr, comp) => {
                 const unique = arr
                     .map(e => e[comp])
@@ -19,7 +20,6 @@ export default {
             }
 
             funds = _.merge(funds, getUnique(operFunds, 'id'));
-
             funds = funds.map(item => {
                 // item.in_case = userFunds.find(fund => fund.id == item.instrumentId) ? true : false;
                 item.in_case = item.allowExchange == true || item.allowSell == true ? true : false;
@@ -31,6 +31,32 @@ export default {
             });
 
             state.items = funds;
+
+            let arr = [];
+            const ugold = state.items.find(i => i.name == "ПИФУЗ");
+            const ufp = state.items.find(i => i.name == "ПИФП");
+            const usit = state.items.find(i => i.name == "ПИФСИТ");
+
+            let pp1 = 0;
+            let pp2 = 0;
+            const str1 = [];
+            if (ugold && ufp)
+            {
+                str1.push({ id: ugold.webSiteId, fond: ugold.description, part:20, profitability: ugold.profitability });
+                str1.push({ id: ufp.webSiteId, fond: ufp.description, part:80, profitability: ufp.profitability });
+                pp1 = str1.reduce((acc, val) => acc + val.profitability*val.part, 0)/100;
+            } 
+            const str2 = [];
+            if (usit && ufp)
+            {
+                str2.push({ id: usit.webSiteId, fond: usit.description, part: 50, profitability: usit.profitability });
+                str2.push({ id: ufp.webSiteId, fond: ufp.description, part: 50, profitability: ufp.profitability });
+                pp2 = str2.reduce((acc, val) => acc + val.profitability*val.part, 0)/100;
+            } 
+            arr.push({ description: 'Для рационального инвестора', webSiteId: 'p1', profitability: pp1, structure: str1, risk: 'выше среднего' });
+            arr.push({ description: 'Для решительного инвестора', webSiteId: 'p2', profitability: pp2, structure: str2, risk: 'высокий' });
+            state.portPif = arr
+
             state.itemsOper = operFunds;
             if (!state.loaded) state.loaded = true;
             state.items_strategies = funds;
@@ -40,9 +66,7 @@ export default {
             state.operations = {};
         },
         setOperation(state, data) {
-
             state.operations = data;
-
         },
         updateOperation(state, { path, data }) {
             _.set(state.operations, path, data);
@@ -50,6 +74,12 @@ export default {
         clearFunds(state) {
             state.loaded = false;
             state.items = [];
+        },
+        setAmounts(state, data) {
+            state.amounts = data;
+        },
+        clearAmounts(state) {
+            state.amounts = {};
         }
     },
     actions: {

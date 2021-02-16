@@ -101,11 +101,9 @@
                         if(this.amountQuery.hasOwnProperty(item.webSiteId)) {
                             this.$set(this.amount, index, this.amountQuery[item.webSiteId].toString())
                         }
-
                     })
                     this.amountQuery=false;
                 }
-
             },
             allFunds(val) {
                 this.formatFunds(val);
@@ -121,11 +119,10 @@
                     let disableArr = []
                     let indx
                     let valIndx
-
                     Object.keys(val).forEach(i => {
                         if (val[i]) {
                             if(val[i].replace(/\D/g, "") > 0) {
-                                this.selected_funds.push(this.funds[i]);
+                                this.selected_funds.push(this.allFunds[i]);
                                 disableArr.push(val[i])
                             }
                         }
@@ -161,13 +158,21 @@
             if(localStorage.getItem('amountQuery')) {
                 this.amountQuery =  JSON.parse(localStorage.getItem('amountQuery'))
                 localStorage.removeItem('amountQuery')
-
             }
 
         },
         mounted() {
             document.querySelector('#app').onscroll = () => this.onScroll();
             this.applyNumericMask();
+
+            if (this.$store.state.funds.amounts) {
+                this.allFunds.forEach((item, index) => {
+                    if (this.$store.state.funds.amounts.hasOwnProperty(item.webSiteId)) {
+                        this.$set(this.amount, index.toString(), this.$store.state.funds.amounts[item.webSiteId].toString());
+                    }
+                });
+                this.$store.commit('funds/clearAmounts');
+            }
         },
         methods: {
             getTextDisclaimer() {
@@ -176,9 +181,7 @@
                         place: 'Operations',
                     }
                 }).then(({data}) => {
-
                     this.disclaimerTextOperations = data.outText;
-
                 });
             },
             changeInput(value, i) {
@@ -204,7 +207,8 @@
                 }
             },
             formatFunds(val) {
-                axios.get('/reports/AssetsEstimate').then(({data}) => {
+                // axios.get('/reports/AssetsEstimate').then(({data}) => {
+                axios.get('/reports/AssetsStructPIF').then(({data}) => {
                     let funds = _.cloneDeep(val);
                     funds = funds.map((item,index) => {
                         item.total = 0;
@@ -214,12 +218,11 @@
                         item.total = item.total.toLocaleString('ru-RU', {maximumFractionDigits: 10});
                         item.priceValue = this.formatCurrency(item.priceValue);
                         item.profitability = item.profitability.toLocaleString('ru-RU', {maximumFractionDigits: 2});
-
-
                         return item;
                     });
                     this.funds = funds;
-
+                    console.log(this.funds)
+                    this.$nextTick(() => this.onScroll());
                 });
             },
             checkFund(fund) {
@@ -283,7 +286,6 @@
                     let last_element = elements[elements.length - 1];
                     offset_last = last_element.getBoundingClientRect().top - window.innerHeight + last_element.offsetHeight;
                 }
-
                 if (offset_last !== false && (offset_last + this.$refs.total.offsetHeight) > 0) {
                     this.$refs.total.classList.add("case-table__total_fix");
                     this.$refs.totalWrap.classList.add("case-table-operations_fix");
@@ -343,8 +345,5 @@
     }
 </script>
 <style lang="scss">
-
 .case-table-operations_fix .case-table:after {content:'';height:120px;}
-
-
 </style>

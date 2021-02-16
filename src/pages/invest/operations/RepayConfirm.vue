@@ -350,7 +350,8 @@
                 });
             },
             getFundInfo() {
-                return axios.get('/reports/AssetsEstimate');
+                // return axios.get('/reports/AssetsEstimate');
+                return axios.get('/reports/AssetsStructPIF');
             },
             getAccounts(direction) {
                 axios.get('/reference/accountsbyfond', {

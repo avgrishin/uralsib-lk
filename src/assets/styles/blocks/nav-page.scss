@@ -69,7 +69,7 @@
 
   @include media($width_xs){
     padding:0;
-    height:60px;
+    // height:60px;
     margin:0 -10px nth($m_em, 4);
 
     &__link{ font-weight:500 }
@@ -116,7 +116,7 @@
 
     &__item_active{ font-size:inherit; opacity:1 }
     &:not(&_open) &__item_active{ order:-1; }
-    &_open &__list{ margin-top:40px; }
+    &_open &__list{ margin-top:0px; }
     &_open &__title:before{ }
     &_open &__sub{ font-size:inherit; opacity:1; visibility:visible }
     &_open &__wrap{ box-shadow:$bxsh_3; border:0 }

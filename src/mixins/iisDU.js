@@ -82,11 +82,10 @@ export default {
         },
 
         strategyOperation(id, contractPage) {
-            console.log("id, contractPage", id, contractPage)
-            if (this.$store.state.user.state.authState == 1) {
-                window.events.$emit('show_popup', 'confirm-personal-data');
-                return;
-            }
+            // if (this.$store.state.user.state.authState == 1) {
+            //     window.events.$emit('show_popup', 'confirm-personal-data');
+            //     return;
+            // }
 
             if (this.duDisabledBuy) {
                 this.showDuSpecialPopup(id);
@@ -123,7 +122,7 @@ export default {
                     }
                     this.$router.push({name: 'iisDuStrategyСontract', params: { strategyPrefix: id }})
                 } else {
-                    this.$router.push({name: 'iisDuStrategyBuy', params: { strategyPrefix: id }})
+                    this.$router.push({name: 'iisDuStrategyBuy', params: { strategyPrefix: id, selectedStrategy: this.rStrategyType }})
                 }
             });
         }

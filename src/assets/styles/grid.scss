@@ -34,13 +34,13 @@
 
 .main {
   //align-self: center;
-  flex:1 0 auto;
+  flex:0 0 auto;
   display: flex;
   align-items: center;
   min-height: 30vh;
 
   @include media($width_xs) {
-    min-height: 90vh;
+    min-height: 9vh;
   }
   //margin-bottom: 40px;
   &.spinner {

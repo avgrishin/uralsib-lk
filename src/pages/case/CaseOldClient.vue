@@ -207,7 +207,7 @@
 					this.case_table = table_data;
 					
 					this.case_table.data = this.case_table.data.filter(item => item.id && item.share);
-					console.log('this.case_table', this.case_table)
+					//console.log('this.case_table', this.case_table)
 				})
 			},
 			formatTableData(items) {
@@ -222,7 +222,8 @@
 					pif:'',
 					children: [],
 					sCode: '',
-					portfolioID: null
+					sType: '',
+					portfolioId: null
 				}
 
 				let colors = colorsFunds.colors;
@@ -256,6 +257,7 @@
 							data.color = getColor && getColor[0];
 							data.id = scodeL || 'unknown';
 							data.portfolioId = item.opeR_ACC;
+							data.sType = item.sType;
 						}
 					//}
 				});

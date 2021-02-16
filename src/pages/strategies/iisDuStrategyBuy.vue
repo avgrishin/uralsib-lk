@@ -48,7 +48,7 @@
                 .control__label-top
                     label(for="sum") Введите сумму
                 .tooltip-wrap(:class="{active: tollTipShow}")
-                    .tooltip(v-html="`Минимальная сумма ${amount_min} ${rubleSign}`")
+                    .tooltip(v-html="`Минимальная сумма ${amount_min} ${amount_currency==='Доллары США' ? '$' : rubleSign}`")
                     input(
                         type="text",
                         id="sum",
@@ -137,7 +137,7 @@
 <script>
 import { mapState } from 'vuex';
 import { VMoney } from 'v-money';
-import { confirmPersonalData } from '../../guards';
+//import { confirmPersonalData } from '../../guards';
 import { buyDu, iisDU } from '../../mixins';
 import IisDateBanner from './iisDateBanner.vue';
 
@@ -148,7 +148,7 @@ export default {
 
     components: { IisDateBanner },
 
-    beforeRouteEnter: confirmPersonalData,
+    //beforeRouteEnter: confirmPersonalData,
 
     data() {
         return {
@@ -167,6 +167,7 @@ export default {
             amountT: '',
             amount: '',
             amount_min: '',
+            amount_currency: '',
             strategyName: '',
         };
     },
@@ -322,11 +323,15 @@ export default {
             const setMinSum = () => {
                 this.amount_min = this.strategyBuy.sfp.minSumm.toString();
                 this.amount = this.amount_min;
+                this.amount_currency = this.strategyBuy.sfp.currency;
+                this.money.suffix = this.amount_currency === "Доллары США" ? "$" :'\u20BD';
             };
 
             const setAddSum = () => {
                 this.amount_min = this.strategyBuy.sfp.addSumm.toString();
                 this.amount = this.amount_min;
+                this.amount_currency = this.strategyBuy.sfp.currency;
+                this.money.suffix = this.amount_currency === "Доллары США" ? "$" :'\u20BD';
             };
 
             try {
@@ -363,6 +368,7 @@ export default {
     computed: {
         strategyContracts() {
             const contracts = this.storeSrategyById().contract ? this.storeSrategyById().contract.filter(contract => contract.canBuyFromLKK == 1) : [];
+            console.log('this.storeSrategyById()', this.storeSrategyById())
             return _.sortBy(contracts, ['pifID']);
         },
 

@@ -15,10 +15,6 @@
                 p.g-mt_4
                     input(type="button" @click.prevent="next1" class="btn btn_primary g-mr_2 g-mr_0_xs g-mb_0_xs g-col_md_a g-col_xs_12" value="Продолжить")
                     input(type="button" @click.prevent="prev" class="btn btn_secondary g-col_md_a g-col_xs_12 g-mb_0_xs" value="Отказаться")
-                    a(href="#" @click.prevent="doc").btn.btn_file.btn_o.g-col_xs_12
-                            | Уведомление
-                            span(title="pdf" ,:class="{spinner:loading}").icon.icon_file_pdf.g-fr
-                    input(type="button" @click.prevent="doc" class="btn btn_secondary g-col_md_a g-col_xs_12 g-mb_0_xs" value="Уведомление")
         .content__termination(v-if="step==2")
             .g-col.g-col_lg_8
                 form(autocomplete="off")
@@ -77,8 +73,8 @@
                             .control__note.control__note_long При наличии
                     fieldset.form__fieldset.form__fieldset_narrow
                         p.g-pb_4
-                            input(type="button" @click.prevent="next2" :class="{'spinner_bg': loading }" :disabled="loading" value="Продолжить").btn.btn_primary.g-mr_2.g-mr_0_xs.g-mb_0_xs.g-col_md_a.g-col_xs_12
-                            input(type="button" @click.prevent="prev" class="btn btn_secondary g-col_md_a g-col_xs_12 g-mb_0_xs" value="Отказаться")
+                            input(type="button" @click.prevent="next2" :disabled="loading" value="Продолжить").btn.btn_primary.g-mr_2.g-mr_0_xs.g-mb_0_xs.g-col_md_a.g-col_xs_12
+                            input(type="button" @click.prevent="prev" :disabled="loading" class="btn btn_secondary g-col_md_a g-col_xs_12 g-mb_0_xs" value="Отказаться")
         .content__termination(v-if="step==3")
             .g-col.g-col_lg_8
                 form(autocomplete="off")
@@ -115,31 +111,32 @@
                     fieldset.form__fieldset.form__fieldset_narrow
                         .g-row_narrow
                             .g-col.g-col_md_6
-                                input.js-validate-datalayer(data-action="validateField" data-label="smscode" type="text" v-validate="'required|sms'" data-vv-as="smscode" v-model="smscode" maxlength="5").field_text.field_text_mtrl#SMSCODE
-                                label(for="SMSCODE").control__label Введите код
+                                label(for="SMSCODE").control__field.g-d_b
+                                    input.js-validate-datalayer(data-action="validateField" data-label="smscode" type="text" v-validate="'required|sms'" data-vv-as="smscode" v-model="smscode" maxlength="5").field_text.field_text_mtrl#SMSCODE
+                                    span.control__label Введите код
+                                    //- label(for="SMSCODE").control__label Введите код
                                 .g-fs_05.g-clr_gray(v-show="countDownSeconds.status")
                                     AppTimer(ref="appTimer", @onProgressEnd="handleCountdownProgress")
                                 button.g-btn-txt.g-fs_05.g-clr_gray.g-clr_pr_h.g-fw_6(type="button" @click.prevent="requestCode") Запросить код повторно
                             .g-col.g-col_md_6
-                                input(type="submit" :class="{'spinner_bg': loading }" value="Отправить" :disabled="loading" @click.prevent="next3").btn.btn_block.btn_primary.g-mb_2.g-mb_0_xs
+                                input(type="submit" value="Отправить" :disabled="loading" @click.prevent="next3").btn.btn_block.btn_primary.g-mb_2.g-mb_0_xs
                     fieldset.form__fieldset
                         p
-                            input(type="button" @click.prevent="prev3" value="Изменить реквизиты").btn.btn_secondary.g-mb_3.g-mb_0_xs 
+                            input(type="button" @click.prevent="prev3" :disabled="loading" value="Изменить реквизиты").btn.btn_secondary.g-mb_3.g-mb_0_xs 
         .content__termination(v-if="step==4")
             p.g-mb_3 Уважаемый клиент!
             p.g-mb_2 Уведомление о расторжении договора № #[strong {{ dogNumber }}] от #[strong {{ beginDate }}] отправлено на рассмотрение в АО «УК УРАЛСИБ»
             p
                 a(href="#" @click.prevent="doc").btn.btn_file.btn_o
                     | Уведомление
-                    span(title="pdf" ,:class="{spinner:downloading}").icon.icon_file_pdf.g-fr        
+                    span(title="pdf" ,:class="{spinner:loading}").icon.icon_file_pdf.g-fr
 </template>
 
 <script>
     import moment from 'moment-timezone';
     import Inputmask from 'inputmask';
     import { countDownMixin } from '../../mixins'
-
-    // const TERM = ['о досрочном прекращение Договора', 'о прекращении Договора по истечении срока его действия'];
+    import FileSaver from 'file-saver';
 
     export default {
         mixins: [countDownMixin],
@@ -147,12 +144,13 @@
             return {
                 step: 1,
                 loading: true,
-                downloading: false,
+                // downloading: false,
                 id: null,
                 beginDate: '',
                 dogNumber: '',
                 daysRest: null,
                 sType: '',
+                strategy: '',
                 cancelType: 0,
                 phone: '',
                 smscode: '',
@@ -184,6 +182,7 @@
                     this.dogNumber = data.dogNumber;
                     const dt = moment(data.beginDate);
                     this.beginDate = dt.isValid() ? dt.format('DD.MM.YYYY') : '';
+                    this.strategy = data.strategy;
 
                     if (Object.keys(this.$store.state.user.bankingDetails).length) 
                         this.fillData();
@@ -217,6 +216,7 @@
                     Inputmask('99999999999999999999').mask(document.getElementById('FPD_CORR_ACC'));
 
                     setTimeout(() => this.$checkInputs(), 50);
+                    this.toTop();
                 });
             },
 
@@ -244,6 +244,7 @@
                             {
                                 this.id = data.id;
                                 this.phone = data.phone;
+                                this.smscode = '';
                                 this.$removeOnBlurEvents();
                                 this.step = 3;
                                 this.$nextTick(() => {
@@ -254,6 +255,7 @@
                             else {
                                 data.errorDescription ? flash([data.errorDescription], 'error') : flash(['Неизвестная ошибка'], 'error');
                             }
+                            this.toTop();
                             this.loading = false;
                         })
                         .catch(({response: error}) => {
@@ -278,6 +280,7 @@
                 }).then(() => {
                     this.$removeOnBlurEvents();
                     this.step = 4;
+                    this.toTop();
                     this.loading = false;
                 }).catch(({response: error}) => {
                     this.loading = false;
@@ -285,10 +288,27 @@
                 });        
             },
 
+            toTop() {
+                setTimeout(() => {
+                    document.getElementById('app').scrollTop = 0;
+                }, 500);
+            },
+
             doc() {
-                this.downloading = true;
-                this.downloadFile(`/amcontracts/${this.id}/canceldoc`, `name.pdf`);
-                this.downloading = false;
+                if (this.loading) {
+                    flash('Дождитесь окончание загрузки', 'info');
+                    return;
+                }
+                this.loading = true;
+                axios.get(`/amcontracts/${this.id}/canceldoc`, { responseType: 'blob' }).then(({ data, headers }) => {
+                    const blob = new Blob([data], { type: data.type });
+                    const fileName = headers["content-disposition"].split("filename=")[1];
+                    FileSaver.saveAs(blob, fileName);
+                    this.loading = false;
+                }).catch(({response: error}) => {
+                    this.loading = false;
+                    if (error) flash([error.data.message], 'error');
+                });
             },
 
             fillData() {
@@ -303,6 +323,21 @@
                     this.name_branch = bankBranchName || '';
                     this.phone = phone || '';
                 }
+                this.toTop();
+                this.$store.commit('updateCrumbs', [
+                    {
+                        link: this.$route.params.selectedStrategy == 'iis' ? '/strategies/iis' : '/strategies/du',
+                        text: 'ИИС и Доверительное управление'
+                    },
+                    {
+                        link: this.$route.params.selectedStrategy == 'iis' ? '/strategies/iis' : '/strategies/du',
+                        text: this.$route.params.selectedStrategy == 'iis' ? 'Стратегии ИИС' : 'Стратегии ДУ'
+                    },
+                    {
+                        link: '',
+                        text: this.strategy.replace('ИИС ', 'Стратегия ')
+                    }
+                ]);
             },
 
             getBankByBic() {
@@ -320,23 +355,10 @@
                     setTimeout(() => this.$checkInputs(), 50);
                 });
             },
-
-            submitCode() {
-                this.loading = true;
-                axios.post(`/amcontracts/cancelconfirm/${this.smscode}`, { Id: this.id })
-                .then(() => {
-                    this.$removeOnBlurEvents();
-                    this.page = 3;
-                    this.loading = false;
-                }).catch(({response: error}) => {
-                    this.loading = false;
-                    if (error) flash([error.data.message], 'error');
-                });        
-            },
             
             requestCode() {
                 this.loading = true;
-                axios.post(`/message/reqcode`, { Id: this.id })
+                axios.get(`/amcontracts/${this.id}/cancelrc`, { Id: this.id })
                     .then(({data}) => {
                         this.loading = false;
                         this.handleRequestSMScode(data);

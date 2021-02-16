@@ -2,8 +2,8 @@
  * Массив id ДУ, для покупки которых необходима связь с менеджером
  * @type {number[]}
  */
-export const DU_DISABLED_BUY = [15, 16, 18, 22, 23];
-export const DU_CODE_DISABLED_BUY = ['s33', 's35', 's34', 's42', 's43'];
+export const DU_DISABLED_BUY = [/*15, 16, */18/*, 22, 23*/];
+export const DU_CODE_DISABLED_BUY = [/*'s33', 's35', */'s34'/*, 's42', 's43'*/];
 
 /**
  * Ссылка на внешний опросник, которая открывается при погашении ПИФ более 100 000 р. (DEFERRED_SELL_SUM)

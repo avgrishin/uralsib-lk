@@ -3,7 +3,6 @@
     right: 0;
     bottom: 0;
     top: 0;
-    z-index: 9999;
     opacity: 0;
     visibility: hidden;
     position: fixed;
@@ -13,7 +12,7 @@
     justify-content: center;
     align-items: flex-start;
     overflow: auto;
-
+    z-index: 999;
     &__buttons {
         > div {
             &:first-child {
@@ -28,7 +27,12 @@
         bottom: 0;
         top: 0;
         position: fixed;
-        background-color: rgba(0, 10, 23, 0.9);
+        background-color: rgba(128, 128, 128, 0.6);
+        z-index: 888;
+
+        @include media($width_xs) {
+            background-color: rgba(128, 128, 128, 0);
+        }
     }
 
     &__title strong {
@@ -59,6 +63,7 @@
         padding: 0 1em;
         margin: auto 0;
         padding: 12vh 0;
+        z-index: 9999;
 
         @include media($width_xs) {
             max-width: 100%;

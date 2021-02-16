@@ -4,7 +4,7 @@
             .nav-page__wrap
                 .nav-page__arrow.g-hidden.g-show_xs
                     .g-icon-down(@click.prevent="togglePageNav", :class="{'g-icon-down_open': pageNavOpen }")
-                .nav-page__title(data-text="Меню", @click.prevent="togglePageNav")
+                //- .nav-page__title(data-text="Меню", @click.prevent="togglePageNav")
 
                 ul.nav-page__list.g-plain
                     router-link(
@@ -15,6 +15,7 @@
                         class="nav-page__item"
                         :class="{ 'nav-page__item_parent': item.children, 'g-icon-down-hover': item.children, 'nav-page__link_disabled': item.disabled }"
                         active-class="nav-page__item_active"
+                        exact
                     )
                         .nav-page__name-drop.g-pr(v-if="item.children")
                             span(class="nav-page__link g-hidden g-show_xs" :class="{'nav-page__link_disabled': item.disabled}" hidden v-html="item.name")
@@ -146,7 +147,7 @@
                     {
                         link:'/documents',
                         name:'Документы',
-                        disabled: authState
+                        disabled: false
                     },
                     {
                         link:'/analytics',
@@ -156,11 +157,12 @@
                     {
                         link:'/operations',
                         name:'Операции с паями',
+                        disabled: authState,
                         children:[
                             {
                                 link:'/operations/buy',
                                 name: 'Купить',
-                                disabled: !buyFunds
+                                disabled: !buyFunds || authState
                             },
                             {
                                 link:'/operations/change',

@@ -108,9 +108,6 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                             let item = this.formatTableData(items);
                             if (item.type != 'ДУ') {
                                 table_data.total_pif += item.amount;
-
-                                //window.log(table_data.profit_pif);
-
                             }
                             table_data.data.push(item);
                         }
@@ -166,7 +163,8 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                 type: '',
                 quantity: 0,
                 sCode: '',
-                sCodeType: ''
+                sCodeType: '',
+                sType: ''
             };
 
             items.forEach(item => {
@@ -197,6 +195,7 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                     if (item.pif == 'ДУ') {
                         data.portfolioId = item.opeR_ACC;
                     }
+                    data.sType = item.sType;
                 //}
             });
 

@@ -10,9 +10,18 @@
 
                 a(href="https://www.uralsib-am.ru/investors/private/lk/", target="_blank", class="g-clr_gray g-bbc_t g-d_f g-ai_c")
                     span Все операции онлайн без визита в офис
+
             //- p(class="g-clr_err g-mb_1")
             //-     |В связи с плановым проведением технических работ в период с 29 по 30 августа 2020г личный кабинет клиента будет недоступен.
             //-     |Приносим вам свои извинения за временные неудобства. 
+            //- p
+            //-     strong Уважаемые клиенты,#[br]поздравляем вас с наступающим Новым годом и Рождеством! 
+            //- p
+            //-     |Информируем вас, что офис компании будет закрыт с 1 по 10 января 2021 года. 31 декабря офис будет работать до 16:00.#[br]
+            //-     |Вы можете оформить любые операции с паями инвестиционных фондов, а также осуществить перевод денежных средств на счета доверительного управления и ИИС в любое удобное время. Обработка заявок и зачисление средств будут производиться, начиная с 11 января 2021 года.#[br]
+            //-     |Вывод средств и торговые операции на бирже в период новогодних праздников осуществляться не будут.#[br]
+            //-     |Просим учесть эту информацию и приносим извинения за возможные неудобства!
+
             //div(class="g-mb_3 reg-old-link")
 
                 a(href="https://i.am-uralsib.ru/oldversion",class="g-clr_gray g-bbc_t g-d_f g-ai_c")
@@ -45,7 +54,7 @@
                             span.field_error(v-if="errors.has('login')" v-html="errors.first('login')")
                         .control
                             .control__field
-                                input.field_text.field_text_mtrl.field_text_mtrl_focus.js-validate-datalayer(data-action="validateField" data-label="password" v-validate="'required'" data-vv-as="пароль" v-model="password" name="password" type="password" id="F_AUTH_PASS" placeholder="Пароль")
+                                input.js-validate-datalayer.field_text(data-action="validateField" data-label="password" v-validate="'required'" data-vv-as="пароль" v-model="password" name="password" type="password" id="F_AUTH_PASS" placeholder="Пароль")
                                 span.field__eye(@click="togglePassword('F_AUTH_PASS')")
                                 span.field_error(v-if="errors.has('password')" v-html="errors.first('password')")
                             .auth__forgot.g-ta_r.g-ta_l_xs
@@ -56,7 +65,7 @@
                 .auth.auth_bg_2.g-plr_2_xs(:class="{'spinner':  loaded_esia }")
                     .g-mb_3
                         h3.g-mb_0 Через сайт Госуслуг
-                    .g-mt_8.g-mb_9.g-clr_gray
+                    .g-mt_8.g-mb_7.g-clr_gray
                         span.g-fw_4.g-d_b Потребуется:
                         br
                         | Подтвержденная учетная запись

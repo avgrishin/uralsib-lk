@@ -92,7 +92,7 @@ article.content
                             .control__note Строго в соответствии с паспортом
                         .control
                             .control__field
-                                input(type="text" value="Гражданство РФ" id="FPD_CITIZENSHIP" disabled).field_text.field_text_mtrl
+                                input(type="text" value="Гражданство РФ" id="FPD_CITIZENSHIP" disabled).field_text
                         .control
                             .g-row_narrow
                                 .g-col.g-col_xs_6

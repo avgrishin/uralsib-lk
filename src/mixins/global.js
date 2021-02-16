@@ -54,9 +54,8 @@ export default {
     },
     methods: {
         iisDuOpen(row) {
-            console.log('row', row);
             if (row.sCode) {
-                return `/strategies/${_.includes(row.name,'ДУ') ? 'du' : 'iis'}/${row.sCode.toLowerCase()}/${row.portfolioId}`;
+                return `/strategies/${_.includes(row.sType,'DU') ? 'du' : 'iis'}/${row.sCode.toLowerCase()}/${row.portfolioId}`;
             } else {
                 return '/'
             }
@@ -323,36 +322,48 @@ export default {
                 event.target.classList.add('spinner')
             }
 
-            window.log(url);
-            api.get(url, { responseType: 'arraybuffer' }).then(({ data, headers }) => {
-                window.log('arraybuffer', data);
-                let file = this.arrayBufferToBlob(data, headers);
-
-                if (file && !isAndroidWebview) FileSaver.saveAs(file, name);
-                else if (file && isAndroidWebview) {
-                    let url = URL.createObjectURL(file);
-
-                    // const reader = new FileReader();
-                    // reader.readAsDataURL(file);
-                    // reader.onloadend = () => {
-                    //     window.location = reader.result;
-                    // }
-
-                    document.location = url;
-
-                    // this.$nextTick(() => URL.revokeObjectURL(url));
-                } else flash(['Старый браузер'], 'error');
-
+            api.get(url, { responseType: 'blob' }).then(({ data, headers }) => {
+                const blob = new Blob([data], { type: data.type });
+                const fileName = headers["content-disposition"].split("filename=")[1];
+                FileSaver.saveAs(blob, fileName);
                 this.disableDownload = false;
                 if (event) {event.target.classList.remove('spinner')}
-            }).catch(({ response }) => {
-                if (response) {
-                    flash(['Неизвестная ошибка'], 'error');
-                }
-                window.log(response);
+            }).catch(({response: error}) => {
+                if (error) flash([error.data.message], 'error');
                 this.disableDownload = false;
                 if (event) {event.target.classList.remove('spinner')}
             });
+
+
+            // api.get(url, { responseType: 'arraybuffer' }).then(({ data, headers }) => {
+            //     window.log('arraybuffer', data);
+            //     let file = this.arrayBufferToBlob(data, headers);
+
+            //     if (file && !isAndroidWebview) FileSaver.saveAs(file, name);
+            //     else if (file && isAndroidWebview) {
+            //         let url = URL.createObjectURL(file);
+
+            //         // const reader = new FileReader();
+            //         // reader.readAsDataURL(file);
+            //         // reader.onloadend = () => {
+            //         //     window.location = reader.result;
+            //         // }
+
+            //         document.location = url;
+
+            //         // this.$nextTick(() => URL.revokeObjectURL(url));
+            //     } else flash(['Старый браузер'], 'error');
+
+            //     this.disableDownload = false;
+            //     if (event) {event.target.classList.remove('spinner')}
+            // }).catch(({ response }) => {
+            //     if (response) {
+            //         flash(['Неизвестная ошибка'], 'error');
+            //     }
+            //     window.log(response);
+            //     this.disableDownload = false;
+            //     if (event) {event.target.classList.remove('spinner')}
+            // });
         },
         arrayBufferToBlob(data, headers) {
             const array = new Uint8Array(data);

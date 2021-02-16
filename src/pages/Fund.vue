@@ -20,7 +20,7 @@
                     p.g-mb_1(v-text="fund_full.text")
                     a(:href="`https://www.uralsib-am.ru/funds/${this.fund}/`" target="_blank").g-fw_5 Полное описание фонда
                     br
-                    a.fond-detail__results(href="https://www.uralsib-am.ru/services/advisor/" target="_blank").g-fw_5 Результаты управления фондом
+                    a.fond-detail__results(href="https://www.uralsib-am.ru/services/bulletin-new/" target="_blank").g-fw_5 Результаты управления фондом
             .g-col.g-col_lg_5.g-col_md_a
                 .fond-detail__info.g-lh_1
                     .g-mb_2

@@ -19,7 +19,7 @@
                 .control
                     .control__field.g-mb_1
                         input.js-validate-datalayer(data-action="validateField" data-label="name" type="text" v-model="name" name="name" v-validate="" data-vv-as="имя").field_text.field_text_mtrl#NAME
-                        label(for="NAME").control__label Как к Вам обращаться
+                        label(for="NAME").control__label Фамилия Имя Отчество
                         span.field_error(v-if="errors.has('name')" v-html="errors.first('name')")
                 .control
                     .control__field.g-mb_1

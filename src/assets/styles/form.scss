@@ -26,7 +26,7 @@ textarea.field_text{ padding-top:20px;
     position:relative;
     border: 1px solid #D3DAE4;
     padding: 10px 18px;
-    height: 60px;
+    height: 50px;
     font-size: 16px;
     font-weight: 300;
     color:$clr_primary;
@@ -42,13 +42,15 @@ textarea.field_text{ padding-top:20px;
       color: $clr_darklight;
     }
     &_mtrl {
+      padding: 15px 18px 0;
+      height: 50px;
       & ~ .control__label {
         position: absolute;
         display: block;
         left: 0;
         right: 0;
         top:0;
-        padding: 19px 0 17px 19px !important;
+        padding: 14px 0 17px 14px !important;
         font-size: 16px;
         line-height: 24px;
         color:$clr_gray_1;
@@ -59,9 +61,9 @@ textarea.field_text{ padding-top:20px;
       &.hasvalue ~ .control__label,
       &.hasesia ~ .control__label,
       &:focus ~ .control__label, &_focus ~ .control__label{
-        top:-25px;
+        top:0;
         padding:0px 0 0 19px !important;
-        font-size:$fs_05;
+        font-size:$fs_025;
       }
       &_top ~ .control__label{ top:auto; bottom:0 }
       &_top:focus ~ .control__label{
@@ -95,7 +97,7 @@ textarea.field_text{ padding-top:20px;
   &__eye {
     position: absolute;
     right: 20px;
-    top: 25px;
+    top: 20px;
     width: 14px;
     height: 10px;
     background: $icon_bg -50px 0;
@@ -800,9 +802,9 @@ textarea.field_text:not(.field_textarea-only_xs){
   &.v-select.single .selected-tag {
     display: block;
     padding: 0 18px;
-    height: 60px;
+    height: 50px;
     margin: 0;
-    line-height: 60px;
+    line-height: 50px;
     color:$clr_primary;
     font-size: 16px;
     font-weight: 300;
@@ -811,7 +813,7 @@ textarea.field_text:not(.field_textarea-only_xs){
     display: block;
     border: 1px solid #D3DAE4;
     border-radius: 6px;
-    height: 60px;
+    height: 50px;
   }
   &.v-select.dropdown .open-indicator{
     position:absolute;

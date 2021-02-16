@@ -44,14 +44,14 @@ export default {
             state.authenticated = false;
         },
         save(state, { profile, userState, bankingDetails, messages, funds, totals }) {
-            userState.pifState=2;
+            userState.pifState = 2;
          /*
             totals={
                 duTotal:1000,
                 pifTotal:0,
                 total:1000,
             }*/
-            userState.portfolioDate=moment(userState.portfolioDate).format('DD.MM.YYYY');
+            userState.portfolioDate = moment(userState.portfolioDate).format('DD.MM.YYYY');
             state.info = profile;
             state.state = userState;
 
@@ -159,9 +159,7 @@ export default {
                 axios.spread((profile, userState, bankingDetails, messages, funds, totals) => {
                     commit('save', {
                         profile: profile.data,
-                        userState: {
-                            ...userState.data,
-                        },
+                        userState: { ...userState.data, },
                         bankingDetails: bankingDetails.data,
                         messages: messages.data,
                         funds: funds.data,

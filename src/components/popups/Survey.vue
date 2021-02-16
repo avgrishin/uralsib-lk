@@ -19,12 +19,13 @@ export default {
     props: ['payload'],
     computed: {
         formLink() {
-            return 'https://ru.research.net/r/UralsibCSI_4Q2020?master_id='+this.payload.clientId;
+            return 'https://ru.surveymonkey.com/r/D2MWRD5?master_id='+this.payload.userId;
+            //return 'https://ru.research.net/r/UralsibCSI_4Q2020?master_id='+this.payload.clientId;
         }
     },
 	methods: {
 		toSurvey() {
-            this.setCookie('opros', '1', { 'expires ': new Date(2020, 11, 25) });
+            this.setCookie('opros2', '1', { 'expires ': new Date(2021, 03, 16) });
 			window.events.$emit('close_popup');
         },
 

@@ -321,7 +321,7 @@
   }
 
   @include media($width_xs){
-    &{ height:3.7em; }
+    // &{ height:3.7em; }
     &__grid{ position:relative; padding-right:20px; }
     &_title:not(&_open) &__text:after{ 
       content:'Меню';

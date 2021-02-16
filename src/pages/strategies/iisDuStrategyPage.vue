@@ -48,7 +48,7 @@
                                 class="btn btn_secondary g-col_md_a g-col_xs_12 g-mb_0_xs",
                                 @click.prevent="showPopup"
                             ) Расторгнуть договор
-
+                                //- :to="{name:'iisDuTermination'}",
                 .g-col.g-col_md_6.g-mt_3_xs
                     div.g-mb_4.strategy-page__head(v-if="strategyOld.iis || strategyOld.du")
                         .strategy-page__conditions-row.g-row
@@ -63,7 +63,7 @@
                         .g-tabs
                             ul.strategy-page__tabs
                                 li.strategy-page__tab(:class="{active: selected_tab == 1}", @click.prevent="changeSelectedTab(1)") По инструментам
-                                li.strategy-page__tab(:class="{active: selected_tab == 2}", @click.prevent="changeSelectedTab(2)") По отраслям
+                                //- li.strategy-page__tab(:class="{active: selected_tab == 2}", @click.prevent="changeSelectedTab(2)") По отраслям
                             .strategy-page__structure-box(:class="{spinner:!loaded.fund_structure}")
                                 div.chart-structure-case(ref="pie_chart" v-show="loaded.fund_structure")
             .g-row(v-if="strategyOld.du || strategyOld.iis")
@@ -82,6 +82,7 @@
                             :to="{name:'iisDuCancel'}",
                             class="btn btn_secondary g-col_md_a g-col_xs_12"
                         ) Расторгнуть договор
+                            //- :to="{name:'iisDuTermination'}",
         section.page-section.strategy-page__section
             .g-row
                 .g-col.g-col_lg_6
@@ -224,42 +225,64 @@ export default {
         };
     },
     created() {
-        this.getIisDuPieData();
+        this.getIisDuPieData1();
         this.checkStrategyContractInCase();
         this.buffering = true;
         //this.date = moment().format('DD.MM.YYYY')
     },
     methods: {
-        getIisDuPieData() {
+        getIisDuPieData1() {
             let startdate = moment().subtract(2, 'days').format('YYYY-MM-DD');
-            let params = (type) => {
-                return {
-                    params: {
-                        dat: startdate,
-                        sid: this.rsStrategyID,
-                        ctype: type
-                    }
-                };
-            };
-            axios.all([
-                axios.get('/am/getDUPortfolioStructure', params(2)),
-                axios.get('/am/getDUPortfolioStructure', params(1))
-            ]).then(
-                axios.spread(({ data: chart_1 }, { data: chart_2 }) => {
-                    this.selected_fund_pie_chart_BUFFER[0] = chart_1.map(elm => ({
-                        NAME: elm.sName.toLowerCase().charAt(0).toUpperCase() + elm.sName.toLowerCase().slice(1),
-                        VAL: elm.prct
-                    }));
-                    this.selected_fund_pie_chart_BUFFER[1] = chart_2.map(elm => ({
-                        NAME: elm.sName.toLowerCase().charAt(0).toUpperCase() + elm.sName.toLowerCase().slice(1),
-                        VAL: elm.prct
-                    }));
-                    this.selected_fund_pie_chart = this.selected_fund_pie_chart_BUFFER[0];
-                    this.initPieChart();
-                    this.buffering = false;
-                })
-            );
+            axios.get('/am/getDUPortfolioStructure', {
+                params: {
+                    dat: moment().subtract(2, 'days').format('YYYY-MM-DD'), 
+                    sid: this.rsStrategyID, 
+                    ctype: 2
+                }
+            }).then(({ data: chart_2}) => {
+                this.selected_fund_pie_chart_BUFFER[0] = chart_2.map(elm => ({
+                    NAME: elm.sName.toLowerCase().charAt(0).toUpperCase() + elm.sName.toLowerCase().slice(1),
+                    VAL: elm.prct
+                }));
+                // this.selected_fund_pie_chart_BUFFER[1] = chart_2.map(elm => ({
+                //     NAME: elm.sName.toLowerCase().charAt(0).toUpperCase() + elm.sName.toLowerCase().slice(1),
+                //     VAL: elm.prct
+                // }));
+                this.selected_fund_pie_chart = this.selected_fund_pie_chart_BUFFER[0];
+                this.initPieChart();
+                this.buffering = false;
+            });
         },
+        // getIisDuPieData() {
+        //     let startdate = moment().subtract(2, 'days').format('YYYY-MM-DD');
+        //     let params = (type) => {
+        //         return {
+        //             params: {
+        //                 dat: startdate,
+        //                 sid: this.rsStrategyID,
+        //                 ctype: type
+        //             }
+        //         };
+        //     };
+        //     axios.all([
+        //         axios.get('/am/getDUPortfolioStructure', params(2)),
+        //         axios.get('/am/getDUPortfolioStructure', params(1))
+        //     ]).then(
+        //         axios.spread(({ data: chart_1 }, { data: chart_2 }) => {
+        //             this.selected_fund_pie_chart_BUFFER[0] = chart_1.map(elm => ({
+        //                 NAME: elm.sName.toLowerCase().charAt(0).toUpperCase() + elm.sName.toLowerCase().slice(1),
+        //                 VAL: elm.prct
+        //             }));
+        //             this.selected_fund_pie_chart_BUFFER[1] = chart_2.map(elm => ({
+        //                 NAME: elm.sName.toLowerCase().charAt(0).toUpperCase() + elm.sName.toLowerCase().slice(1),
+        //                 VAL: elm.prct
+        //             }));
+        //             this.selected_fund_pie_chart = this.selected_fund_pie_chart_BUFFER[0];
+        //             this.initPieChart();
+        //             this.buffering = false;
+        //         })
+        //     );
+        // },
         changeSelectedTab(tab) {
             this.selected_tab = tab;
             this.selected_fund_pie_chart = this.selected_fund_pie_chart_BUFFER[tab - 1];
