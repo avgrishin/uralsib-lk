@@ -140,13 +140,13 @@ import moment from 'moment';
 // import 'inputmask/dist/inputmask/phone-codes/phone-ru.js';
 import '../../../assets/js/vendor/phone-ru.js';
 import Inputmask from 'inputmask';
-import { formProfileStepChange } from './../../../mixins';
+// import { formProfileStepChange } from './../../../mixins';
 import { mapActions, mapState } from 'vuex';
 export default {
     components: {
         step,
     },
-    mixins: [formProfileStepChange],
+    // mixins: [formProfileStepChange],
     data() {
         return {
             last_name: '',
@@ -212,67 +212,82 @@ export default {
         },
 
         next() {
-            if (this.$store.state.user.state.authState == 2) {
-                axios.get('/ClientProfile/PersonalData').then(({
-                    data
-                }) => {
-                    if (!data) return;
-                    let dataBd = moment.utc(data.birthDate, 'YYYY-MM-DD[T]HH:mm:ss').format('DD.MM.YYYY')
-                    let thisPhone = this.phone.replace(/[^0-9]/g, '')
-                    let dataPhone
-                    if(data.phone) {
-                        dataPhone = data.phone.replace(/[^0-9]/g, '')
-                    } else {
-                        dataPhone = ''
-                    }
+            this.buffering = true;
+            this.$validator.validateAll().then((result) => {
+                if (result) {
+                    this.updateInfo();
+                }
+                else {
+                    this.buffering = false;
+                }
+            });
+            // if (this.$store.state.user.state.authState == 2) {
+            //     axios.get('/ClientProfile/PersonalData').then(({
+            //         data
+            //     }) => {
+            //         if (!data) return;
+            //         let dataBd = moment.utc(data.birthDate, 'YYYY-MM-DD[T]HH:mm:ss').format('DD.MM.YYYY')
+            //         let thisPhone = this.phone.replace(/[^0-9]/g, '')
+            //         let dataPhone
+            //         if(data.phone) {
+            //             dataPhone = data.phone.replace(/[^0-9]/g, '')
+            //         } else {
+            //             dataPhone = ''
+            //         }
 
 
-                    if (this.last_name != data.lastName ||
-                        this.name != data.firstName ||
-                        this.middle_name != data.middleName ||
-                        this.dob != dataBd ||
-                        this.sex != data.gender ||
-                        this.birth_place != data.birthPlace ||
-                        this.citizenship != data.citizenshipCountryNum ||
-                        this.snils != data.snils ||
-                        this.inn != data.inn ||
-                        thisPhone != dataPhone ||
-                        this.email != data.email
-                    ) {
+            //         if (this.last_name != data.lastName ||
+            //             this.name != data.firstName ||
+            //             this.middle_name != data.middleName ||
+            //             this.dob != dataBd ||
+            //             this.sex != data.gender ||
+            //             this.birth_place != data.birthPlace ||
+            //             this.citizenship != data.citizenshipCountryNum ||
+            //             this.snils != data.snils ||
+            //             this.inn != data.inn ||
+            //             thisPhone != dataPhone ||
+            //             this.email != data.email
+            //         ) {
+                        
+            //             this.buffering = true;
+            //             this.$validator.validateAll().then((result) => {
+            //                 if (result) {
+            //                     this.updateInfo();
+            //                 } else {
+            //                     this.buffering = false;
+            //                 }
+            //             });
+            //         } else {
+            //             let stepPath = this.$store.state.formStep.path
+            //             if (stepPath == '') {
 
-                        this.buffering = true;
-                        this.$validator.validateAll().then((result) => {
-                            if (result) {
-                                this.updateInfo();
-                            } else {
-                                this.buffering = false;
-                            }
-                        });
-                    } else {
+            //                 this.buffering = true;
+            //                 this.$validator.validateAll().then((result) => {
+            //                     if (result) {
+            //                         this.updateInfo();
+            //                     } else {
+            //                         this.buffering = false;
+            //                     }
+            //                 });
+            //             } else {
 
-                        let stepPath = this.$store.state.formStep.path
-                        if (stepPath == '') {
-
-                            this.buffering = true;
-                            this.$validator.validateAll().then((result) => {
-                                if (result) this.updateInfo();
-                                else this.buffering = false;
-                            });
-                        } else {
-
-                            this.buffering = true;
-                            this.$store.commit('setFormStepStatus', true);
-                            this.$router.push(stepPath);
-                        }
-                    }
-                });
-            } else {
-                this.buffering = true;
-                this.$validator.validateAll().then((result) => {
-                    if (result) this.updateInfo();
-                    else this.buffering = false;
-                });
-            }
+            //                 this.buffering = true;
+            //                 this.$store.commit('setFormStepStatus', true);
+            //                 this.$router.push(stepPath);
+            //             }
+            //         }
+            //     });
+            // } else {
+            //     this.buffering = true;
+            //     this.$validator.validateAll().then((result) => {
+            //         if (result) {
+            //             this.updateInfo();
+            //         }
+            //         else {
+            //             this.buffering = false;
+            //         }
+            //     });
+            // }
         },
 
         // anketaEnter() {
@@ -292,7 +307,7 @@ export default {
                 this.dob = data.birthDate ? moment.utc(data.birthDate, 'YYYY-MM-DD[T]HH:mm:ss').format('DD.MM.YYYY') : '';
                 this.sex = data.gender;
                 this.birth_place = data.birthPlace || '';
-                this.citizenship = data.citizenshipCountryNum || '';
+                this.citizenship = data.citizenshipCountryNum;
                 this.snils = data.snils ? Inputmask.format(data.snils, {
                     mask: '999-999-999 99'
                 }) : '';
@@ -334,14 +349,12 @@ export default {
                 snils: this.snils,
                 inn: this.inn
             };
-
             axios.post('/ClientProfile/PersonalData', data).then(() => {
                 this.$store.dispatch('user/formChanged');
-                this.$store.dispatch('user/getForm');
+                //this.$store.dispatch('user/getForm');
 	            this.A_GET_PROGRESS_PROFILE();
                 this.buffering = false;
-
-                if (this.$store.state.user.state.authState == 2) {
+                if (this.$store.state.user.state.authState == 2 && 1 == 2) {
                     window.events.$emit('show_popup', 'form-step');
                 } else {
                     if (!localStorage.getItem('questionaryStep')) {
@@ -353,7 +366,6 @@ export default {
                         };
                         localStorage.setItem('questionaryStep', JSON.stringify(obj))
                     };
-
                     this.$router.push('/user/passport')
                 }
 

@@ -75,7 +75,7 @@ export default {
         },
 
         goToStrategy(id) {
-            this.$router.push({ name: 'iisDuStrategyPage', params: { strategyPrefix: id } });
+            this.$router.push({ name: 'iisDuStrategyPage1', params: { strategyPrefix: id } });
         },
 
         showPopup(type) {

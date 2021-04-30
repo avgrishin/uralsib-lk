@@ -368,7 +368,6 @@ export default {
     computed: {
         strategyContracts() {
             const contracts = this.storeSrategyById().contract ? this.storeSrategyById().contract.filter(contract => contract.canBuyFromLKK == 1) : [];
-            console.log('this.storeSrategyById()', this.storeSrategyById())
             return _.sortBy(contracts, ['pifID']);
         },
 

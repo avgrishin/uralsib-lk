@@ -33,12 +33,12 @@ export default {
                 return id == str.webSiteID;
             });
             if (selectedIISinCase) {
-                selectedIISinCase = selectedIISinCase.contract.length == 0
+                selectedIISinCase = selectedIISinCase.contract.length == 0;
             }
 
             return {
                 val: selectedIISinCase,
-                text: selectedIISinCase ? 'Купить' : 'Пополнить'
+                text: selectedIISinCase ? 'Купить' : 'Пополнить',
             }
         },
 
@@ -50,10 +50,8 @@ export default {
     methods: {
         checkContractSubmited(id) {
             let contracts = this.storeSrategyById(id).contract;
-            //console.log('contracts1', contracts)
             if (!contracts && contracts.length == 0) return false;
             contracts = contracts.filter(contract => contract.canBuyFromLKK == 1);
-            //console.log('contracts2', contracts)
             return contracts.length > 0;
         },
 

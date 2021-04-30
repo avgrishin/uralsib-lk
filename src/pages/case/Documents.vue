@@ -146,7 +146,6 @@ export default {
                     item.findStrategy = findStrategy;
                     return item;
                 });
-                //console.log('this.strategiesDocs', this.strategiesDocs, this.strategiesDocs.filter(document => document.isBoughtFromLKK))
             }).finally(() => {
                 this.loadingFlags.iisDuList = false;
             });

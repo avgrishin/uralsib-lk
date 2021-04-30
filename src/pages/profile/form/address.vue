@@ -213,50 +213,55 @@
 				'A_GET_PROGRESS_PROFILE'
 			]),
 			next() {
-				if(this.$store.state.user.state.authState == 2) {
-				axios.get('/ClientProfile/Addresses').then(({data}) => {
-					if (!data) return;
-					if (
-						this.registrationAddress.post_code != data.registrationAddress.zipCode ||
-						this.registrationAddress.region != data.registrationAddress.state ||
-						this.registrationAddress.district != data.registrationAddress.region ||
-						this.registrationAddress.city != data.registrationAddress.city ||
-						this.registrationAddress.area != data.registrationAddress.area ||
-						this.registrationAddress.street != data.registrationAddress.street ||
-						this.registrationAddress.house != data.registrationAddress.building ||
-						this.registrationAddress.building != data.registrationAddress.block ||
-						this.registrationAddress.apartment != data.registrationAddress.appartment
-					) {
-						this.buffering = true;
-
-						this.$validator.validateAll().then((result) => {
-							if (result) this.updateInfo();
-							else this.buffering = false;
-						});
-					} else {
-						let stepPath = this.$store.state.formStep.path
-						if (stepPath == '') {
-							// this.buffering = true;
-							// this.$router.push('/user/bank');
-							this.buffering = true;
-							this.$validator.validateAll().then((result) => {
-								if (result) this.updateInfo();
-								else this.buffering = false;
-							});
-						} else {
-							this.buffering = true;
-							this.$store.commit('setFormStepStatus', true);
-							this.$router.push(stepPath);
-						}
-					}
+				this.buffering = true;
+				this.$validator.validateAll().then((result) => {
+					if (result) this.updateInfo();
+					else this.buffering = false;
 				});
-				} else {
-					this.buffering = true;
-					this.$validator.validateAll().then((result) => {
-						if (result) this.updateInfo();
-						else this.buffering = false;
-					});
-				}
+				// if(this.$store.state.user.state.authState == 2) {
+				// axios.get('/ClientProfile/Addresses').then(({data}) => {
+				// 	if (!data) return;
+				// 	if (
+				// 		this.registrationAddress.post_code != data.registrationAddress.zipCode ||
+				// 		this.registrationAddress.region != data.registrationAddress.state ||
+				// 		this.registrationAddress.district != data.registrationAddress.region ||
+				// 		this.registrationAddress.city != data.registrationAddress.city ||
+				// 		this.registrationAddress.area != data.registrationAddress.area ||
+				// 		this.registrationAddress.street != data.registrationAddress.street ||
+				// 		this.registrationAddress.house != data.registrationAddress.building ||
+				// 		this.registrationAddress.building != data.registrationAddress.block ||
+				// 		this.registrationAddress.apartment != data.registrationAddress.appartment
+				// 	) {
+				// 		this.buffering = true;
+
+				// 		this.$validator.validateAll().then((result) => {
+				// 			if (result) this.updateInfo();
+				// 			else this.buffering = false;
+				// 		});
+				// 	} else {
+				// 		let stepPath = this.$store.state.formStep.path
+				// 		if (stepPath == '') {
+				// 			// this.buffering = true;
+				// 			// this.$router.push('/user/bank');
+				// 			this.buffering = true;
+				// 			this.$validator.validateAll().then((result) => {
+				// 				if (result) this.updateInfo();
+				// 				else this.buffering = false;
+				// 			});
+				// 		} else {
+				// 			this.buffering = true;
+				// 			this.$store.commit('setFormStepStatus', true);
+				// 			this.$router.push(stepPath);
+				// 		}
+				// 	}
+				// });
+				// } else {
+				// 	this.buffering = true;
+				// 	this.$validator.validateAll().then((result) => {
+				// 		if (result) this.updateInfo();
+				// 		else this.buffering = false;
+				// 	});
+				// }
 			},
 			fillData(user) {
 				axios.get('/ClientProfile/Addresses').then(({data}) => {
@@ -304,12 +309,12 @@
 
 				axios.post('/ClientProfile/Addresses', data).then(({data}) => {
 					this.$store.dispatch('user/formChanged');
-					this.$store.dispatch('user/getForm');
+					//this.$store.dispatch('user/getForm');
 					this.A_GET_PROGRESS_PROFILE();
 
 					this.buffering = false;
 
-					if(this.$store.state.user.state.authState == 2) {
+					if (this.$store.state.user.state.authState == 2 && 1 == 2) {
 						window.events.$emit('show_popup', 'form-step');
 					} else {
 

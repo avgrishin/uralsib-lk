@@ -7,7 +7,7 @@
                 router-view
             .bug-ie
         app-foot
-        .g-p_4.g-p_1_xs.h6.g-mb_0.g-lh_15(v-if="showDisclaimer")
+        .g-p_4.g-p_1_xs.h6.g-mb_0.g-lh_15.disclaimer(v-if="showDisclaimer")
             div(v-html="disclaimerTextFooter")
         startup-modals-observer
         pop-up
@@ -419,4 +419,7 @@ export default {
 
 <style lang="scss">
     @import "./assets/styles/app";
+    .disclaimer { background-color: white;}
 </style>
+
+

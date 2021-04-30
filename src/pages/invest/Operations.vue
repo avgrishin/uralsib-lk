@@ -221,7 +221,6 @@
                         return item;
                     });
                     this.funds = funds;
-                    console.log(this.funds)
                     this.$nextTick(() => this.onScroll());
                 });
             },

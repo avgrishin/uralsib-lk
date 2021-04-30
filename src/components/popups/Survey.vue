@@ -25,7 +25,7 @@ export default {
     },
 	methods: {
 		toSurvey() {
-            this.setCookie('opros2', '1', { 'expires ': new Date(2021, 03, 16) });
+            this.setCookie('opros2', '1', { 'expires ': new Date(2021, 3, 16) });
 			window.events.$emit('close_popup');
         },
 

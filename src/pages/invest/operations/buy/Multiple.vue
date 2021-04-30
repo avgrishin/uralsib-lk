@@ -121,17 +121,18 @@
                                 p.g-col.g-col_md_7 40701810300480000169
                             .control.control_empty
                     fieldset.control
+                        p(v-if="isOrderLK") Надбавка к расчетной стоимости пая для заявок, оформленных в Личном кабинете #[strong не взимается]
+                        div(v-if="!isOrderLK").g-row.g-mb_2
+                            .control.g-col.g-col_lg_8
+                                label.checkbox(:class="{'checkbox_error': errors.has('term2')}")
+                                    input(type="checkbox", v-model="term2" v-validate="'required'" name="term2")
+                                    .checkbox__text Надбавка к расчетной стоимости пая составит 0.5%#[br]При приобретении на сумму 3 млн руб. и более #[strong 0%]
+                        //- p Надбавка к расчетной стоимости пая при приобретении в Личном кабинете #[strong не взимается]
                         .g-row.g-mb_2
                             .control.g-col.g-col_lg_8
                                 label.checkbox(:class="{'checkbox_error': errors.has('term1')}")
                                     input(type="checkbox", v-model="term1" v-validate="'required'" name="term1")
                                     .checkbox__text Срок проведения операции составляет до 5(пяти) рабочих дней
-                        .g-row.g-mb_2
-                            .control.g-col.g-col_lg_8
-                                label.checkbox(:class="{'checkbox_error': errors.has('term2')}")
-                                    input(type="checkbox", v-model="term2" v-validate="'required'" name="term2")
-                                    .checkbox__text Надбавка к расчетной стоимости пая составит 0.5%#[br]При приобретении на сумму 3 млн руб. и более #[strong 0%]
-
                         .g-row.g-mb_2
                             .control.g-col.g-col_lg_8
                                 label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")
@@ -288,18 +289,12 @@
                 let funds = _.cloneDeep(this.selected_funds);
                 let orders = _.cloneDeep(this.orders);
                 let result = funds.filter((fund,index) =>{
-
                     return !orders.some(order => order.portfolio.id == fund.id)});
-
-
 
                 this.fundWithOrders = funds.filter(fund => orders.some(order => order.portfolio.id == fund.id));
 
                 if (!result.length) result = false;
-
                 return result;
-
-
             },
             fundsEnd() {
                 if(this.fundWithOrders.length == 1) {
@@ -309,6 +304,9 @@
                     let data = ['фонды: ','которым', 'открыты', 'счета']
                     return data
                 }
+            },
+            isOrderLK() {
+                return this.order && this.order.number.indexOf('-КК') !== -1;
             }
         },
         methods: {

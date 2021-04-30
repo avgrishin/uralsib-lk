@@ -75,6 +75,7 @@ export default {
         },
         formSigned(state) {
             state.form_changed = false;
+            state.state.allowEditClientProfile = false;
             localStorage.removeItem('form_changed');
         },
         saveMessages(state, messages) {

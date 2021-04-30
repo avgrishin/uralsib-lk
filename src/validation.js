@@ -50,7 +50,7 @@ const place_of_issue = {
         return 'Поле имеет недопустимые символы.';
     },
     validate(value) {
-        const regex = /^[0-9а-яё "'\.№-]+$/i;
+        const regex = /^[0-9а-яё "'\(\)\.№-]+$/i;
         return regex.test(value);
     }
 };

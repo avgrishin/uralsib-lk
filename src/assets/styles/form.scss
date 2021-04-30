@@ -606,7 +606,7 @@ textarea.field_text:not(.field_textarea-only_xs){
   }
 }
 .control {
-  margin-bottom:nth($m_em, 4);
+  margin-bottom:nth($m_em, 2);
   &:last-child{ margin-bottom:0 }
 
   &__label-top{

@@ -1,4 +1,3 @@
-import { checkAndFireEvent } from '../helpers';
 
 let oldErrors = [];
 

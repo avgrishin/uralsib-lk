@@ -207,7 +207,6 @@
 					this.case_table = table_data;
 					
 					this.case_table.data = this.case_table.data.filter(item => item.id && item.share);
-					//console.log('this.case_table', this.case_table)
 				})
 			},
 			formatTableData(items) {
@@ -240,8 +239,8 @@
 						data.amount += item.outamnt;
 						data.amountVal += item.outamntusd > 0 ? item.outamntusd : item.outamnt;
 						data.Val = item.outamntusd > 0 ? 'Доллары США' : 'Рубли РФ';
-						data.profit += item.prlosT_NR;
-						data.profit_per += item.profiT_2;
+						data.profit = item.prlosT_NR;
+						data.profit_per = item.profiT_2;
 						data.sCode = item.sCode;
 						data.children.push({
 							name: item.opeR_ACC,

@@ -259,7 +259,7 @@
                     let table = [];
 
                     if (data && data.length == 0) this.loaded.table = true;
-                    data= data.filter(item => item.pif != 'ДУ');
+                    data = data.filter(item => item.pif != 'ДУ');
 
                     let funds = _.groupBy(data, 'prtf');
 					window.log("TCL: pifTableData -> funds", funds)
@@ -314,16 +314,16 @@
                         let matches = [];
 
                         if (item.smallIcon) matches = item.smallIcon.match(/\/([a-z0-9]*)-s.jpg$/);
-                        if(item.type=="ДУ") {
-                            data.du=true;
+                        if(item.type == "ДУ") {
+                            data.du = true;
                         }
                         data.id = matches ? matches[1] : '';
                         data.name = item.prtf;
                         data.price = item.outprc;
                         data.quantity += item.outqnt;
                         data.amount += item.outamnt;
-                        data.profit += item.prlost;
-                        data.profit_per += item.profiT_2;
+                        data.profit = item.prlost;
+                        data.profit_per = item.profiT_2;
                         data.children.push({
                             name: item.opeR_ACC,
                             price: this.formatCurrency(item.outprc),

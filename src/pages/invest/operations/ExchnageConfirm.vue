@@ -381,7 +381,6 @@
             },
             fundAvailableToChange() {
                 let funds = []
-console.log('this.fund_from', this.fund_from);
                 if (!this.fund_from) this.fundAvailable = [];
                     else {
                     axios.get('/exchapps/selectTo', {

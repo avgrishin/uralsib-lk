@@ -1,45 +1,35 @@
 <template lang="pug">
     article.content.content_reg
         template(v-if="!webview")
+            //- h4 Сообщение о временном ограничении доступа к дистанционному сервису «Личный Кабинет Клиента» АО «УК УРАЛСИБ»
+            //- p Уважаемые клиенты!
+            //- p В связи с проведением плановых технических работ 15 апреля в период с 11.00-15.00 по московскому времени возможны  ограничения доступа к информационному сервису «Личный Кабинет Клиента» при регистрации и авторизации пользователей через портал Госуслуги.ру.
+            //- p Всю актуальную информацию по счетам и операциям Вы можете получить по телефону 8 800 200 90 58 (бесплатно); либо направить запрос по электронному адресу  info@am-uralsib.ru
+            //- p Приносим извинения за временные неудобства.
+
             h4 Уважаемые клиенты!
+            p ИНВЕСТИРУЙТЕ В ЛИЧНОМ КАБИНЕТЕ !#[br]
+            p ОНЛАЙН ОПЕРАЦИИ БЕЗ КОМИСИИ:
+                ul
+                    li Покупка#[sup *] и обмен всех паев ПИФ#[br]
+                    li Открытие счета ИИС ДУ «Умные инвестиции»#[br]
+                    li Оплата картами любого банка#[br]
             p
-                |Мы рады вам сообщить о доступности новой версии Личного
-                |кабинета #[br] с новыми возможностями для управления личными
-                |финансами.
-            div(class="g-mb_1 reg-old-link" style="margin-top: -7px")
+                small #[sup *]Обращаем ваше внимание: при покупке паев пиф в личном кабинете по заявке, оформленной в офисе агента, взимается надбавка в размере 0,5%.
+            p С целью обнуления надбавки необходимо оформить заявку на приобретение в виде электронного документа в личном кабинете
 
-                a(href="https://www.uralsib-am.ru/investors/private/lk/", target="_blank", class="g-clr_gray g-bbc_t g-d_f g-ai_c")
-                    span Все операции онлайн без визита в офис
+            //- div(class="g-mb_1 reg-old-link" style="margin-top: -7px")
+            //-     a(href="https://www.uralsib-am.ru/investors/private/lk/", target="_blank", class="g-clr_gray g-bbc_t g-d_f g-ai_c")
+            //-         span Все операции онлайн без визита в офис
 
-            //- p(class="g-clr_err g-mb_1")
-            //-     |В связи с плановым проведением технических работ в период с 29 по 30 августа 2020г личный кабинет клиента будет недоступен.
-            //-     |Приносим вам свои извинения за временные неудобства. 
-            //- p
-            //-     strong Уважаемые клиенты,#[br]поздравляем вас с наступающим Новым годом и Рождеством! 
-            //- p
-            //-     |Информируем вас, что офис компании будет закрыт с 1 по 10 января 2021 года. 31 декабря офис будет работать до 16:00.#[br]
-            //-     |Вы можете оформить любые операции с паями инвестиционных фондов, а также осуществить перевод денежных средств на счета доверительного управления и ИИС в любое удобное время. Обработка заявок и зачисление средств будут производиться, начиная с 11 января 2021 года.#[br]
-            //-     |Вывод средств и торговые операции на бирже в период новогодних праздников осуществляться не будут.#[br]
-            //-     |Просим учесть эту информацию и приносим извинения за возможные неудобства!
-
-            //div(class="g-mb_3 reg-old-link")
-
-                a(href="https://i.am-uralsib.ru/oldversion",class="g-clr_gray g-bbc_t g-d_f g-ai_c")
-                    i.icon.icon_arrow_left.g-mr_1
-                    span Перейти на старую версию Личного кабинета
-        .g-d_f.g-jc_sb.g-d_b_xs
+        //- .g-d_f.g-jc_sb.g-d_b_xs
             //router-link(to="/register",class="btn btn_reg btn_secondary btn_p_s g-as_b g-or_1 g-mb_6 g-d_b_xs g-mlr_2_m_xs g-mb_3_xs") Регистрация
 
         .g-row
-            //- .g-col.g-col_md_6.g-mb_2.auths__left
-            //-     .g-plr_0_xs
-            //-         .g-pt_1
-            //-             input(@click="authType = true" type="submit", value="Зарегистрироваться в Личном кабинете" :class="{'btn_secondary' : !authType}").btn.btn_primary.btn_block.g-ws_pw_xs.g-lh_1_xs
-            //- .g-col.g-col_md_6.g-mb_2_xs.auths__left
-            //-     .g-plr_0_xs
-            //-         .g-pt_1.g-pt_0_xs
-            //-             input(@click="authType = false" type="submit", value="Войти в Личный кабинет" :class="{'btn_secondary' : authType}").btn.btn_primary.btn_block.g-lh_1_xs
-            .g-col.g-col_md_12.g-ta_r
+            .g-col.g-col_md_6.g-ta_r
+                a(href="https://www.uralsib-am.ru/investors/private/lk/", target="_blank", class="g-clr_gray g-bbc_t g-d_f g-ai_c")
+                    span Все операции онлайн без визита в офис
+            .g-col.g-col_md_6.g-ta_r
                 router-link.js-click-datalayer(:to="APP_CONFIGURATION.disableESIA ? '/register/contact' : '/register'" data-action="registration" class="btn btn_primary btn_register btn_secondary") Регистрация
 
         .g-row.g-row_flex.g-mb_2.auths
@@ -59,13 +49,13 @@
                                 span.field_error(v-if="errors.has('password')" v-html="errors.first('password')")
                             .auth__forgot.g-ta_r.g-ta_l_xs
                                 router-link(to="/recover",class="link g-clr_gray") Забыли пароль?
-                        .g-pt_1
+                        .g-pt_4
                             input(:disabled="buffering" type="submit",value="Вход в Личный кабинет").btn.btn_primary.btn_block
             .g-col.g-col_md_6.auths__right
                 .auth.auth_bg_2.g-plr_2_xs(:class="{'spinner':  loaded_esia }")
                     .g-mb_3
                         h3.g-mb_0 Через сайт Госуслуг
-                    .g-mt_8.g-mb_7.g-clr_gray
+                    .g-mt_8.g-mb_6.g-clr_gray
                         span.g-fw_4.g-d_b Потребуется:
                         br
                         | Подтвержденная учетная запись

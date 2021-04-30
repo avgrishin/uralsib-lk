@@ -172,12 +172,12 @@
 	import moment from 'moment';
 	import Inputmask from 'inputmask';
 
-	import { DnD, fillUserInfo, formProfileStepChange } from './../../../mixins';
+	import { DnD, fillUserInfo/*, formProfileStepChange*/ } from './../../../mixins';
 	import step from './step.vue';
 	import {mapActions} from 'vuex';
 	export default {
 		components: {step},
-		mixins: [DnD, formProfileStepChange],
+		mixins: [DnD/*, formProfileStepChange*/],
 		data() {
 			return {
 				passport: '',
@@ -252,61 +252,62 @@
 				this[field] = pastedData;
 			},
 			next() {
-				if (this.$store.state.user.state.authState == 2) {
-					let checkPassportField = () => {
-						axios.get('/ClientProfile/Passport').then(({
-							data
-						}) => {
-							if (!data) return;
+				this.buffering = true;
+				this.$validator.validateAll().then((result) => {
+					if (result) this.updateInfo();
+					else this.buffering = false;
+				});
+				// if (this.$store.state.user.state.authState == 2) {
+				// 	let checkPassportField = () => {
+				// 		axios.get('/ClientProfile/Passport').then(({
+				// 			data
+				// 		}) => {
+				// 			if (!data) return;
 
-							let thisPassport = this.passport.replace(/ /g, "")
-							let dataPassport = data.series + data.number
-							let dataIssued = moment.utc(data.issued, 'YYYY-MM-DD[T]HH:mm:ss').format('DD.MM.YYYY')
+				// 			let thisPassport = this.passport.replace(/ /g, "")
+				// 			let dataPassport = data.series + data.number
+				// 			let dataIssued = moment.utc(data.issued, 'YYYY-MM-DD[T]HH:mm:ss').format('DD.MM.YYYY')
 
-							if (thisPassport != dataPassport ||
-								this.issue != data.issuer ||
-								this.date_issue != dataIssued ||
-								this.passport_code != data.issuerCode ||
-								this.scansStatusChange[0] != false ||
-								this.scansStatusChange[1] != false ||
-								this.scansStatusChange[2] != false
-							) {
+				// 			if (thisPassport != dataPassport ||
+				// 				this.issue != data.issuer ||
+				// 				this.date_issue != dataIssued ||
+				// 				this.passport_code != data.issuerCode ||
+				// 				this.scansStatusChange[0] != false ||
+				// 				this.scansStatusChange[1] != false ||
+				// 				this.scansStatusChange[2] != false
+				// 			) {
 
-								this.buffering = true;
-								this.$validator.validateAll().then((result) => {
-									if (result) this.updateInfo();
-									else this.buffering = false;
-								});
-							} else {
-								let stepPath = this.$store.state.formStep.path
-								if (stepPath == '') {
+				// 				this.buffering = true;
+				// 				this.$validator.validateAll().then((result) => {
+				// 					if (result) this.updateInfo();
+				// 					else this.buffering = false;
+				// 				});
+				// 			} else {
+				// 				let stepPath = this.$store.state.formStep.path
+				// 				if (stepPath == '') {
 
-									this.buffering = true;
-									this.$validator.validateAll().then((result) => {
-										if (result) this.updateInfo();
-										else this.buffering = false;
-									});
-								} else {
+				// 					this.buffering = true;
+				// 					this.$validator.validateAll().then((result) => {
+				// 						if (result) this.updateInfo();
+				// 						else this.buffering = false;
+				// 					});
+				// 				} else {
 
-									this.buffering = true;
-									this.$store.commit('setFormStepStatus', true);
-									this.$router.push(stepPath);
-								}
-							}
-						});
-					}
-
-
-					checkPassportField();
-
-
-				} else {
-					this.buffering = true;
-					this.$validator.validateAll().then((result) => {
-						if (result) this.updateInfo();
-						else this.buffering = false;
-					});
-				}
+				// 					this.buffering = true;
+				// 					this.$store.commit('setFormStepStatus', true);
+				// 					this.$router.push(stepPath);
+				// 				}
+				// 			}
+				// 		});
+				// 	}
+				// 	checkPassportField();
+				// } else {
+				// 	this.buffering = true;
+				// 	this.$validator.validateAll().then((result) => {
+				// 		if (result) this.updateInfo();
+				// 		else this.buffering = false;
+				// 	});
+				// }
 			},
 			fillData() {
 				axios.get('/ClientProfile/Passport').then(({data}) => {
@@ -343,7 +344,7 @@
 
 						this.A_GET_PROGRESS_PROFILE();
 
-						if (this.$store.state.user.state.authState == 2) {
+						if (this.$store.state.user.state.authState == 2 && 1 == 2) {
 							window.events.$emit('show_popup', 'form-step');
 						} else {
 							this.$router.push('/user/address');

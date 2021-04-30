@@ -36,9 +36,9 @@ export default {
         userStateLoaded: {
             immediate: true,
             handler(value) {
-                if (this.userState.clientId && this.getCookie('opros2') != '1') {
-                    setTimeout(this.openSurveyModal, 1000);
-                }
+                // if (this.userState.clientId && this.getCookie('opros2') != '1') {
+                //     setTimeout(this.openSurveyModal, 1000);
+                // }
             }
         },
     },

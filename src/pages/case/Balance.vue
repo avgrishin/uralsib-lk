@@ -80,7 +80,7 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                             return this.case_table = table_data;
                         }
 
-                        window.temp = 0;
+                        //window.temp = 0;
 
                         AssetsEstimateDU.forEach(item => {
                             if (item.pif == 'ДУ') {
@@ -96,7 +96,7 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
                             } else /*if (item.outqnt > 0)*/ {
                                 table_data.profit_pif += item.prlosT_NR;
 
-                                window.temp += item.profiT_2;
+                                //window.temp += item.profiT_2;
                             }
 
                         });
@@ -133,12 +133,12 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
 
                         this.case_table = table_data;
 
-                        axios.get('/reports/AssetsEstimateTotal').then(({ data }) => {
-                            if (data.length > 0){
-                                this.case_table.profit_pif = data[0].prlosT_NR;
-                                this.case_table.profit_2 = data[0].profiT_2;
-                            }
-                        });
+                        // axios.get('/reports/AssetsEstimateTotal').then(({ data }) => {
+                        //     if (data.length > 0){
+                        //         this.case_table.profit_pif = data[0].prlosT_NR;
+                        //         this.case_table.profit_2 = data[0].profiT_2;
+                        //     }
+                        // });
 
                         this.case_table.data = this.case_table.data.filter(item => /*item.id &&*/ item.share);
                     })
@@ -182,7 +182,7 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
 					data.amountVal += item.outamntusd > 0 ? item.outamntusd : item.outamnt;
                     data.Val = item.outamntusd > 0 ? 'Доллары США' : 'Рубли РФ';
                     data.profit += item.outamntusd > 0 ? item.prlosT_NR_USD: item.prlosT_NR;
-                    data.profit_per += item.profiT_2;
+                    data.profit_per = item.profiT_2;
                     data.children.push({
                         name: item.opeR_ACC,
                         amount: item.outamnt,

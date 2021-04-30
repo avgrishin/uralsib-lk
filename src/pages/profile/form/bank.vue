@@ -50,15 +50,15 @@
 </template>
 
 <script>
-    import { fillUserInfo, formProfileStepChange,} from '../../../mixins';
+    //import { fillUserInfo, formProfileStepChange,} from '../../../mixins';
     import Inputmask from 'inputmask';
     import step from './step.vue';
     import { mapState } from 'vuex';
-    import {mapActions} from 'vuex';
+    import { mapActions } from 'vuex';
     export default {
-        components: {step,},
+        components: { step, },
         // mixins: [fillUserInfo],
-        mixins: [formProfileStepChange],
+        // mixins: [formProfileStepChange],
         watch: {
             bik(val) {
                 let regex = /^[0-9]{9}$/;
@@ -127,52 +127,57 @@
                 e.preventDefault();
             },
             next() {
+                this.buffering = true;
+                this.$validator.validateAll().then((result) => {
+                    if (result) this.updateInfo();
+                    else this.buffering = false;
+                });
 
-                if (this.$store.state.user.state.authState == 2) {
-                    axios.get('/ClientProfile/BankingDetails').then(({
-                        data
-                    }) => {
-                        let thisCheckAcc = this.check_acc.replace(/\./g, '')
-                        let thisAcc = this.acc.replace(/\./g, '')
+                // if (this.$store.state.user.state.authState == 2) {
+                //     axios.get('/ClientProfile/BankingDetails').then(({
+                //         data
+                //     }) => {
+                //         let thisCheckAcc = this.check_acc.replace(/\./g, '')
+                //         let thisAcc = this.acc.replace(/\./g, '')
 
-                        if (!data) return this.loaded = true
-                        if (
-                            this.bik != data.bic ||
-                            this.bank_name != data.bankName ||
-                            this.corr_acc != data.accCorr ||
-                            thisCheckAcc != data.accCheck ||
-                            thisAcc != data.accPers ||
-                            this.name_branch != data.bankBranchName
-                        ) {
-                            this.buffering = true;
-                            this.$validator.validateAll().then((result) => {
-                                if (result) this.updateInfo();
-                                else this.buffering = false;
-                            });
-                        } else {
-                            let stepPath = this.$store.state.formStep.path
-                            if (stepPath == '') {
-                                // this.buffering = true;
-                                // this.$router.push('/user/personal');
-                                this.buffering = true;
-                                this.$validator.validateAll().then((result) => {
-                                    if (result) this.updateInfo();
-                                    else this.buffering = false;
-                                });
-                            } else {
-                                this.buffering = true;
-                                this.$store.commit('setFormStepStatus', true);
-                                this.$router.push(stepPath);
-                            }
-                        }
-                    });
-                } else {
-                    this.buffering = true;
-                    this.$validator.validateAll().then((result) => {
-                        if (result) this.updateInfo();
-                        else this.buffering = false;
-                    });
-                }
+                //         if (!data) return this.loaded = true
+                //         if (
+                //             this.bik != data.bic ||
+                //             this.bank_name != data.bankName ||
+                //             this.corr_acc != data.accCorr ||
+                //             thisCheckAcc != data.accCheck ||
+                //             thisAcc != data.accPers ||
+                //             this.name_branch != data.bankBranchName
+                //         ) {
+                //             this.buffering = true;
+                //             this.$validator.validateAll().then((result) => {
+                //                 if (result) this.updateInfo();
+                //                 else this.buffering = false;
+                //             });
+                //         } else {
+                //             let stepPath = this.$store.state.formStep.path
+                //             if (stepPath == '') {
+                //                 // this.buffering = true;
+                //                 // this.$router.push('/user/personal');
+                //                 this.buffering = true;
+                //                 this.$validator.validateAll().then((result) => {
+                //                     if (result) this.updateInfo();
+                //                     else this.buffering = false;
+                //                 });
+                //             } else {
+                //                 this.buffering = true;
+                //                 this.$store.commit('setFormStepStatus', true);
+                //                 this.$router.push(stepPath);
+                //             }
+                //         }
+                //     });
+                // } else {
+                //     this.buffering = true;
+                //     this.$validator.validateAll().then((result) => {
+                //         if (result) this.updateInfo();
+                //         else this.buffering = false;
+                //     });
+                // }
 
             },
             fillData() {
@@ -212,15 +217,15 @@
 
                 axios.post('/ClientProfile/BankingDetails', data).then(({data}) => {
                     this.$store.dispatch('user/formChanged');
-                    this.$store.dispatch('user/getForm');
+                    //this.$store.dispatch('user/getForm');
                     this.A_GET_PROGRESS_PROFILE();
 
                     this.buffering = false;
-                    if(this.$store.state.user.state.authState == 2) {
+                    if (this.$store.state.user.state.authState == 2 && 1 == 2) {
                         window.events.$emit('show_popup', 'form-step');
                     } else {
                         let percentageData = this.S_PROGRESS;
-                        if(percentageData.bankingDetailsRate >= 50) {
+                        if (percentageData.bankingDetailsRate >= 50) {
                             this.$router.push('/user/finish');
                         }
                         this.$router.push('/user/finish'); // не знаю для чего условие выше, из за него срабатывало со второго раза, добавил эту строчку

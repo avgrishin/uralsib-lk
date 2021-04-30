@@ -347,10 +347,10 @@ export default {
             } else if (method == 3) {
                 this.$store.commit('buffering', false);
                 if(typeof yaCounter50062190 !== "undefined") yaCounter50062190.reachGoal('BTN_CARD_3');
-                let ibank = window.open('https://i.uralsib.ru/');
+                let ibank = window.open('https://online.uralsib.ru/');
                 // Check if the window has been opened, if it hasn't alert
                 if (!ibank) {
-                    window.events.$emit('show_popup', ['not-confirmed', { text: 'В случае, если страница Интернет-банка ПАО "БАНК УРАЛСИБ" не открывается, Вам необходимо в браузере разрешить всплывающие окна. Либо пройдите по этой ссылке <a href="https://i.uralsib.ru" target="_blank">https://i.uralsib.ru/</a>' }])
+                    window.events.$emit('show_popup', ['not-confirmed', { text: 'В случае, если страница Интернет-банка ПАО "БАНК УРАЛСИБ" не открывается, Вам необходимо в браузере разрешить всплывающие окна. Либо пройдите по этой ссылке <a href="https://online.uralsib.ru/" target="_blank">https://online.uralsib.ru/</a>' }])
                 }
             }
         },

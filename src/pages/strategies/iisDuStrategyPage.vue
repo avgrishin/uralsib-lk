@@ -9,7 +9,7 @@
                         span(v-html="strategyName.length > 1 ? strategyName.replace('', '') : strategyName ")
                     template(v-if="!strategyOld.iis && !strategyOld.du")
                         h2 Условия*
-                        p #[strong Доходность#[sup 1], % годовых ~ {{strategyParam.expectProfitAdd}} {{strategy.expectProfit}}%{{ strategyParam.currency !== 'Рубли РФ' ? '*' : '' }}]
+                        p #[strong Доходность#[sup 1], в годовых ~ {{strategyParam.expectProfitAdd}} {{strategy.expectProfit}}%{{ strategyParam.currency !== 'Рубли РФ' ? '*' : '' }}]
                         p #[strong Допустимый риск]#[sup 2] - {{strategy.risk}}
                         p #[strong Инвестиционная стратегия] - {{strategyParam.investStrategy.replace(/\.|;/g,' ')}}
                         p #[strong Инвестиционная цель] - {{strategyParam.investAim.replace(/\.|;/g,' ')}}
@@ -44,9 +44,9 @@
                                 class="btn btn_primary g-mr_2 g-mr_0_xs g-mb_0_xs g-col_md_a g-col_xs_12"
                             ) Пополнить
                             router-link(
-                                :to="{name:'iisDuCancel'}",
+                                :to="{name:'iisDuCancel', params: { portfolioId: this.$route.params.portfolioId ? this.$route.params.portfolioId : startContract.portfolioId }}",
                                 class="btn btn_secondary g-col_md_a g-col_xs_12 g-mb_0_xs",
-                                @click.prevent="showPopup"
+                                //- @click.prevent="showPopup"
                             ) Расторгнуть договор
                                 //- :to="{name:'iisDuTermination'}",
                 .g-col.g-col_md_6.g-mt_3_xs
@@ -79,7 +79,7 @@
                             class="btn btn_primary g-mr_2 g-mr_0_xs g-mb_2_xs g-col_md_a g-col_xs_12"
                         ) Частичный вывод
                         router-link(
-                            :to="{name:'iisDuCancel'}",
+                            :to="{name:'iisDuCancel', params: { portfolioId: this.$route.params.portfolioId ? this.$route.params.portfolioId : startContract.portfolioId }}",
                             class="btn btn_secondary g-col_md_a g-col_xs_12"
                         ) Расторгнуть договор
                             //- :to="{name:'iisDuTermination'}",
@@ -110,15 +110,15 @@
                             .g-col.g-col_md_5.strategy-page__conditions-val #[strong {{strategyParam.partialWithdrawal}}]
                         .strategy-page__conditions-row.g-row
                             .g-col.g-col_md_7(v-if="rStrategyType == 'du'") Вознаграждение, взимаемое при передаче активов в управление:
-                            .g-col.g-col_md_7(v-else) Вознаграждение за ведение счета, % от взноса:
+                            .g-col.g-col_md_7(v-else) Вознаграждение за ведение счета, от взноса:
                             .g-col.g-col_md_5.strategy-page__conditions-val #[strong {{strategyParam.maintainCommission}}%]
                         .strategy-page__conditions-row.g-row
-                            .g-col.g-col_md_7(v-if="rStrategyType == 'du'") Вознаграждение за управление счетом, % годовых от суммы активов:
-                            .g-col.g-col_md_7(v-else) Вознаграждение за управление счетом, % годовых от суммы активов:
+                            .g-col.g-col_md_7(v-if="rStrategyType == 'du'") Вознаграждение за управление счетом, в годовых от суммы активов:
+                            .g-col.g-col_md_7(v-else) Вознаграждение за управление счетом, в годовых от суммы активов:
                             .g-col.g-col_md_5.strategy-page__conditions-val #[strong {{strategyParam.manageCommission}}%]
                         .strategy-page__conditions-row.g-row(v-if="rStrategyType == 'du' && strategyParam.successPercent !== undefined && strategyParam.successPercent !== null")
-                            .g-col.g-col_md_7 Вознаграждение за успех, % от прироста портфеля:
-                            .g-col.g-col_md_5.strategy-page__conditions-val #[strong {{strategyParam.successPercent}}]
+                            .g-col.g-col_md_7 Вознаграждение за успех, от прироста портфеля:#[sup(v-if="rsStrategyID=='s42'") 3]#[sup(v-if="rsStrategyID=='s43'") 3]:
+                            .g-col.g-col_md_5.strategy-page__conditions-val #[strong {{strategyParam.successPercent}}%]
                         .strategy-page__conditions-row.g-row
                             .g-col.g-col_md_7 Комиссия при досрочном расторжении#[sup(v-if="rsStrategyID=='s45'") 4]:
                             .g-col.g-col_md_5.strategy-page__conditions-val #[strong {{ strategyParam.terminationCommission ? `${strategyParam.terminationCommission}%` : strategyParam.termCmsText ? strategyParam.termCmsText : 'Не предусмотрено' }}]
@@ -138,11 +138,13 @@
         p(v-if="!strategyOld.iis && !strategyOld.du")
             span(v-if="false", @click="strategyOperation(rsStrategyID)", class="btn btn_primary g-mr_2 g-mr_0_xs g-mb_2 g-col_md_a g-col_xs_12") Оформить договор
             button(class="btn btn_secondary g-col_md_a g-col_xs_12" @click.prevent="showPopup") Помощь консультанта
-        .g-col_md_10.g-mt_4(v-if="!strategyOld.iis && !strategyOld.du")
-            p: small.text-note #[sup 1] Доходность – прогнозируемая доходность, которая не накладывает на АО «УК УРАЛСИБ» обязанности по ее достижению и не является гарантией для Клиента. Рассчитывается исходя из текущего совокупного состава портфеля и может быть скорректирована управляющим.
-            p: small.text-note #[sup 2] Допустимый риск – риск возможных убытков, связанных с доверительным управлением, который способен нести Клиент.
+        .g-col_md_10.g-mt_4 
+            p(v-if="!strategyOld.iis && !strategyOld.du"): small.text-note #[sup 1] Доходность – прогнозируемая доходность, которая не накладывает на АО «УК УРАЛСИБ» обязанности по ее достижению и не является гарантией для Клиента. Рассчитывается исходя из текущего совокупного состава портфеля и может быть скорректирована управляющим.
+            p(v-if="!strategyOld.iis && !strategyOld.du"): small.text-note #[sup 2] Допустимый риск – риск возможных убытков, связанных с доверительным управлением, который способен нести Клиент.
             p(v-if="rsStrategyID=='s45'"): small.text-note #[sup 3] Минимальная сумма инвестиций доступна только при оформлении в Личном кабинете.
             p(v-if="rsStrategyID=='s45'"): small.text-note #[sup 4] При выводе активов до истечения первого года действия Договора комиссия рассчитывается от совокупной рыночной стоимости портфеля на дату расторжения, уменьшенной на сумму начисленного Вознаграждения за управление.
+            p(v-if="rsStrategyID=='s42'"): small.text-note #[sup 3] Вознаграждение за успех в размере 10% взимается с дохода, превышающего 10 % в год
+            p(v-if="rsStrategyID=='s43'"): small.text-note #[sup 3] Вознаграждение за успех в размере 10% взимается с дохода, превышающего 12 % в год
             
             p: small.text-note(v-if="rStrategyType === 'iis' && strategyParam.currency !== 'Рубли РФ'") *Прогнозируемая доходность указана в долларах.
             p: small.text-note(v-if="rStrategyType === 'du' && strategyParam.currency !== 'Рубли РФ'") *Прогнозируемая доходность указана в валюте стратегии.
@@ -218,7 +220,8 @@ export default {
             },
             startContract: {
                 amount: '',
-                yield: ''
+                yield: '',
+                portfolioId: ''
             },
             indicators: [false, false],
             // date: null,
@@ -321,6 +324,7 @@ export default {
 
                     let amountData = str.map(({ outamnt }) => outamnt).filter(item => item);
                     let yieldData = str.map(({ profiT_2 }) => profiT_2).filter(item => item);
+                    this.startContract.portfolioId = str[0].opeR_ACC;
                     this.startContract.amount = amountData && amountData.length ? this.formatCurrency(amountData.reduce((a, b) => a + b, 0)) : this.formatCurrency(0);
                     this.startContract.yield = yieldData && yieldData.length ? yieldData.reduce((a, b) => a + b, 0).toLocaleString('ru-RU', { maximumFractionDigits: 2 }) + '%' : 0 + '%';
                 }));

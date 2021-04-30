@@ -21,8 +21,7 @@ let helpers = [
                 breadcrumb: 'Индивидуальный инвестиционный счёт',
                 auth: true
             }
-        },
-        {
+        }, {
             path: '/strategies/:selectedStrategy',
             name: 'strategies',
             component: iisDuStrategies,
@@ -30,24 +29,28 @@ let helpers = [
                 breadcrumb: 'ИИС и Доверительное управление',
                 auth: true
             }
-        },
-        {
+        }, {
             path: '/strategies/:selectedStrategy/:strategyPrefix/:portfolioId',
             name: 'iisDuStrategyPage',
             component: iisDuStrategyPage,
             meta: {
                 auth: true
             }
-        },
-        {
+        }, {
+            path: '/strategies/:selectedStrategy/:strategyPrefix',
+            name: 'iisDuStrategyPage1',
+            component: iisDuStrategyPage,
+            meta: {
+                auth: true
+            }
+        }, {
             path: '/strategies/:selectedStrategy/:strategyPrefix/contract',
             name: 'iisDuStrategyСontract',
             component: iisDuStrategyСontract,
             meta: {
                 auth: true
             }
-        },
-        {
+        }, {
             path: '/strategies/:selectedStrategy/:strategyPrefix/buy',
             component: iisDuStrategyBuy,
             name: 'iisDuStrategyBuy',
@@ -55,8 +58,7 @@ let helpers = [
                 auth: true
             },
             beforeEnter: newUserBuy
-        },
-        {
+        }, {
             path: '/du/strategies/:strategyPrefix/buy/approve',
             component: PifBuyConfirm,
             meta: {
@@ -65,8 +67,7 @@ let helpers = [
                 auth: true
             },
             beforeEnter: fundOperations
-        },
-        {
+        }, {
             path: '/du/iis/questionary',
             name:'duQuestionary',
             component: DuQuestionary,
@@ -74,24 +75,21 @@ let helpers = [
                 breadcrumb: 'Анкета для определения инвестиционного портфеля Клиента',
                 auth: true
             }
-        },
-        {
+        }, {
             path: '/strategies/:selectedStrategy/:strategyPrefix/withdrawal',
             name:'duWithdrawal',
             component: duWithdrawalTemp,
             meta: {
                 auth: true
             }
-        },
-        {
+        }, {
             path: '/strategies/:selectedStrategy/:portfolioId/termination',
             name:'iisDuTermination',
             component: iisDuTermination,
             meta: {
                 auth: true
             }
-        },
-        {
+        }, {
             path: '/strategies/:selectedStrategy/:strategyPrefix/:portfolioId/cancel',
             name:'iisDuCancel',
             component: iisDuCancel,

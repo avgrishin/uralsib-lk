@@ -81,6 +81,12 @@
                     p.g-col.g-col_md_7(v-text="fund.recipientAccount")
                 .control.control_empty
         fieldset.control
+            p(v-if="isOrderLK") Надбавка к расчетной стоимости пая для заявок, оформленных в Личном кабинете #[strong не взимается]
+            div(v-if="!isOrderLK").g-row.g-mb_2
+                .control.g-col.g-col_lg_8
+                    label.checkbox(:class="{'checkbox_error': errors.has('term2')}")
+                        input(type="checkbox", v-model="term2" v-validate="'required'" name="term2")
+                        .checkbox__text Надбавка к расчетной стоимости пая составит 0.5%#[br]При приобретении на сумму 3 млн руб. и более #[strong 0%]
             .g-row.g-mb_2
                 .control.g-col.g-col_lg_8
                     label.checkbox(:class="{'checkbox_error': errors.has('term1')}")
@@ -88,13 +94,8 @@
                         .checkbox__text Срок проведения операции составляет до 5(пяти) рабочих дней
             .g-row.g-mb_2
                 .control.g-col.g-col_lg_8
-                    label.checkbox(:class="{'checkbox_error': errors.has('term2')}")
-                        input(type="checkbox", v-model="term2" v-validate="'required'" name="term2")
-                        .checkbox__text Надбавка к расчетной стоимости пая составит 0.5%#[br]При приобретении на сумму 3 млн руб. и более #[strong 0%]
-            .g-row.g-mb_2
-                .control.g-col.g-col_lg_8
                     label.checkbox(:class="{'checkbox_error': errors.has('correct_data')}")
-                        input(type="checkbox",v-validate="'required'",   v-model="checkbox" name="correct_data", id="FPP_CORRECT_DATA" )
+                        input(type="checkbox",v-validate="'required'",  v-model="checkbox" name="correct_data", id="FPP_CORRECT_DATA" )
                         span.checkbox__text(v-html="disclaimerTextOperBuy")
         fieldset.control
             p Выберите удобный для Вас способ оплаты
@@ -176,7 +177,10 @@
                     precision: 0,
                     masked: false
                 },
-                amountT: ''
+                amountT: '',
+                order: { 
+                    applicationNumber: '' 
+                }
             }
         },
         created() {
@@ -193,6 +197,9 @@
                 let value = this.amount
                 value = value.replace(/\D/g, "")
                 return (value > 0 && value < 1000)
+            },
+            isOrderLK() {
+                return this.order && this.order.number.indexOf('-КК') !== -1;
             }
         },
         methods: {

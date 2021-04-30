@@ -51,6 +51,7 @@ export default {
             selected_card: {},
             terms: false,
             success: false,
+            buffering: false,
             payment: {},
             request_id: 0,
             loaded_activepaymentsNoCard: false,
@@ -99,11 +100,7 @@ export default {
         },
 
         getTextDisclaimer() {
-            return axios.get('/reference/getsitetext', {
-                params: {
-                    place: 'BuyApprove',
-                },
-            }).then(({ data }) => {
+            return axios.get('/reference/getsitetext', { params: { place: 'BuyApprove' } }).then(({ data }) => {
                 this.disclaimerTextBuyApprove = data.outText;
                 return data;
             });
