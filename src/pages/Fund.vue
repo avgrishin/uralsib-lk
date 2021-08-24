@@ -20,7 +20,12 @@
                     p.g-mb_1(v-text="fund_full.text")
                     a(:href="`https://www.uralsib-am.ru/funds/${this.fund}/`" target="_blank").g-fw_5 Полное описание фонда
                     br
-                    a.fond-detail__results(href="https://www.uralsib-am.ru/services/bulletin-new/" target="_blank").g-fw_5 Результаты управления фондом
+                    a(:href="`https://www.uralsib-am.ru/funds/doc/${this.fund}/`" target="_blank").fond-detail__results.g-fw_5 Результаты управления фондом
+                    
+                    //- a(:href="`/api/reference/doc/${this.fund}/`" target="_blank").fond-detail__results.g-fw_5 Результаты управления фондом1
+                    //- a(href="#" @click.prevent="doc").fond-detail__results.g-fw_5 
+                        | Результаты управления фондом 
+                        span(title="pdf" ,:class="{spinner:loading}").icon.icon_file_pdf.g-fr
             .g-col.g-col_lg_5.g-col_md_a
                 .fond-detail__info.g-lh_1
                     .g-mb_2
@@ -119,7 +124,11 @@
                 chart_max: 0,
                 chart_range: -1,
                 fundDescDate: '',
+                loading: false,
             }
+        },
+        created() {
+            ga('send', 'pageview', { 'anonymizeIp': true });
         },
         watch: {
             '$route' (to, from) {
@@ -154,8 +163,6 @@
                 });
             },
             getData() {
-                let profitability = [];
-
                 let params = {
                     fund_id: [this.fund_full.id],
                 };
@@ -166,9 +173,9 @@
                     baseURL: 'https://www.uralsib-am.ru'
                 })
                 .then(({data}) => {
+                    data.data[0].data = data.data[0].data.map(function(item) { if (item[0] <= 1622678400000) item[1] /= 100; return item; });
                     this.profitability = data.data;
                     data.data[0].field = 'price';
-                    profitability = data.data;
 
                     return axios.get('/ajax-lk/getSCHAChart.php', {
                         params,
@@ -178,7 +185,7 @@
                     this.scha = data.data;
 
                     data.data[0].field = 'scha';
-                    this.data = profitability.concat(data.data);
+                    this.data = this.profitability.concat(data.data);
 
                     this.loaded.fund_chart = true;
                 });
@@ -206,6 +213,28 @@
 
                 this.$router.push('/operations/buy');
             },
+            doc() {
+                if (this.loading) {
+                    flash('Дождитесь окончание загрузки', 'info');
+                    return;
+                }
+                this.loading = true;
+                axios.get(`funds/doc/${this.fund}/`, { 
+                    responseType: 'blob', 
+                    baseURL: 'https://www.uralsib-am.ru/', 
+                    withCredentials: false, 
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': '*' },
+                    transformRequest: [(data, headers) => { delete headers.common.Authorization; return data }] }
+                ).then(({ data, headers }) => {
+                    const blob = new Blob([data], { type: data.type });
+                    const fileName = headers["content-disposition"].split("filename=")[1];
+                    FileSaver.saveAs(blob, fileName);
+                    this.loading = false;
+                }).catch(({response: error}) => {
+                    this.loading = false;
+                    if (error) flash([error.data.message], 'error');
+                });
+            }
         },
         computed: {
 
@@ -224,9 +253,7 @@
                         place: this.fund,
                     }
                 }).then(({data}) => {
-
                     fund.text = data.outText;
-
                 });
 
                 fund.profitability = fund.profitability.toLocaleString('ru-RU', {maximumFractionDigits: 2}) + '%';
@@ -236,13 +263,12 @@
             tableData() {
                 let result = {};
                 let data = _.cloneDeep(this.data);
-
                 data.map(item => {
                     item.data = item.data.slice(item.data.length - 2);
                     return item;
                 }).forEach(item => {
-                    let field;
                     let change = (item.data[1][1] / item.data[0][1] * 100) - 100;
+                    //change = change*(item.data[1][0] >= 1622764800000 && item.data[1][1] <= 1622678400000 ? 100 : 1) - 100;
                     let up = (change > 0) ? true : false;
 
                     change = Math.abs(change).toLocaleString('ru-RU', {maximumFractiosnDigits: 2});
@@ -260,6 +286,7 @@
             disclaimerDate() {
                 return moment().subtract(2, 'days').format('DD.MM.YYYY');
             }
+            
         }
     }
 </script>

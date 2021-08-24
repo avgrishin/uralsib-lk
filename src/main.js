@@ -188,7 +188,7 @@ Chart.pluginService.register({
 
 axios.interceptors.request.use((config) => {
     if (config.url.includes('svg')) return config;
-
+    if (config.url.includes('funds/doc')) return config;
     if (config.params) config.params.version = Math.random().toString(36).substr(2, 9);
     else config.params = { version: Math.random().toString(36).substr(2, 9) };
 
@@ -196,7 +196,10 @@ axios.interceptors.request.use((config) => {
 });
 
 axios.interceptors.response.use(null, function(error) {
-    if (store.state.flashErrorOn && error.response.status == 500) flash(['Неизвестная ошибка'], 'error');
+    if (store.state.flashErrorOn && error.response.status == 500) {
+        console.log(error);
+        flash(['Неизвестная ошибка!'], 'error');
+    }
     //if (store.state.flashErrorOn && error.response.status == 400) flash(['Не истекло время ожидания до следующей отправки СМС'], 'error');
     else if (error.response.status == 403) {
         store.dispatch('user/logout');

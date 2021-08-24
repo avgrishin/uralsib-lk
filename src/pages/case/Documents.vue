@@ -1,6 +1,6 @@
 <template lang="pug">
     casenav
-        section
+        article.content
             // h1.g-hide_xs Документы
             .g-tabs
                 .g-tabs__header.g-mb_6.g-mb_2_xs.g-mt_2_xs

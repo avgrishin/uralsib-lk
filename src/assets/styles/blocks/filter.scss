@@ -60,7 +60,7 @@
     }
     &__label {}
   }
-  margin-bottom:nth($m_em, 6);
+  margin-bottom:nth($m_em, 2);
 
   @include media($width_md){
     .radio label{ font-size:0;
@@ -75,6 +75,6 @@
   }
 
   @include media($width_xs){
-    margin-bottom:nth($m_em, 4)
+    margin-bottom:nth($m_em, 2)
   }
 }

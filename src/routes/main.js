@@ -1,6 +1,6 @@
-import Dashboard from '../pages/Dashboard';
+// import Dashboard from '../pages/Dashboard';
 
-import { hookNoUserFundsCase } from '../guards';
+// import { hookNoUserFundsCase } from '../guards';
 
 let helpers = process.env.NODE_ENV !== 'production'
     ? [
@@ -22,13 +22,13 @@ let helpers = process.env.NODE_ENV !== 'production'
     : [];
 
 export default [
-    {
+    /*{
         path: '/',
         component: Dashboard,
         meta: {
             breadcrumb: 'Портфель'
         },
         beforeEnter: hookNoUserFundsCase
-    },
+    },*/
     ...helpers
 ];

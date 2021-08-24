@@ -5,17 +5,17 @@
 			thead
 				tr
 					th.case-table__th-name Наименование актива
-					th Доля в портфеле
-					th Количество паев
-					th Стоимость активов #[br] на конец периода*
-					th Доход*
-					th Доходность*
+					th.td_right Доля в портфеле
+					th.td_right Количество паев
+					th.td_right Стоимость активов #[br] на конец периода*
+					th.td_right Доход*
+					th.td_right Доходность*
 					th
 				tr.case-table__thead-line(v-if="table_data.total_pif")
 					td ПИФы
-					td(v-html="formatNumber(table_data.share_pif, {maximumFractionDigits: 2}) + '%'")
+					td.td_right(v-html="formatNumber(table_data.share_pif, {maximumFractionDigits: 2}) + '%'")
 					td(v-html="")
-					td(v-html="formatCurrency(table_data.total_pif)")
+					td.td_right(v-html="formatCurrency(table_data.total_pif)")
 					//- td(v-html="formatCurrency(table_data.profit_pif)")
 					//- td(v-html="table_data.profit_2.toLocaleString('ru-RU') + '%'")
 					td(v-html="")
@@ -40,9 +40,9 @@
 				tr.case-table__thead-line
 					td.g-ws_nw.g-hidden-b.g-hide_md
 						span.h4 Доверительное управление
-					td.g-hide_xs(v-html="formatNumber(table_data.share_du, {maximumFractionDigits: 2}) + '%'")
+					td.td_right.g-hide_xs(v-html="formatNumber(table_data.share_du, {maximumFractionDigits: 2}) + '%'")
 					td.g-hide_xs
-					td.case-table__total-line-price(title="Доверительное управление")
+					td.td_right.case-table__total-line-price(title="Доверительное управление")
 						span(v-html="formatCurrency(table_data.total_du)")
 					td.g-hide_xs
 					td.g-hide_xs
@@ -52,10 +52,10 @@
 				tr.case-table__total-line
 					td.g-ws_nw.g-hidden-b.g-hide_md
 						span.h4 Итого по портфелю:
-					td.g-hide_xs
+					td.g-hide_xs.td_right
 						span.g-fw_5.g-fs_15 100%
 					td.g-hide_xs
-					td.case-table__total-line-price(title="Итого по портфелю:")
+					td.case-table__total-line-price.td_right(title="Итого по портфелю:")
 						span.g-fw_5.g-fs_15(v-html="formatCurrency(table_data.total)")
 					td.g-hide_xs
 					td.g-hide_xs
@@ -80,7 +80,7 @@
 			}
 		},
 		created() {
-			this.getData();
+			//this.getData();
 		},
 		methods: {
 			formatNumber(item, options) {

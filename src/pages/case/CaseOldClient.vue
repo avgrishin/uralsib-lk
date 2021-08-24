@@ -127,6 +127,8 @@
 			}
 		},
 		created() {
+            this.$store.commit('updateCrumbs', [{ link: '/', text: 'Портфель' }]);
+
 			this.$store.commit('toggleCrumbs', true);
 			if (window.innerWidth > 768) this.selected_fund_hidden = false;
 
@@ -278,9 +280,8 @@
 					},
 					baseURL: 'https://www.uralsib-am.ru/'
 				}).then(({data}) => {
-
+					data.data[0].data = data.data[0].data.map(function(item) { if (item[0] <= 1622678400000) item[1] /= 100; return item; });
 					this.selected_fund_price_graph = data.data;
-
 					this.loaded.fund_price_chart = true;
 				});
 

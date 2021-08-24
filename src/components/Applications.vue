@@ -3,7 +3,7 @@
         date-filter(text="Выберите период" @filter_time="customDate" @start_of="defaultDate")
         .page-section
             .case-data
-                table.case-table.g-mb_4()#js-paginator-scroll-top
+                table.case-table()#js-paginator-scroll-top
                     caption.case-table__title ПИФы
                     thead
                         tr

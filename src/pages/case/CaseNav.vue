@@ -125,13 +125,13 @@
                 const exchangeFunds = this.$store.getters['funds/exchangeFunds'].length > 0
                 return [
                     {
-                        link: '/',
-                        name: 'Структура',
-                        disabled: false
+                        link:'/', //
+                        name: 'Баланс',
+                        disabled: funds && duState
                     },
                     {
-                        link:'/case/balance',
-                        name: 'Баланс',
+                        link: '/case/balance',
+                        name: 'Структура',
                         disabled: funds && duState
                     },
                     {
@@ -151,8 +151,8 @@
                     },
                     {
                         link:'/analytics',
-                        name:'Аналитика',
-                        disabled: authState || pifState
+                        name:'Аналитика<span class="g-hide_xs">&nbsp;ПИФ</span>',
+                        disabled: /*authState ||*/ pifState
                     },
                     {
                         link:'/operations',

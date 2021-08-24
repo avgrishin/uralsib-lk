@@ -112,7 +112,7 @@ export default {
             return {};
         },
         getIMGName(page) {
-            if (this[page + '_file']) return _.truncate(this[page + '_file'].name, { length: 15 });
+            if (this[page + '_file']) return _.truncate(this[page + '_file'].name, { length: 20 });
             return '';
         },
         canvasToBlob(canvas) {

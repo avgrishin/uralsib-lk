@@ -2,6 +2,7 @@
     casenav
         article.content
             h1.g-hide_xs Обменять паи
+            p.red_text 4 июня 2021 производится дробление инвестиционных паев с коэффициентом 1:100, то есть из одного инвестиционного пая образуются 100 инвестиционных паев.
             form.form_approve
                 fieldset.g-mb_2
                     legend.control-label-top-title_xs
@@ -358,8 +359,9 @@
                         noAccount: !Boolean(this.accounts_to),
                         fund: this.fund_from.description
                     }]);
-                }).catch(() => {
+                }).catch(({ response: error }) => {
 	                this.$store.commit('buffering', false);
+                    flash([error.data && error.data.message ? error.data.message : 'Неизвестная ошибка.'], 'error');
                 });
             },
             onCodeConfirmed() {
@@ -460,5 +462,9 @@
     }
 </script>
 
-
+<style lang="scss">
+	.red_text {
+		color: red;
+	}
+</style>
 

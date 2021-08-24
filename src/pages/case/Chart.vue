@@ -60,6 +60,7 @@ casenav
             }
         },
         created() {
+            this.$store.commit('updateCrumbs', [{ link: '/', text: 'Портфель' }]);
             this.getData(3, true);
         },
         computed: {

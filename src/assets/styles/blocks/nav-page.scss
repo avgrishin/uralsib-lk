@@ -10,7 +10,7 @@
     transition:$trans;
 
   }
-  &__item{ margin-right:40px; }
+  &__item{ margin-right:33px; }
   &__item, &__sub-item{ position:relative; color:rgba($clr_primary, .6) }
   &__item:hover, &__sub-item:hover{ color:$clr_primary }
   &__link{ color:inherit }

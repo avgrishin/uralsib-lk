@@ -296,10 +296,10 @@ const pif_amount = {
         const input_fraction = (input % 1).toFixed(6);
         const input_integer = Math.floor(input);
 
-        if ((integer === input_integer) && (fraction !== input_fraction)) {
+        /*if ((integer === input_integer) && (fraction !== input_fraction)) {
             error = false;
             message = 'Дробная часть остатка должна быть указана';
-        } else if ((input_fraction != 0) && (fraction !== input_fraction)) {
+        } else*/ if ((input_fraction != 0) && (fraction !== input_fraction)) {
             error = false;
             message = 'Дробная часть остатка не равна введенной';
         } else if (integer != 0 && input_integer == 0) {

@@ -143,6 +143,9 @@ export default {
                             fileSize:0,
                             loading:true
                         })
+                    }).catch(({ response: error }) => {
+                        console.log(error);
+                        flash([error.data && error.data.message ? error.data.message : 'Неизвестная ошибка.'], 'error');
                     });
                 });
                 return
@@ -180,6 +183,9 @@ export default {
                     operation: 'BuyApps',
                     fund: this.fund.description
                 }]);
+            }).catch(({ response: error }) => {
+                console.log(error);
+                flash([error.data && error.data.message ? error.data.message : 'Неизвестная ошибка.'], 'error');
             });
         },
         makePurchaseRequest(multiFundId) {
@@ -248,9 +254,9 @@ export default {
                         this.$router.push('/operations/buy/approve?card=other');
                     }
                     this.$store.commit('buffering', false);
-                }).catch((error)=>{
+                }).catch(({ response: error })=>{
                     this.$store.commit('buffering', false);
-
+                    flash([error.data && error.data.message ? error.data.message : 'Неизвестная ошибка.'], 'error');
                 });
             } else if (method == 2) {
                 if(this.checkAllPaid) {

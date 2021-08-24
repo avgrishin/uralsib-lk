@@ -1,19 +1,27 @@
 <template lang="pug">
     casenav
         article.content
-            h1.g-hide_xs Аналитика
+            //- h1.g-hide_xs Аналитика
             section.page-section
-                date-filter(text="Динамика стоимости пая" @filter_time="customDate" @start_of="defaultDate")
+                date-filter(text="Выберите период" @filter_time="customDate" @start_of="defaultDate")
+                //- fund-filter(@fundid="setFund")
+                .g-col_lg_4.g-as_fe.g-col_md_5.g-mb_1
+                    .radio-list_du.radio-list_inline.g-col_lg_12.g-mlr_auto.g-col_xs_12.g-mlr_0_md.g-jc_fs_md
+                        .g-mb_1.g-mr_2_md Валюта
+                        each v,k in ['Рубль РФ','Доллар США']
+                            .radio.g-mb_1.g-mr_2_md
+                                input(type="radio", @change="filterFund", v-model="fundId" value=k name="currency", id="currency" + k)
+                                label(for="currency" + k)=v                
                 .case-data
                     app-table(:rows="table_data" :loaded="loaded.table")
                         caption.case-table__title(slot="caption") Пифы
                         th.case-table__th-name Наименование фонда
-                        th Цена пая #[br] на конец #[br] периода*
-                        th Количество #[br] паев на конец #[br] периода*
-                        th Стоимость #[br] активов на конец #[br] периода*
-                        th Доход #[br] за  период*
-                        th Доходность #[br] за период*
-                        th Операции с паями
+                        th.td_right Цена пая #[br] на конец #[br] периода*
+                        th.td_right Количество #[br] паев на конец #[br] периода*
+                        th.td_right Стоимость #[br] активов на конец #[br] периода*
+                        th.td_right Доход #[br] за  период*
+                        th.td_right Доходность #[br] за период*
+                        th.td_center Операции с паями
                 .case-data__nav.g-row
                     .g-col.g-col_md_4
                         router-link(to="/operations" class="btn btn_primary btn_block g-mb_2_xs" @click.native="yandexTarget()") Купить паи другого фонда
@@ -68,6 +76,7 @@
     import AppTable from '../../components/table/AppTable';
     import CaseNav from '../case/CaseNav';
     import Paginator from '../../components/Paginator';
+    import FundFilter from '../../components/FundFilter';
 
     import { dateFilter, xml } from '../../mixins';
 
@@ -76,7 +85,8 @@
             'analytics-hchart': AnalyticsHighChart,
             AppTable,
             'casenav': CaseNav,
-            Paginator
+            Paginator,
+            'fund-filter': FundFilter
         },
         mixins: [dateFilter, xml],
         data() {
@@ -99,7 +109,8 @@
                 loaded: {
                     table: false,
                     chart: false
-                }
+                },
+                fundId: '0'
             }
         },
         watch: {
@@ -224,6 +235,7 @@
                         params,
                         baseURL: 'https://www.uralsib-am.ru'
                     }).then(({data}) => {
+                        data.data.forEach(e => e.data = e.data.map(item => { if (item[0] <= 1622678400000) item[1] /= 100; return item; }));
                         this.profitability = data.data;
                         if (!this.charts.length) {
                             this.charts = [];
@@ -252,7 +264,8 @@
                 axios.get('/reports/AssetsEstimateDU', {
                     params: {
                         start: this.dateStart,
-                        end: this.dateEnd
+                        end: this.dateEnd,
+                        fundID: this.fundId == '1' ?  27 : 2
                     }
                 }).then(({data}) => {
                     if (data && data.length == 0) this.loaded.table = true;
@@ -262,8 +275,6 @@
                     data = data.filter(item => item.pif != 'ДУ');
 
                     let funds = _.groupBy(data, 'prtf');
-					window.log("TCL: pifTableData -> funds", funds)
-
                     //let fund = data.find(item => item.smallIcon.includes(this.$route.query.fund));
                     for (let name in funds) {
                         let items = funds[name];
@@ -307,16 +318,16 @@
                     du:false,
                     children: []
                 }
-
+                let val = this.fundId == "1" ? 'Доллары США' : 'Рубли РФ';
                 items.forEach(item => {
                     //if (item.outqnt > 0) {
                         if(item.type=="ДУ") return;
                         let matches = [];
 
                         if (item.smallIcon) matches = item.smallIcon.match(/\/([a-z0-9]*)-s.jpg$/);
-                        if(item.type == "ДУ") {
-                            data.du = true;
-                        }
+                        // if(item.type == "ДУ") {
+                        //     data.du = true;
+                        // }
                         data.id = matches ? matches[1] : '';
                         data.name = item.prtf;
                         data.price = item.outprc;
@@ -326,19 +337,19 @@
                         data.profit_per = item.profiT_2;
                         data.children.push({
                             name: item.opeR_ACC,
-                            price: this.formatCurrency(item.outprc),
+                            price: this.formatCurrency(item.outprc, false, val),
                             quantity: item.outqnt.toLocaleString('ru-RU', {maximumFractionDigits: 6}),
-                            amount: this.formatCurrency(item.outamnt),
-                            profit: this.formatCurrency(item.prlost),
+                            amount: this.formatCurrency(item.outamnt, false, val),
+                            profit: this.formatCurrency(item.prlost, false, val),
                             profit_per: item.profiT_2.toLocaleString('ru-RU', {maximumFractionDigits: 2})
                         });
                   //  }
                 });
 
-                data.price = this.formatCurrency(data.price);
+                data.price = this.formatCurrency(data.price, false, val);
                 data.quantity = data.quantity ? data.quantity.toLocaleString('ru-RU', {maximumFractionDigits: 6}):0;
-                data.amount = this.formatCurrency(data.amount);
-                data.profit = this.formatCurrency(data.profit);
+                data.amount = this.formatCurrency(data.amount, false, val);
+                data.profit = this.formatCurrency(data.profit, false, val);
                 data.profit_per = data.profit_per; //*100;
                 data.profit_per = data.profit_per ? data.profit_per.toLocaleString('ru-RU', {maximumFractionDigits: 2}):0;
 
@@ -346,6 +357,13 @@
             },
             changePage(page) {
                 this.page = page;
+            },
+            setFund([fund]) {
+                this.fundId = fund;
+            },
+            filterFund() {
+                this.loaded.table = false;
+                this.pifTableData(true);
             }
         },
         computed: {

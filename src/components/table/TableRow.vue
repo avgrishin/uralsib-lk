@@ -15,11 +15,11 @@
                             .icon.icon_arrow_dn.sz_s.td__name-more(v-if="hasChildren")
                 .case-table__toggle.g-hidden.g-show_md
                     .g-icon-down(:class="{'g-icon-down_open': toggleCaseTable }")
-            td.case-table__td-md(title="Цена пая на конец периода*" v-html="row.price").g-ws_nw
-            td.case-table__td-md(title="Количество паев" v-html="row.quantity").g-ws_nw
-            td.case-table__td-md(title="Стоимость активов на конец периода*" v-html="row.amount").g-ws_nw
-            td.case-table__td-md(title="Доход за период*" v-html="row.profit").g-ws_nw
-            td.case-table__td-promo(title="Доходность за период*" v-html="(row.profit_per || '0') + ' %'").g-ws_nw: .g-ta_r.g-ta_l_md
+            td.case-table__td-md.td_right(title="Цена пая на конец периода*" v-html="row.price").g-ws_nw
+            td.case-table__td-md.td_right(title="Количество паев" v-html="row.quantity").g-ws_nw
+            td.case-table__td-md.td_right(title="Стоимость активов на конец периода*" v-html="row.amount").g-ws_nw
+            td.case-table__td-md.td_right(title="Доход за период*" v-html="row.profit").g-ws_nw
+            td.case-table__td-promo.td_right(title="Доходность за период*" v-html="(row.profit_per || '0') + ' %'").g-ws_nw: .g-ta_r.g-ta_l_md
             td.case-table__td-md.g-hidden-b
                 form.dropdown.dropdown_case(:class="{'dropdown_open': toggleDrop }" v-if="!row.history && !row.du")
                     fieldset
@@ -36,11 +36,11 @@
         //0 && hasChildren добавил 0 что бы отключить
         tr.tr_child(v-show="isShowChild" v-for="(child, child_index) in row.children" v-if="hasChildren")
             td.g-ws_nw(v-html="child.name")
-            td.g-ws_nw(v-html="child.price")
-            td.g-ws_nw(v-html="child.quantity")
-            td.g-ws_nw(v-html="child.amount")
-            td.g-ws_nw(v-html="child.profit")
-            td.g-ws_nw(v-html="child.profit_per + ' %'")
+            td.g-ws_nw.td_right(v-html="child.price")
+            td.g-ws_nw.td_right(v-html="child.quantity")
+            td.g-ws_nw.td_right(v-html="child.amount")
+            td.g-ws_nw.td_right(v-html="child.profit")
+            td.g-ws_nw.td_right(v-html="child.profit_per + ' %'")
             td()
                 form.dropdown.dropdown_case(:class="{'dropdown_open': toggleDrop }")
                     fieldset

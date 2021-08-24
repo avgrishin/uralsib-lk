@@ -17,11 +17,11 @@
                                     .icon.icon_arrow_dn.sz_s.td__name-more(v-if="hasChildren")
                         .case-table__toggle.g-hidden.g-show_md
                             .g-icon-down(:class="{'g-icon-down_open': toggleCaseTable }")
-                    td.case-table__td-md(title="Доля в портфеле" v-html="formatNumber(row.share, {maximumFractionDigits: 2}) + '%'")
-                    td.case-table__td-md(title="Количество паев" v-html="row.quantity")
-                    td.case-table__td-md(title="Стоимость активов на конец периода*" v-html="formatCurrency(row.amount)")
-                    td.case-table__td-md(title="Доход*" v-html="row.profit")
-                    td.case-table__td-promo(title="Доходность*" v-html="(row.profit_per=='-0')?'0':row.profit_per + '%'")
+                    td.case-table__td-md.td_right(title="Доля в портфеле" v-html="formatNumber(row.share, {maximumFractionDigits: 2}) + '%'")
+                    td.case-table__td-md.td_right(title="Количество паев" v-html="row.quantity")
+                    td.case-table__td-md.td_right(title="Стоимость активов на конец периода*" v-html="formatCurrency(row.amount)")
+                    td.case-table__td-md.td_right(title="Доход*" v-html="row.profit")
+                    td.case-table__td-promo.td_right(title="Доходность*" v-html="(row.profit_per=='-0')?'0':row.profit_per + '%'")
                     td.case-table__td-md.g-hidden-b
                         form.dropdown(:class="{'dropdown_open': toggleDrop }")
                             fieldset
@@ -59,12 +59,21 @@
                                     .icon.icon_arrow_dn.sz_s.td__name-more(v-if="hasChildren")
                         .case-table__toggle.g-hidden.g-show_md
                             .g-icon-down(:class="{'g-icon-down_open': toggleCaseTable }")
-                    td.case-table__td-md(title="Доля в портфеле" v-html="formatNumber(row.share, {maximumFractionDigits: 2}) + '%'")
+                    td.case-table__td-md.td_right(title="Доля в портфеле" v-html="formatNumber(row.share, {maximumFractionDigits: 2}) + '%'")
                     td(v-html="")
-                    td.case-table__td-md(title="Стоимость активов на конец периода*" v-html="formatCurrency(row.amountVal, false, row.Val)")
-                    td.case-table__td-md(title="Доход*" v-html="row.profit")
-                    td.case-table__td-md(title="Доходность*" v-html="(row.profit_per=='-0')?'0':row.profit_per + '%'")
-                    td.case-table__t-btns.g-hidden-b: button.btn.btn_primary.g-d_b.g-col_xs_12.g-col_md_3.g-col_lg_12(@click="stratOper(row.sCode.toLowerCase())") Пополнить
+                    td.case-table__td-md.td_right(title="Стоимость активов на конец периода*" v-html="formatCurrency(row.amountVal, false, row.Val)")
+                    td.case-table__td-md.td_right(title="Доход*" v-html="row.profit")
+                    td.case-table__td-md.td_right(title="Доходность*" v-html="(row.profit_per=='-0')?'0':row.profit_per + '%'")
+                    td.case-table__td-md.g-hidden-b
+                        form.dropdown(:class="{'dropdown_open': toggleDrop }")
+                            fieldset
+                                a(href="#" @click.prevent="toggleDropdown(),jsToggleCaseTable()").dropdown__name Операция
+                                    span.dropdown__arrow
+                                        span.g-icon-down.g-clr_inh(:class="{'g-icon-down_open': toggleDrop }")
+                                .dropdown__content()
+                                    .dropdown__item
+                                        button.g-btn-txt(@click.prevent="stratOper(row.sCode.toLowerCase())") Пополнить
+                        //- button.btn.btn_primary.g-d_b.g-col_xs_12.g-col_md_3.g-col_lg_12(@click="stratOper(row.sCode.toLowerCase())") Пополнить
 </template>
 <script>
 import {iisDU} from '../../mixins';

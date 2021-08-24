@@ -1,7 +1,7 @@
 <template lang="pug">
     casenav
-        section
-            h2(v-html="`Данные по портфелю <br class='g-hidden g-show_xs'> на ${dateDisclaimer}*`")
+        article.content
+            h2(v-html="`Данные по портфелю с начала управления <br class='g-hidden g-show_xs'> на ${dateDisclaimer}*`")
             casetable(:table="case_table" v-show="!isLoading")
             .spinner(v-show="isLoading")
             .g-row.g-pt_7.g-pt_2_md
@@ -12,7 +12,7 @@
                     router-link(to="/strategies/du",  class="btn btn btn_primary btn_block g-mb_1_xs g-hidden g-show_md g-hide_xs" hidden) Ду
                 p.g-col.g-col_md_4
                     router-link(to="/strategies/iis",  class="btn btn btn_primary btn_block g-mb_1_xs") ИИС
-                p.g-col.g-col_md_12
+                //- p.g-col.g-col_md_12.ofbottom_1
                     ui-disclaimer.text-note(tag="small")
 
 </template>
@@ -40,6 +40,7 @@ import UiDisclaimer from '../../components/ui/UiDisclaimer';
             }
         },
         created() {
+            this.$store.commit('updateCrumbs', [{ link: '/', text: 'Портфель' }]);
             this.getCaseTableData();
             this.getTextDisclaimer();
         },

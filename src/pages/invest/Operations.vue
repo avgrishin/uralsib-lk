@@ -61,7 +61,7 @@
                                             |  Погасить
                                             span.count(v-if="multipleOperation.sell" v-html="multipleOperation.sell")
                 .spinner(v-show="!loaded")
-            p.g-mt_6.g-col_8
+            p.g-mt_3.g-col_12
                 small.text-note(v-text="disclaimerTextOperations")
 </template>
 <script>

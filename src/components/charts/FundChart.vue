@@ -171,7 +171,7 @@
                     yAxis: {
                         labels: {
                             formatter: function () {
-                                return THIS.numberWithSpaces(this.value) +  ' ' + rubleSign;
+                                return ''; //THIS.numberWithSpaces(this.value) +  ' ' + rubleSign;
                             },
                             x: 8,
                             align: 'left',
@@ -211,7 +211,7 @@
 
                     tooltip: {
                         pointFormatter: function () {
-                            let val = valueFormat(this.y);
+                            let val = valueFormat(this.y*(this.x <= 1622678400000 ? 100 : 1));
 
                             return `<div class="g-mb_1 g-mt_1"><span style="color:${this.series.color}">${this.series.name}</span>: <b>${val}</b></div>`;
                         },

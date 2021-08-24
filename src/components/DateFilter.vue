@@ -3,8 +3,8 @@
         fieldset
             .g-row
                 .control
-                    .g-col.g-mb_3
-                        label.h2.g-fw_3.filter__title(for="FILTER_DATE_FROM" v-html="(text ? text : 'Укажите произвольный период') + ':'")
+                    .g-col.g-mb_1
+                        label.h4.g-fw_3.filter__title(for="FILTER_DATE_FROM" v-html="(text ? text : 'Укажите произвольный период') + ':'")
                 .control
                     .g-col.g-col_md_a.g-col_lg_4
                         .g-row.control__field.filter__control
