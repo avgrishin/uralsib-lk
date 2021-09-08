@@ -62,28 +62,25 @@
                 temp: false,
 
                 id: Math.random().toString(36).substr(2, 9),
-                options: [
-                    {
-                        title: 'С начала управления',
-                        title_md: 'Все'
-                    }, 
-                    {
-                        title: '3 месяца',
-                        title_md: '3 мес.'
-                    }, 
-                    {
-                        title: '6 месяцев',
-                        title_md: '6 мес.'
-                    }, 
-                    {
-                        title: '1 год',
-                        title_md: '1 год'
-                    }, 
-                    {
-                        title: '3 года',
-                        title_md: '3 года'
-                    }
-                ]
+                options: [{
+                    title: 'С начала управления',
+                    title_md: 'Все'
+                }, {
+                    title: '3 месяца',
+                    title_md: '3 мес.'
+                }, {
+                    title: '6 месяцев',
+                    title_md: '6 мес.'
+                }, {
+                    title: '1 год',
+                    title_md: '1 год'
+                }, {
+                    title: '3 года',
+                    title_md: '3 года'
+                }, {
+                    title: '5 лет',
+                    title_md: '5 лет'
+                }]
             }
         },
         mounted(){
@@ -99,6 +96,7 @@
                 else if (val == '2') start = this.getStartOf(6, 'month');
                 else if (val == '3') start = this.getStartOf(1, 'year');
                 else if (val == '4') start = this.getStartOf(3, 'year');
+                else if (val == '5') start = this.getStartOf(5, 'year');
 
                 if (val != '-1') {
                     this.dateStart = '';

@@ -36,7 +36,7 @@
                 }
             },
             range(val) {
-                if (val < 0 || val > 4) return;
+                if (val < 0 || val > 5) return;
                 
                 let y;
                 let x = this.chart.xAxis[this.chart.xAxis.length - 1];
@@ -46,6 +46,7 @@
                 else if (val == 2) y = moment(x.max).subtract(6, 'months');
                 else if (val == 3) y = moment(x.max).subtract(1, 'year');
                 else if (val == 4) y = moment(x.max).subtract(3, 'years');
+                else if (val == 5) y = moment(x.max).subtract(5, 'years');
 
                 this.chart.xAxis[0].setExtremes(y.valueOf(), x.max);
             },
