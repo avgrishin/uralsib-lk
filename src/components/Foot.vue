@@ -10,11 +10,11 @@
                     br
                     a(href="tel:88002009058").g-clr_wh.g-ws_nw 8 (800) 200 90 58 #[small (бесплатно)]
                 p.g-col.g-col_md_3.footer__text.footer__text_phone.g-mb_3_xs.g-fw_5(v-else)
-                    a(href="https://www.uralsib-am.ru/" target="_blank", class="g-clr_gray g-ws_nw") сайт УК УРАЛСИБ
+                    a(href="https://www.uralsib-am.ru/" target="_blank", class="g-clr_wh g-ws_nw") сайт УК УРАЛСИБ
                     br
-                    a(href="https://online.uralsib.ru/", target="_blank", class="g-clr_gray g-ws_nw") сайт Интернет банка УРАЛСИБ
+                    a(href="https://online.uralsib.ru/", target="_blank", class="g-clr_wh g-ws_nw") сайт Интернет банка УРАЛСИБ
                 p.g-col.g-col_md_2.footer__text.footer__text_pol.g-mb_3_xs.g-fw_5
-                    a(href="/downloads/PD_approval.pdf", download="PD_approval.pdf" target="_blank", class="g-clr_gray g-ws_nw") Политика конфиденциальности
+                    a(href="/downloads/PD_approval.pdf", download="PD_approval.pdf" target="_blank", class="g-clr_wh g-ws_nw") Политика конфиденциальности
                 .g-col.g-col_md_2.g-f_r.g-ps
                     .g-row
                         p.g-col.g-col_xs_6.footer__copy.footer__text.footer__text-xs.g-col_xs_pr_0

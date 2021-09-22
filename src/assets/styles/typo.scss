@@ -14,7 +14,7 @@ p{ margin:0 0 nth($m_em, 2);
 
 }
 .text-note{
-  color:$clr_gray_1;
+  color:$clr_text;
   @extend .h6;
   line-height:1.5;
   margin-bottom:0;
@@ -24,16 +24,16 @@ p{ margin:0 0 nth($m_em, 2);
 .typo {
   font-size: 16px;
   line-height:1.5;
-  color:$clr_primary;
+  color:$clr_text;
   label {
     display: block;
-    color:$clr_primary;
+    color:$clr_text;
   }
   p {
     margin-bottom: 24px;
     .popup & {
       margin-bottom: 6px;
-      color:$clr_primary;
+      color:$clr_text;
     }
     &:last-child {
       margin-bottom: 0 !important;
@@ -66,12 +66,12 @@ p{ margin:0 0 nth($m_em, 2);
     }
     &__dt {
       clear: both;
-      color:$clr_primary;
+      color:$clr_text;
       font-family: $font__family_book;
     }
     &__dd {
       font-weight: 300;
-      color:$clr_primary;
+      color:$clr_text;
       p {
         margin-bottom: 14px;
         &:last-child {
@@ -109,7 +109,7 @@ p{ margin:0 0 nth($m_em, 2);
       padding: 21px 41px 22px;
       font-size: 16px;
       font-family: $font__family_book;
-      color: #7382a0;
+      color: $clr_text;
       border-top: 1px solid #bfd0e7;
       transition: .3s ease-in-out;
     }

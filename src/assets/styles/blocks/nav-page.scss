@@ -11,10 +11,10 @@
 
   }
   &__item{ margin-right:33px; }
-  &__item, &__sub-item{ position:relative; color:rgba($clr_primary, .6) }
-  &__item:hover, &__sub-item:hover{ color:$clr_primary }
+  &__item, &__sub-item{ position:relative; color:rgba($clr_text, .6) }
+  &__item:hover, &__sub-item:hover{ color:$clr_text }
   &__link{ color:inherit }
-  &__item_active, .nav-page__sub-link_active{ color:$clr_primary }
+  &__item_active, .nav-page__sub-link_active{ color:$clr_text }
   &__link{
     border-bottom:0;
     font-size:inherit;

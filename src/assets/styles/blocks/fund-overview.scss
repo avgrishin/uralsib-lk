@@ -13,7 +13,7 @@
     font-size: 18px;
     line-height: 27px;
     font-weight: 500;
-    color:$clr_primary;
+    color:$clr_text;
   }
   &__yield {
     margin-top: 48px;
@@ -23,7 +23,7 @@
     font-size: 16px;
     line-height: 24px;
     font-weight: 300;
-    color:$clr_primary;
+    color:$clr_text;
     ul {
       li {
         position: relative;
@@ -31,7 +31,7 @@
         font-size: 16px;
         line-height: 24px;
         font-weight: 300;
-        color:$clr_primary;
+        color:$clr_text;
         &+& {
           margin-top: 5px;
         }
@@ -44,7 +44,7 @@
           width: 2px;
           height: 2px;
           border-radius: 50%;
-          background-color:$clr_primary;
+          background-color:$clr_text;
         }
       }
     }
@@ -83,7 +83,7 @@
     border-radius: 6px;
     font-weight: 500;
     background-color: #eaf1f8;
-    color:$clr_primary;
+    color:$clr_text;
     text-align: center;
     transition: .3s ease-in-out;
   }

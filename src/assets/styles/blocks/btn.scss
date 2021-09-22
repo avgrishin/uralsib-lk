@@ -26,9 +26,9 @@
     transition:$trans;
   }
   &:hover{
-    color:#002250;
+    color:$clr_primary;
     svg{
-      fill:#002250;
+      fill:$clr_primary;
     }
   }
   transition:.3s ease-in-out;
@@ -58,7 +58,7 @@
   }
   &_o{
     border:1px solid #eaf1f8;
-    color:#002250;
+    color:$clr_text;
     background-color:transparent;
     &:hover:not(:disabled){
       background-color:white;
@@ -96,7 +96,7 @@
       box-shadow:none;
       background-color:#102b4f;
     }
-    background-color:#002250;
+    background-color:$clr_button;
     color:#fff;
     box-shadow:none;
 
@@ -131,7 +131,7 @@
     }
   }
   &_register {
-    background-color: #c0c6ca;
+    background-color: #8e979d;
     margin-bottom: 25px;
     padding-top: 13px !important;
     padding-bottom: 13px !important;
@@ -179,7 +179,7 @@
       padding:8px 15px;
       background-color:#fff;
       border-color:#eaf1f8;
-      color:$clr_gray_1;
+      color:$clr_text;
       font-weight:500;
       &.active,
       &:hover{
@@ -214,7 +214,7 @@
     padding:21px 10px;
     font-size:16px !important;
     font-weight:300;
-    color:$clr_gray_1;
+    color:$clr_text;
   }
   &_file{
     display:inline-block;
@@ -226,7 +226,7 @@
     padding-right:90px;
     font-weight:500;
     line-height:1.2;
-    color:$clr_primary;
+    color:$clr_text;
     position:relative;
     .icon{
       position:absolute;

@@ -22,7 +22,7 @@ export default {
         }
     },
     mounted() { 
-        axios.get(`/message`).then(({ data }) => { console.log(data); this.msgs = data; });
+        axios.get(`/message`).then(({ data }) => { this.msgs = data; });
     },
     methods: {
         newMessage() {

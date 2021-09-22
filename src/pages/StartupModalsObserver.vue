@@ -14,7 +14,7 @@ export default {
             window.events.$emit('show_popup', ['temp-password', { disableOverlayClick: true }]);
         },
         openSurveyModal() {
-            window.events.$emit('show_popup', ['survey', { userId: this.userState.userId }]);
+            window.events.$emit('show_popup', ['survey', { userId: this.userState.clientId }]);
         },
         getCookie(name) {
             let matches = document.cookie.match(new RegExp(
@@ -36,9 +36,9 @@ export default {
         userStateLoaded: {
             immediate: true,
             handler(value) {
-                // if (this.userState.clientId && this.getCookie('opros2') != '1') {
-                //     setTimeout(this.openSurveyModal, 1000);
-                // }
+                if (this.userState.clientId && this.getCookie('opros3') != '1') {
+                    setTimeout(this.openSurveyModal, 1000);
+                }
             }
         },
     },

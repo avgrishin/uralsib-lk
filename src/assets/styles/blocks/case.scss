@@ -10,7 +10,7 @@
       margin-bottom: 37px;
       font-size: 24px;
       font-weight: 500;
-      color:$clr_primary;
+      color:$clr_text;
     }
     .radio-list_inline {
       padding-top: 12px;
@@ -27,7 +27,7 @@
     &__caption {
       margin-bottom: 14px;
       font-size: 16px;
-      color:$clr_primary;
+      color:$clr_text;
     }
     img {
       display: block;
@@ -107,7 +107,7 @@
         display:inline-block;
         border-radius:50%;
         background-color:#c0c6ca;
-        color:$clr_primary;
+        color:$clr_text;
         text-align:center;
         position:absolute;
         width:19px;
@@ -155,7 +155,7 @@
       vertical-align: middle;
       /*   font-family: $font__family_book;*/
       font-weight:400;
-      color:$clr_gray_1;
+      color:$clr_text;
       border-top:1px solid $clr_br-table;
       transition: .3s;
       &:first-child {
@@ -220,14 +220,14 @@
       &:hover{
         box-shadow:$bxsh_3;
         td{
-          color:#002250;
+          color:$clr_text;
           cursor:pointer;
           border-top-color:transparent;
           background-color:#feffff;
         }
         .dropdown{
           &__name{
-            color:#002250;
+            color:$clr_text;
             background-color:#feffff;
           }
         }
@@ -251,7 +251,7 @@
         &_children-mod{
           &.open tr:not(.tr_child) .btn{ display:none }
           .tr_child td{
-            color:#7382a0;
+            color:$clr_text;
           }
 
         }
@@ -364,7 +364,7 @@
         align-items:center;
         flex-flow:row wrap;
       }
-      td{ width:100%; font-family:inherit; border-top:0; color:$clr_primary; font-size:$fs_15; font-weight:500; padding:nth($m_em, 1) 0 0;
+      td{ width:100%; font-family:inherit; border-top:0; color:$clr_text; font-size:$fs_15; font-weight:500; padding:nth($m_em, 1) 0 0;
         &:not(.g-hidden-b):before{
           content:attr(title); font-size:0.889em; font-weight:400; white-space:normal; display:inline-block; flex:0 0 50%; padding-right:2em
         }
@@ -459,7 +459,7 @@
     margin-top: -14px;
     border-radius: 10px;
     padding: 44px 38px;
-    color:$clr_primary;
+    color:$clr_text;
     background-color: #fff;
     box-shadow:$bxsh_2;
     &__row {
@@ -487,7 +487,7 @@
     border-radius: 10px;
     padding: 32px 40px;
     background-color: #fff;
-    color:$clr_primary;
+    color:$clr_text;
     box-shadow:$bxsh_2;
     font-weight: 300;
     &__content {

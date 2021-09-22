@@ -29,13 +29,13 @@ textarea.field_text{ padding-top:20px;
     height: 50px;
     font-size: 16px;
     font-weight: 300;
-    color:$clr_primary;
+    color:$clr_text;
     background-color: #fff;
     border-radius: 6px;
     -webkit-appearance: none;
 
     @include placeholder{
-      color:$clr_gray_1;
+      color:$clr_text;
     }
 
     &-buy_d {
@@ -53,7 +53,7 @@ textarea.field_text{ padding-top:20px;
         padding: 14px 0 17px 14px !important;
         font-size: 16px;
         line-height: 24px;
-        color:$clr_gray_1;
+        color:$clr_text;
         font-weight: 300;
         cursor: text;
         transition: .3s;
@@ -89,7 +89,7 @@ textarea.field_text{ padding-top:20px;
     &_style_1{
       border-color:$clr_blue;
       background-color:$clr_blue;
-      color:$clr_primary;
+      color:$clr_text;
       font-weight:500;
       &:disabled{ opacity:1 }
     }
@@ -154,12 +154,12 @@ textarea.field_text{ padding-top:20px;
     }
     &__note {
       font-size:$fs_05;
-      color:$clr_gray_1;
+      color:$clr_text;
     }
     &__filename {
       font-size:$fs_05;
       line-height: 18px;
-      color:$clr_gray_1;
+      color:$clr_text;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -219,7 +219,7 @@ textarea.field_text:not(.field_textarea-only_xs){
     label, .checkbox__text{
       font-size: 16px;
       font-family: $font__family_book;
-      color:$clr_gray_1;
+      color:$clr_text;
       display: inline-block;
       padding-left: 30px;
       cursor: pointer;
@@ -329,7 +329,7 @@ textarea.field_text:not(.field_textarea-only_xs){
   }
   &.sz_s {
     label {
-      color:$clr_gray_1;
+      color:$clr_text;
       font-size:$fs_05;
       line-height: 18px;
       font-weight: 300;
@@ -358,7 +358,7 @@ textarea.field_text:not(.field_textarea-only_xs){
         position: relative;
         font-size:$fs_05;
         line-height: 18px;
-        color:$clr_gray_1;
+        color:$clr_text;
         padding-left:$fs_05;
         &+li {
           margin-top: 11px;
@@ -515,14 +515,14 @@ textarea.field_text:not(.field_textarea-only_xs){
     display: inline-block;
     vertical-align: top;
     input:checked ~ label {
-      color:$clr_primary;
+      color:$clr_text;
       border-bottom-color:$clr_primary;
     }
     label {
       display: inline-block;
       padding: 10px 0 10px;
       font-size: 16px;
-      color:$clr_gray_1;
+      color:$clr_text;
       border-bottom: 2px solid transparent;
       &:after,
       &:before {
@@ -534,7 +534,7 @@ textarea.field_text:not(.field_textarea-only_xs){
     display: inline-block;
     vertical-align: top;
     input:checked ~ label {
-      color:$clr_primary;
+      color:$clr_text;
       border-bottom:2px solid $clr_primary;
 
     }
@@ -542,7 +542,7 @@ textarea.field_text:not(.field_textarea-only_xs){
       display: block;
       text-align: center;
       padding:14px 0 7px;
-      color:$clr_gray_1;
+      color:$clr_text;
       transition:$trans;
       border-bottom:2px solid transparent;
       &:after,
@@ -611,7 +611,7 @@ textarea.field_text:not(.field_textarea-only_xs){
 
   &__label-top{
     font-size:$fs_025;
-    color:$clr_gray_1;
+    color:$clr_text;
     padding:0 0 6px 16px;
     display:block;
     @include media($width_xs){
@@ -629,7 +629,7 @@ textarea.field_text:not(.field_textarea-only_xs){
     top:50%;
     transform:translateY(-50%);
     font-size:$fs_05;
-    color:$clr_gray_1;
+    color:$clr_text;
     @include media($width_xs){
       margin-top:nth($m_em, 2);
       transform:translate(0);
@@ -694,7 +694,7 @@ textarea.field_text:not(.field_textarea-only_xs){
     font-size:18px;
     font-weight: 500;
     line-height: 20px;
-    color:$clr_primary;
+    color:$clr_text;
   }
   &__message {
     font-weight: 300;
@@ -724,7 +724,7 @@ textarea.field_text:not(.field_textarea-only_xs){
           font-weight: 300;
           font-size:$fs_05;
           line-height: 18px;
-          color:$clr_gray_1;
+          color:$clr_text;
         }
       }
 
@@ -758,7 +758,7 @@ textarea.field_text:not(.field_textarea-only_xs){
       &__label {
         font-size: 16px;
         font-weight: 300;
-        color:$clr_primary;
+        color:$clr_text;
         &_intop {
           padding-top: 19px;
         }
@@ -805,7 +805,7 @@ textarea.field_text:not(.field_textarea-only_xs){
     height: 50px;
     margin: 0;
     line-height: 50px;
-    color:$clr_primary;
+    color:$clr_text;
     font-size: 16px;
     font-weight: 300;
   }

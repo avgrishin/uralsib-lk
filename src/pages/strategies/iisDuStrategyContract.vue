@@ -92,9 +92,15 @@
                     input(type="checkbox", v-validate="'required'" name="term_4", v-model="term_4" value="1")
                     .checkbox__text мне понятны все существенные условия выбранной Стратегии управления, в том числе Стандартной стратегии управления, включая размер и порядок выплаты вознаграждения, взимаемого Компанией;
 
-                label.checkbox.g-mb_0(:class="{'checkbox_error': errors.has('term_5')}")
+                label.checkbox.g-mb_2(:class="{'checkbox_error': errors.has('term_5')}")
                     input(type="checkbox", v-validate="'required'" name="term_5", v-model="term_5" value="1")
                     .checkbox__text в случае выбора мною Стандартной стратегии управления, даю своё согласие на присваиваемый мне Стандартный инвестиционный профиль, соответствующий выбранной мной Стандартной стратегии управления.
+
+                label.checkbox.g-mb_0(:class="{'checkbox_error': errors.has('term_8')}")
+                    input(type="checkbox", v-validate="'required'" name="term_8", v-model="term_8" value="1")
+                    .checkbox__text ознакомлен с 
+                        a(target="_blank" href="/downloads/Базовый стандарт_перечень информации_2021_1.pdf") информацией о профессиональном участнике рынка ценных бумаг и договоре доверительного управления ценными бумагами
+                        | .
 
             fieldset.g-mb_4(v-else)
                 legend.h2 4. Подтверждаю, что:
@@ -113,18 +119,23 @@
                     input(type="checkbox", v-validate="'required'" name="term_4", v-model="term_4" value="1")
                     .checkbox__text мне понятны все существенные условия выбранной Стратегии управления, в том числе Стандартной стратегии управления, включая размер и порядок выплаты вознаграждения, взимаемого Компанией;
 
-                label.checkbox.g-mb_0(:class="{'checkbox_error': errors.has('term_6')}")
+                label.checkbox.g-mb_2(:class="{'checkbox_error': errors.has('term_6')}")
                     input(type="checkbox", v-validate="'required'" name="term_6", v-model="term_6" value="1")
                     .checkbox__text уведомлен и согласен с приобретением инвестиционных паев паевых инвестиционных фондов, доверительное управление которыми осуществляет Управляющий и лица, указанные в п.5.12 Договора. Освобождаю Управляющего от обязанности предварительного уведомления при реализации им указанного права приобретения.
 
-                label.checkbox.g-mb_0(:class="{'checkbox_error': errors.has('term_7')}")
+                label.checkbox.g-mb_2(:class="{'checkbox_error': errors.has('term_7')}")
                     input(type="checkbox", v-validate="'required'" name="term_7", v-model="term_7" value="1")
                     .checkbox__text настоящим предоставляю в соответствии с Федеральным законом от 27.07.2006 №152-ФЗ «О персональных данных» АО «УК УРАЛСИБ» (ОГРН 1027739003489, 129110, город Москва, Проспект Мира, дом 69, строение 1, этаж 3, пом.3-07, лицензия профессионального участника рынка ценных бумаг на осуществление деятельности по управлению ценными бумагами № 045-06475-001000 выдана 05.03.2003), а также каждому из указанных в п. 14.4 Договора юридических лиц (каждый в отдельности именуется – Оператор, а совместно — Операторы) право (согласие) (далее – Согласие) на обработку моих персональных данных, под которыми понимаются, в том числе, но не ограничиваясь: мои ФИО, номер телефона, адрес электронной почты, адрес места регистрации, адрес места жительства, ИНН, реквизиты паспорта, иные данные, содержащиеся в нем, а также иные данные, указанные в Заявлении или полученные АО «УК УРАЛСИБ» иным образом в связи с заключением/исполнением/прекращением Договора (далее – ПДн), как самостоятельно, так и совместно с другими Операторами, в том числе на передачу ПДн между Операторами.
 
-                label.checkbox.g-mb_0(:class="{'checkbox_error': errors.has('term_5')}")
+                label.checkbox.g-mb_2(:class="{'checkbox_error': errors.has('term_5')}")
                     input(type="checkbox", v-validate="'required'" name="term_5", v-model="term_5" value="1")
                     .checkbox__text в случае выбора мной Стандартной стратегии управления, даю свое согласие на присваиваемый мне Стандартный инвестиционный профиль, соответствующий выбранной мной Стандартной стратегии управления.
 
+                label.checkbox.g-mb_0(:class="{'checkbox_error': errors.has('term_8')}")
+                    input(type="checkbox", v-validate="'required'" name="term_8", v-model="term_8" value="1")
+                    .checkbox__text ознакомлен с 
+                        a(target="_blank" href="/downloads/Базовый стандарт_перечень информации_2021_1.pdf") информацией о профессиональном участнике рынка ценных бумаг и договоре доверительного управления ценными бумагами
+                        | .
 
             fieldset.g-mb_4(v-if="(this.strategyType.val == 'iis')")
                 legend.h2 5. Мне понятно, что:
@@ -190,6 +201,7 @@
                 term_5: false,
                 term_6: false,
                 term_7: false,
+                term_8: false,
             }
         },
 
@@ -325,6 +337,7 @@
                         this.term_3 &&
                         this.term_4 &&
                         this.term_5 &&
+                        this.term_8 &&
                         this.understand
                     )
                 } else {
@@ -333,7 +346,10 @@
                         this.term_2 &&
                         this.term_3 &&
                         this.term_4 &&
-                        this.term_5
+                        this.term_5 &&
+                        this.term_6 &&
+                        this.term_7 &&
+                        this.term_8
                     )
                 }
             },

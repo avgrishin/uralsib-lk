@@ -102,7 +102,7 @@
                         app_id: data.applicationId
                     }]);
                 }).catch((error) => {
-                    console.log('error', error);
+                    // console.log('error', error);
                     this.buffering = false;
                 });
             },

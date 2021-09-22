@@ -53,7 +53,7 @@
   font-family:$font__family_main;
   -webkit-font-smoothing:antialiased;
   background-color:$clr_wh;
-  color:$clr_primary;
+  color:$clr_text;
   width:100%;
   max-width:100%;
   overflow-x:hidden;
@@ -91,7 +91,7 @@ input.show-currency {
     & + span {
       width: 1px;
       height: 18px;
-      background-color: #002250;
+      background-color: $clr_primary;
       position: absolute;
       left: 11px;
       top: 0;
@@ -150,7 +150,7 @@ input.show-currency {
       font-size: 18px;
       line-height: 27px;
       font-weight: 500;
-      color: #7382a0;
+      color: $clr_text;
       border-left-width: 0;
       &:last-child {
         border-radius: 0 10px 10px 0;
@@ -163,11 +163,11 @@ input.show-currency {
         background-color: #e9f0f7;
       }
       &.highlight {
-        background-color:$clr_primary;
+        background-color:$clr_text;
         color: #fff !important;
       }
       &:hover {
-        color:$clr_primary;
+        color:$clr_text;
         box-shadow: 0px 7px 28px -5px rgba(211, 218, 228, 0.4);
       }
     }
@@ -181,7 +181,7 @@ input.show-currency {
 
   &-note {
     font-weight: 500;
-    color:$clr_primary;
+    color:$clr_text;
     font-size: 18px;
     line-height: 27px;
     position: relative;
@@ -208,7 +208,7 @@ input.show-currency {
         vertical-align: top;
         margin-right: 40px;
         font-size:$fs_2;
-        color:$clr_gray_1;
+        color:$clr_text;
         @include media($width_xs){
           display: block;
           width: 100%;
@@ -232,7 +232,7 @@ input.show-currency {
           margin-right: 0;
         }
         &.active {
-          color:$clr_primary;
+          color:$clr_text;
           @include media($width_xs){
             font-size:$fs_15;
             order: -1;

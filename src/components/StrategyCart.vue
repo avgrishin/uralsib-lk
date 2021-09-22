@@ -21,7 +21,7 @@
                     strong.fund-cart__item-text {{risk}}
                 li.fund-cart__item
                     small.fund-cart__item-name(v-if="false") Краткое описание
-                    strong.fund-cart__item-text  {{strategyShortDesc}}
+                    .fund-cart__item-text  {{strategyShortDesc}}
 
             ul.fund-cart__list.fund-cart__options(v-if="rStrategyType == 'du'")
                 li.fund-cart__item
@@ -32,7 +32,7 @@
                     strong.fund-cart__item-text {{fund.sfp.risk}}
                 li.fund-cart__item
                     small.fund-cart__item-name(v-if="false") Краткое описание
-                    strong.fund-cart__item-text  {{duStrategyShortDesc}}
+                    .fund-cart__item-text  {{duStrategyShortDesc}}
 
             .fund-cart__nav
 

@@ -38,7 +38,7 @@
             }
         }
         @include clearfix;
-        color:$clr_primary;
+        color:$clr_text;
         font-size: 16px;
         &+& {
             margin-top: 30px;
@@ -86,7 +86,7 @@
         &__name {
             margin: 7px 50px 0 49px;
             font-weight: 300;
-            color:$clr_primary;
+            color:$clr_text;
         }
         @each $i, $c in $fund_color {
             &_#{$i} {
@@ -114,14 +114,14 @@
                     font-weight: 500;
                     font-size: 18px;
                     line-height: 24px;
-                    color:$clr_primary;
+                    color:$clr_text;
                 }
                 &__value {
                     font-family: $font__family_main;
                     font-weight: 500;
                     font-size: 18px;
                     line-height: 24px;
-                    color:$clr_primary;
+                    color:$clr_text;
                     width: 79px;
                     margin-top: 18px;
                     text-align: right;

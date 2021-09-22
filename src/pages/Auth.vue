@@ -13,7 +13,7 @@
             //- p С целью обнуления надбавки необходимо оформить заявку на приобретение в виде электронного документа в личном кабинете
 
             h4 Уважаемые клиенты,
-            p.red_text принято решение о проведении 4 июня дробления паев ПИФ УРАЛСИБ с коэффициентом 1:100#[sup *].
+            p принято решение о проведении 4 июня дробления паев ПИФ УРАЛСИБ с коэффициентом 1:100#[sup *].
             p Это означает, что 
                 ul
                     li количество Ваших паев #[b увеличивается в 100 раз];#[br]
@@ -33,7 +33,7 @@
             //-     a(href="https://www.uralsib-am.ru/investors/private/lk/", target="_blank", class="g-clr_gray g-bbc_t g-d_f g-ai_c")
             //-         span Все операции онлайн без визита в офис
             .g-col.g-col_md_6.g-ta_r
-                router-link.js-click-datalayer(:to="APP_CONFIGURATION.disableESIA ? '/register/contact' : '/register'" data-action="registration" class="btn btn_primary btn_register btn_secondary") Регистрация
+                router-link.js-click-datalayer(:to="APP_CONFIGURATION.disableESIA ? '/register/contact' : '/register'" data-action="registration" class="btn btn_secondary btn_register") Регистрация
 
         .g-row.g-row_flex.g-mb_2.auths
 

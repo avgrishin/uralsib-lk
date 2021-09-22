@@ -13,11 +13,11 @@
 					th
 				tr.case-table__thead-line(v-if="table_data.total_pif")
 					td ПИФы
-					td.td_right(v-html="formatNumber(table_data.share_pif, {maximumFractionDigits: 2}) + '%'")
+					td.td_right.g-hide_xs
+						span.g-fs_15(v-html="formatNumber(table_data.share_pif, {maximumFractionDigits: 2}) + '%'")
 					td(v-html="")
-					td.td_right(v-html="formatCurrency(table_data.total_pif)")
-					//- td(v-html="formatCurrency(table_data.profit_pif)")
-					//- td(v-html="table_data.profit_2.toLocaleString('ru-RU') + '%'")
+					td.td_right
+						span.g-fs_15(v-html="formatCurrency(table_data.total_pif)")
 					td(v-html="")
 					td(v-html="")
 					td
@@ -31,7 +31,7 @@
 					td.g-hide_xs
 					td.g-hide_xs
 					td.case-table__total-line-price(title="ПИФы")
-						span(v-html="formatCurrency(table_data.total_pif)")
+						span.g-fs_15(v-html="formatCurrency(table_data.total_pif)")
 					td.g-hide_xs
 					td.g-hide_xs
 					td.g-hide_xs
@@ -40,10 +40,11 @@
 				tr.case-table__thead-line
 					td.g-ws_nw.g-hidden-b.g-hide_md
 						span.h4 Доверительное управление
-					td.td_right.g-hide_xs(v-html="formatNumber(table_data.share_du, {maximumFractionDigits: 2}) + '%'")
+					td.td_right.g-hide_xs
+						span.g-fs_15(v-html="formatNumber(table_data.share_du, {maximumFractionDigits: 2}) + '%'")
 					td.g-hide_xs
 					td.td_right.case-table__total-line-price(title="Доверительное управление")
-						span(v-html="formatCurrency(table_data.total_du)")
+						span.g-fs_15(v-html="formatCurrency(table_data.total_du)")
 					td.g-hide_xs
 					td.g-hide_xs
 					td.g-hide_xs

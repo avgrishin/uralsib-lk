@@ -197,7 +197,7 @@ axios.interceptors.request.use((config) => {
 
 axios.interceptors.response.use(null, function(error) {
     if (store.state.flashErrorOn && error.response.status == 500) {
-        console.log(error);
+        // console.log(error);
         flash(['Неизвестная ошибка!'], 'error');
     }
     //if (store.state.flashErrorOn && error.response.status == 400) flash(['Не истекло время ожидания до следующей отправки СМС'], 'error');

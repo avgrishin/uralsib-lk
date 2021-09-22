@@ -50,7 +50,7 @@
             &__caption {
                 font-size: 24px;
                 line-height: 40px;
-                color:$clr_primary;
+                color:$clr_text;
                 display: inline-block;
             }
             &__controls {

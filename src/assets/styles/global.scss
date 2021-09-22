@@ -39,7 +39,7 @@
     text-align: center;
     position: relative;
     line-height: $sz;
-    color: $clr_primary;
+    color: $clr_text;
     padding: 0;
     &:before,
     &:after {
@@ -263,11 +263,11 @@ hr {
 
 .g-clr_pr,
 .g-clr_pr_h:hover {
-    color: $clr_primary
+    color: $clr_text;
 }
 
 .g-clr_gray {
-    color: $clr_gray_1
+    color: $clr_text
 }
 
 .g-clr_wh {
@@ -382,7 +382,7 @@ hr {
 
 .g-tabs__btn {
     font-weight: 500;
-    color: #7382a0;
+    color: $clr_text;
     font-size: 1.286em;
     line-height: 1.2;
     cursor: pointer;
@@ -395,11 +395,11 @@ hr {
 
 .g-tabs__btn:hover,
 .g-tabs__btn.active {
-    color: #002250;
+    color: $clr_text;
 }
 
 .g-tabs__btn.active {
-    border-color: #002250
+    border-color: $clr_primary
 }
 
 .svginline svg {

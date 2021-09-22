@@ -44,7 +44,7 @@
     &__caption {
       font-size: 24px;
       float: left;
-      color:$clr_primary;
+      color:$clr_text;
 
       @include media($width_xs) {
         float: none;
@@ -60,7 +60,7 @@
       }
     }
     &__stripe {
-      background-color: #7382a0;
+      background-color: $clr_gray_1;
       height:60px;
       top:101px;
       position: absolute;
@@ -135,7 +135,7 @@
         margin-bottom: 17px;
         font-family: $font__family_book;
         font-size: 16px;
-        color: #002250;
+        color: $clr_primary;
         label {
           font-size: inherit;
           color: inherit;
@@ -146,7 +146,7 @@
         font-size:12px;
         line-height:1.4;
         font-weight: 300;
-        color:#7382a0;
+        color:$clr_text;
         text-align:right;
         margin-right:35px;
       }

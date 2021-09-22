@@ -2,7 +2,7 @@
 .highcharts-tooltip > span, .highcharts-tooltip-box > span{
   font-family:$font__family_main !important;
   font-size:$fs_1 !important;
-  color:$clr_primary !important;
+  color:$clr_text !important;
   background:$clr_wh;
   border-radius:$br_1;
   box-shadow:$bxsh;
@@ -75,7 +75,7 @@
   li > a{
     line-height:1.2;
     padding:.8em 15px;
-    color:$clr_gray_1;
+    color:$clr_text;
     white-space:normal;
     border-bottom:0;
   }
@@ -100,7 +100,7 @@
   }
 }
 .field-select.v-select.single .selected-tag{
-  color:$clr_primary;
+  color:$clr_text;
   white-space:nowrap;
   width:100%;
   padding-right:25px;

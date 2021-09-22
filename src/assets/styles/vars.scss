@@ -1,7 +1,9 @@
 
-//FONT
-$font__family_main: 'Fira Sans', Helvetica, Arial, sans-serif;
-$font__family_book: 'Fira Sans Book', Arial, sans-serif;
+//FONT 'Suisse Intl', 
+// $font__family_main: 'Fira Sans', Helvetica, Arial, sans-serif;
+$font__family_main: Helvetica, Arial, sans-serif;
+// $font__family_book: 'Fira Sans Book', Arial, sans-serif;
+$font__family_book: Arial, sans-serif;
 $font-size_main:16px;
 $margin-padding:10px;
 $width_xs:767px;
@@ -40,14 +42,18 @@ $fs_3:2.250em;
 $clr_main:#303030;
 $clr_light:#c0c6ca;
 $clr_darklight:#777;
-$clr_primary:#002250;
+$clr_text:#2a2a2a;
+// $clr_primary:#002250;
+$clr_primary:#0c50a3;
 $clr_error:#e12b2b;
 $clr_error_notice:#ff5c5b;
 $clr_highlight:#77ab60;
 $clr_border:#eaf1f8;
 $clr_wh:white;
 $clr_blue:#eaf1f8;
-$clr_gray_1:#7382a0;
+$clr_button:#016ef2;
+// $clr_gray_1:#7382a0;
+$clr_gray_1:#0c50a3;
 $clr_gray:#f9f9f9;
 
 $fund_color:(

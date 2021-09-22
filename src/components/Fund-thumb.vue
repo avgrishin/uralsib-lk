@@ -66,7 +66,7 @@
         &:hover {
             .fund-thumb {
                 &__name {
-                    color:$clr_primary;
+                    color:$clr_text;
                 }
                 &__icon {
                     border-color: #fff;

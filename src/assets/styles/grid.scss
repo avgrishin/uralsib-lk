@@ -7,7 +7,7 @@
   height:100%;
   z-index:1;
   position:relative;
-  background-color: #002250;
+  background-color: $clr_primary;
 
   @include media(1265px) {
     overflow-x: hidden;

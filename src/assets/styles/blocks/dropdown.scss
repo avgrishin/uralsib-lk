@@ -16,7 +16,7 @@
     position:relative;
     line-height:18px;
     font-weight:300;
-    color:$clr_gray_1;
+    color:$clr_text;
     white-space:nowrap;
     cursor:pointer;
     border-radius:6px;
@@ -54,7 +54,7 @@
     }
   }
   &__item{
-    color:$clr_gray_1;
+    color:$clr_text;
     position:relative;
     z-index:1;
     & + &{
@@ -68,7 +68,7 @@
       border-bottom:0;
     }
     &:hover{
-      color:$clr_primary;
+      color:$clr_text;
     }
   }
 

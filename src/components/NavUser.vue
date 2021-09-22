@@ -153,7 +153,7 @@
 					position: relative;
 					font-size: 18px;
 					line-height: 20px;
-					color:$clr_primary;
+					color:$clr_text;
 					white-space: nowrap;
 					&_highlight {
 						font-weight: bold;

@@ -36,7 +36,7 @@
     display: inline-block;
     vertical-align: middle;
     font-size: 18px;
-    color:$clr_primary;
+    color:$clr_text;
     font-weight: 500;
   }
   &__field {
@@ -52,7 +52,7 @@
       margin-bottom: 27px;
       font-size: 16px;
       font-family: $font__family_book;
-      color:$clr_primary;
+      color:$clr_text;
       label {
         font-size: inherit;
         color: inherit;

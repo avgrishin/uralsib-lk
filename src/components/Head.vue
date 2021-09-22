@@ -120,6 +120,7 @@
 </script>
 
 <style lang="scss">
+	@import "../assets/styles/vars";
 	.header__logo {
 		position: relative;
 		display: flex;
@@ -133,7 +134,7 @@
 	
 	.du-reset {
 		position: absolute;
-		color: #002250;
+		color: $clr_primary;
 		right: 0;
 		top: 0;
 		bottom: 10px;

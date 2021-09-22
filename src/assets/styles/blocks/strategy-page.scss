@@ -73,8 +73,8 @@
       margin:0 nth($m_em, 1);
     }
     &.active{
-      color:$clr_primary;
-      border-color:$clr_primary;
+      color:$clr_text;
+      border-color:$clr_text;
     }
   }
   &__tab-content{}

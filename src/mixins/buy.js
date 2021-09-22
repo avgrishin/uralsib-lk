@@ -144,7 +144,7 @@ export default {
                             loading:true
                         })
                     }).catch(({ response: error }) => {
-                        console.log(error);
+                        // console.log(error);
                         flash([error.data && error.data.message ? error.data.message : 'Неизвестная ошибка.'], 'error');
                     });
                 });
@@ -184,7 +184,7 @@ export default {
                     fund: this.fund.description
                 }]);
             }).catch(({ response: error }) => {
-                console.log(error);
+                // console.log(error);
                 flash([error.data && error.data.message ? error.data.message : 'Неизвестная ошибка.'], 'error');
             });
         },
